@@ -6,11 +6,20 @@ interface Props {
   size: "sm" | "md" | "lg";
   onClick: (e: Event) => void;
   onPressAndHold?: Function;
+  className?: string;
 }
 
-export const ActionButton: FC<Props> = ({ children, onClick }) => {
+export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
+  children,
+  onClick,
+  size,
+  className
+}) => {
   return (
-    <View onClick={(e: Event) => onClick(e)} className={styles.ActionButton}>
+    <View
+      onClick={(e: Event) => onClick(e)}
+      className={styles.ActionButton + " " + styles[size] + " " + className}
+    >
       {children}
     </View>
   );

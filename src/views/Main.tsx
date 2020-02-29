@@ -3,5 +3,12 @@ import { Page } from "./Page";
 import { ActionButton } from "../components/ActionButton";
 
 export const Main = () => (
-  <Page title="Main" headerElement={<ActionButton>S</ActionButton>} />
+  <Page
+    title="Main"
+    headerElement={
+      <ActionButton onClick={() => {}} size="lg">
+        S
+      </ActionButton>
+    }
+  />
 );
