@@ -1,0 +1,31 @@
+$primary-color: #770082;
+$secondary-color: white;
+$accent-color: #8e3096;
+
+$sm: 25px;
+$md: 50px;
+$lg: 70px;
+
+$font-size: 1rem;
+
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+// Styles for resetting native elements
+
+.Input {
+  background-color: transparent;
+  border: none;
+  color: $secondary-color;
+  font-size: $font-size;
+  font-family: $font-family;
+  margin: 10px;
+  border-bottom: rgba(255, 255, 255, 0.5) solid 2px;
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+  transition: border-bottom-color 0.2s linear;
+
+  &:focus {
+    outline: none;
+    border-bottom-color: rgba(255, 255, 255, 1);
+  }
+}

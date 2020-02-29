@@ -2,6 +2,7 @@ import React from "react";
 import { Page } from "./Page";
 import { useParams, Link } from "react-router-dom";
 import { View } from "../native";
+import { ActionButton } from "../components/ActionButton";
 
 const placeholderSetlist = [
   { songName: "A whole new world", notes: ["D4", "E4", "A5", "B5"] },
@@ -13,7 +14,19 @@ const placeholderSetlist = [
 export const Setlist = () => {
   const { setlistName } = useParams();
   return (
-    <Page title={setlistName}>
+    <Page
+      title={setlistName}
+      headerElement={
+        <ActionButton
+          inverted
+          style={{ margin: "5px" }}
+          size="lg"
+          onClick={() => console.log("Let's got to the mall")}
+        >
+          Play
+        </ActionButton>
+      }
+    >
       {placeholderSetlist.map(song => (
         <View>
           <Link to={`/song/${encodeURIComponent(song.songName)}`}>

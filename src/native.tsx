@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import styles from "./theme.module.scss";
 
 // Wrappers for native elements
 
@@ -10,6 +11,6 @@ const Text: FC<any> = ({ children, ...props }) => (
   <span {...props}>{children}</span>
 );
 
-const Input: FC<any> = props => <input {...props} />;
+const Input: FC<any> = props => <input className={styles.Input} {...props} />;
 
 export { View, Text, Input };

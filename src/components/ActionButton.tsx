@@ -7,18 +7,31 @@ interface Props {
   onClick: (e: Event) => void;
   onPressAndHold?: Function;
   className?: string;
+  style?: Object;
+  inverted?: boolean;
 }
 
 export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
   children,
   onClick,
   size,
-  className
+  className,
+  style,
+  inverted
 }) => {
   return (
     <View
+      style={style}
       onClick={(e: Event) => onClick(e)}
-      className={styles.ActionButton + " " + styles[size] + " " + className}
+      className={
+        styles.ActionButton +
+        " " +
+        styles[size] +
+        " " +
+        className +
+        " " +
+        (inverted && styles.inverted)
+      }
     >
       {children}
     </View>

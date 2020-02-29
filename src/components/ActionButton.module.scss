@@ -1,4 +1,4 @@
-@import "../theme.scss";
+@import "../theme.module.scss";
 
 .ActionButton {
   border-radius: 50%;
@@ -15,9 +15,14 @@
   user-select: none;
 
   &:active {
-    transform: translateY(3px);
+    transform: translateY(1px);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   }
+}
+
+.inverted {
+  background: $secondary-color;
+  color: $primary-color;
 }
 
 .sm {
