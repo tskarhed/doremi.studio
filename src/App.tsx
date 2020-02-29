@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Main, Play, Setlist, Song } from "./views";
+import "./App.scss";
 
 function App() {
   return (

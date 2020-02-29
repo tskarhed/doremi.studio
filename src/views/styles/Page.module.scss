@@ -1,0 +1,13 @@
+@import "../../theme.scss";
+.body {
+  background-color: $primary-color;
+  height: 100vh;
+  max-height: 100vh;
+
+  header {
+    height: 10vh;
+    background-color: $accent-color;
+    display: flex;
+    justify-content: space-between;
+  }
+}

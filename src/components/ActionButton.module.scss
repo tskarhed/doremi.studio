@@ -1,0 +1,39 @@
+@import "../theme.scss";
+
+.ActionButton {
+  border-radius: 50%;
+  background-color: $primary-color;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  height: $md;
+  width: $md;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: box-shadow 0.05s linear, transform 0.05s linear;
+
+  user-select: none;
+
+  &:active {
+    // color: $primary-color;
+    // background-color: $secondary-color;
+    transform: translateY(3px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.sm {
+  height: $sm;
+  width: $sm;
+}
+
+.md {
+  height: $md;
+  width: $md;
+}
+
+.lg {
+  height: $lg;
+  width: $lg;
+}
