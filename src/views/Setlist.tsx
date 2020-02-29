@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { View } from "../native";
 import { ActionButton } from "../components/ActionButton";
 
-const placeholderSetlist = [
+export const placeholderSetlist = [
   { songName: "A whole new world", notes: ["D4", "E4", "A5", "B5"] },
   { songName: "You give love a bad name", notes: ["D4", "E4", "A5", "B5"] },
   { songName: "Nessum dorma", notes: ["D4", "E4", "A5", "B5"] },
