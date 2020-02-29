@@ -1,6 +1,6 @@
 import React from "react";
 import { Page } from "./Page";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { View } from "../native";
 import { ActionButton } from "../components/ActionButton";
 
@@ -13,6 +13,7 @@ export const placeholderSetlist = [
 
 export const Setlist = () => {
   const { setlistName } = useParams();
+  const history = useHistory();
   return (
     <Page
       title={setlistName}
@@ -21,7 +22,7 @@ export const Setlist = () => {
           inverted
           style={{ margin: "5px" }}
           size="lg"
-          onClick={() => console.log("Let's got to the mall")}
+          onClick={() => history.push(`/setlist/${setlistName}/play/0`)}
         >
           Play
         </ActionButton>
