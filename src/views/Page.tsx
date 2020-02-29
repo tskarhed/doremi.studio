@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import styles from "./styles/Page.module.scss";
 
 interface PageProps {
-  title: string;
+  title?: string;
   headerElement?: React.ReactElement;
 }
 
@@ -15,7 +15,7 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
   return (
     <View className={styles.body}>
       <header>
-        <Input value={title} />
+        <Input value={title || ""} />
         {headerElement}
       </header>
 
