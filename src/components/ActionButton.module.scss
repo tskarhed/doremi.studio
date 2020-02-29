@@ -3,7 +3,7 @@
 .ActionButton {
   border-radius: 50%;
   background-color: $primary-color;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
   height: $md;
   width: $md;
   text-align: center;
@@ -28,14 +28,17 @@
 .sm {
   height: $sm;
   width: $sm;
+  font-size: 0.8rem;
 }
 
 .md {
   height: $md;
   width: $md;
+  font-size: 1rem;
 }
 
 .lg {
   height: $lg;
   width: $lg;
+  font-size: 2rem;
 }
