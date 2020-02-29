@@ -1,14 +1,19 @@
 import React from "react";
 import { Page } from "./Page";
-import { ActionButton } from "../components/ActionButton";
+import { Text } from "../native";
 
 export const Main = () => (
   <Page
-    title="Main"
+    editable={false}
+    title="Setlist"
     headerElement={
-      <ActionButton onClick={() => {}} size="lg">
-        S
-      </ActionButton>
+      <Text
+        style={{
+          margin: "auto"
+        }}
+      >
+        Search
+      </Text>
     }
   />
 );
