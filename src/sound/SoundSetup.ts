@@ -9,11 +9,15 @@ export class Note {
 }
 
 export class ToneSequence {
-  constructor(private notes: string[], private onNoteStart?: Function) {}
+  constructor(
+    private notes: string[],
+    private onNoteChange?: (note: string, duration?: number) => void
+  ) {}
   play() {
     const sequence = new Sequence(
       (time: string, note: string) => {
-        this.onNoteStart && this.onNoteStart(note, Ticks(time).toMilliseconds);
+        this.onNoteChange &&
+          this.onNoteChange(note, Ticks(time).toMilliseconds);
         console.log(note, Ticks(time).toFrequency());
         sampler.triggerAttackRelease(note, "4n");
       },

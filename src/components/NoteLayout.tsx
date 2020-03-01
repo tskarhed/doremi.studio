@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { View } from "../native";
 import { ActionButton } from "./ActionButton";
 import styles from "./NoteLayout.module.scss";
@@ -10,7 +10,11 @@ interface Props {
 }
 
 export const NoteLayout: FC<Props> = ({ edit }) => {
-  const player = new ToneSequence(placeholderSetlist[0].notes);
+  const player = new ToneSequence(placeholderSetlist[0].notes, note => {
+    setActiveNote(note);
+  });
+
+  const [activeNote, setActiveNote] = useState();
   const handleClick = () => {
     console.log("playing ToneSequence");
     player.play();
@@ -19,8 +23,9 @@ export const NoteLayout: FC<Props> = ({ edit }) => {
     <View className={styles.wrapper}>
       <View className={styles.notesPosition}>
         <View className={styles.noteWrapper}>
-          {placeholderSetlist[0].notes.map(note => (
+          {placeholderSetlist[0].notes.map((note, i) => (
             <ActionButton
+              inverted={activeNote === note}
               key={note}
               style={{ margin: "5px 0" }}
               size="lg"
