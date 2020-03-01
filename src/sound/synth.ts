@@ -1,6 +1,14 @@
-// @ts-ignore
-import { Monophonic as Synth, Sequence, Transport, Sampler, Ticks } from "tone";
+import Tone, {
+  Monophonic as Synth,
+  Sequence,
+  Transport,
+  Sampler,
+  Ticks
+  // @ts-ignore
+} from "tone";
 
+// Used to avoid lag on mobile
+Tone.context.latencyHint = "fastest";
 // Audio files courtesy of:
 //https://github.com/googlecreativelab/aiexperiments-ai-duet/blob/master/static/audio/Salamander_README
 const getSampleUrl = (note: string) =>
