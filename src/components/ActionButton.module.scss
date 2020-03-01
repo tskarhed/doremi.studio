@@ -11,6 +11,7 @@
   flex-direction: column;
   justify-content: center;
   transition: box-shadow 0.05s linear, transform 0.05s linear;
+  margin: 5px;
 
   user-select: none;
 
@@ -40,5 +41,5 @@
 .lg {
   height: $lg;
   width: $lg;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }

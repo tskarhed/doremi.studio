@@ -18,6 +18,8 @@
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
+  flex-wrap: wrap-reverse;
+  padding: 10% 0;
 }
 
 .notesPosition {

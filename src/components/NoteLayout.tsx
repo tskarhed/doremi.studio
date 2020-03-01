@@ -35,7 +35,6 @@ export const NoteLayout: FC<Props> = ({ edit }) => {
             <ActionButton
               key={note}
               style={{
-                margin: "5px 0",
                 animationDuration: `${noteDuration}s`
               }}
               className={playingNote === note ? "invertAnim" : ""}
