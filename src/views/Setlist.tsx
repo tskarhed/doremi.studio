@@ -5,7 +5,7 @@ import { View } from "../native";
 import { ActionButton } from "../components/ActionButton";
 
 export const placeholderSetlist = [
-  { songName: "A whole new world", notes: ["D4", "E4", "A5", "B5"] },
+  { songName: "A whole new world", notes: ["C#4", "E#4", "G#4", "C#5"] },
   { songName: "You give love a bad name", notes: ["D4", "E4", "A5", "B5"] },
   { songName: "Nessum dorma", notes: ["D4", "E4", "A5", "B5"] },
   { songName: "Bumbibjörnarna", notes: ["D4", "E4", "A5", "B5"] }
