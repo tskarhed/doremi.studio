@@ -1,4 +1,4 @@
-import { View, Input, Text } from "../native";
+import { View, Input } from "../native";
 import React, { FC } from "react";
 import styles from "./styles/Page.module.scss";
 
