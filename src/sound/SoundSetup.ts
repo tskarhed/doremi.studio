@@ -11,18 +11,19 @@ export class Note {
 export class ToneSequence {
   constructor(
     private notes: string[],
-    private onNoteChange?: (note: string, duration?: number) => void
+    private onNoteChange?: (note: string, duration: number) => void
   ) {}
   play() {
+    const noteLength = "4n";
     const sequence = new Sequence(
       (time: string, note: string) => {
         this.onNoteChange &&
-          this.onNoteChange(note, Ticks(time).toMilliseconds);
+          this.onNoteChange(note, Ticks(noteLength).toSeconds());
         console.log(note, Ticks(time).toFrequency());
-        sampler.triggerAttackRelease(note, "4n");
+        sampler.triggerAttackRelease(note, noteLength);
       },
       this.notes,
-      "4n"
+      noteLength
     );
     sequence.loop = false;
     sequence.start();
