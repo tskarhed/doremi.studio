@@ -7,25 +7,22 @@ import { ActionButton } from "./ActionButton";
 import "./NoteLayout.scss";
 
 import { placeholderSetlist } from "../views/Setlist";
-import { Note, ToneSequence } from "../sound/SoundSetup";
+// import { Note, ToneSequence } from "../sound/SoundSetup";
+import { playNote, playSequence } from "../sound/synth";
 
 interface Props {
   edit: boolean;
 }
 
 export const NoteLayout: FC<Props> = ({ edit }) => {
-  const player = new ToneSequence(
-    placeholderSetlist[0].notes,
-    (note, duration) => {
-      console.log(duration);
-      setNoteDuration(duration);
-      setPlayingNote(note);
-    }
-  );
   const [noteDuration, setNoteDuration] = useState();
   const [playingNote, setPlayingNote] = useState();
   const handleClick = () => {
-    player.play();
+    playSequence(placeholderSetlist[0].notes, (note, duration) => {
+      console.log(duration);
+      setNoteDuration(duration);
+      setPlayingNote(note);
+    });
   };
   return (
     <View className="wrapper">
@@ -40,7 +37,7 @@ export const NoteLayout: FC<Props> = ({ edit }) => {
               className={playingNote === note ? "invertAnim" : ""}
               size="lg"
               onClick={() => {
-                new Note(note).play();
+                playNote(note);
                 setPlayingNote(note);
               }}
             >
