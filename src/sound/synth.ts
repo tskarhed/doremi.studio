@@ -16,7 +16,7 @@ const getSampleUrl = (note: string) =>
 export const constructLinkObject = () => {
   let linkObject: { [key: string]: string } = {};
   const notes = ["A", "C"];
-  for (let i = 0; i < 8; i++) {
+  for (let i = 1; i < 8; i++) {
     notes.forEach(note => {
       linkObject[note + i] = getSampleUrl(note + i);
     });
