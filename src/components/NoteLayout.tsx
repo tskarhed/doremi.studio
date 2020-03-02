@@ -12,13 +12,14 @@ import { playNote, playSequence } from "../sound/synth";
 
 interface Props {
   edit: boolean;
+  notes: string[];
 }
 
-export const NoteLayout: FC<Props> = ({ edit }) => {
+export const NoteLayout: FC<Props> = ({ edit, notes }) => {
   const [noteDuration, setNoteDuration] = useState();
   const [playingNote, setPlayingNote] = useState();
   const handleClick = () => {
-    playSequence(placeholderSetlist[0].notes, (note, duration) => {
+    playSequence(notes, (note, duration) => {
       console.log(duration);
       setNoteDuration(duration);
       setPlayingNote(note);
@@ -28,7 +29,7 @@ export const NoteLayout: FC<Props> = ({ edit }) => {
     <View className="wrapper">
       <View className="notesPosition">
         <View className="noteWrapper">
-          {placeholderSetlist[0].notes.map((note, i) => (
+          {notes.map((note, i) => (
             <ActionButton
               key={note}
               style={{

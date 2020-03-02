@@ -3,6 +3,8 @@ import { Page } from "./Page";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { View } from "../native";
 import { ActionButton } from "../components/ActionButton";
+import { setlists, songs } from "../mockData";
+import { ListItem } from "../components/List";
 
 export const placeholderSetlist = [
   {
@@ -17,6 +19,7 @@ export const placeholderSetlist = [
 export const Setlist = () => {
   const { setlistName } = useParams();
   const history = useHistory();
+
   return (
     <Page
       title={setlistName}
@@ -25,18 +28,18 @@ export const Setlist = () => {
           inverted
           style={{ margin: "5px" }}
           size="lg"
-          onClick={() => history.push(`/setlist/${setlistName}/play/0`)}
+          onClick={() =>
+            history.push(`/setlist/${setlistName}/play/${songs[0].id}`)
+          }
         >
           Play
         </ActionButton>
       }
     >
-      {placeholderSetlist.map(song => (
-        <View>
-          <Link to={`/song/${encodeURIComponent(song.songName)}`}>
-            {song.songName}
-          </Link>
-        </View>
+      {songs.map(song => (
+        <ListItem type="song" to={`/song/${song.id}`} key={song.id}>
+          {song.title}
+        </ListItem>
       ))}
     </Page>
   );
