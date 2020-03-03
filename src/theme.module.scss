@@ -14,6 +14,7 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
 // Styles for resetting native elements
 
 .Input {
+  font-weight: bold;
   max-width: 70%;
   background-color: transparent;
   border: none;
@@ -28,5 +29,37 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
   &:focus {
     outline: none;
     border-bottom-color: rgba(255, 255, 255, 1);
+  }
+}
+
+.animFromInverted {
+  animation: fromInverted 0.5s ease-out;
+  animation-play-state: running;
+}
+
+.animToInverted {
+  animation: toInverted 0.5s ease-out;
+  animation-play-state: running;
+}
+
+@keyframes fromInverted {
+  from {
+    color: $primary-color;
+    background-color: $secondary-color;
+  }
+  to {
+    color: $secondary-color;
+    background-color: $primary-color;
+  }
+}
+
+@keyframes toInverted {
+  to {
+    color: $primary-color;
+    background-color: $secondary-color;
+  }
+  from {
+    color: $secondary-color;
+    background-color: $primary-color;
   }
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import { Page } from "./Page";
-import { useParams, Link, useHistory } from "react-router-dom";
-import { View } from "../native";
+import { useParams, useHistory } from "react-router-dom";
+
 import { ActionButton } from "../components/ActionButton";
-import { setlists, songs } from "../mockData";
+import { songs } from "../mockData";
 import { ListItem } from "../components/List";
 
 export const placeholderSetlist = [

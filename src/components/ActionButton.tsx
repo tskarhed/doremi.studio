@@ -1,6 +1,7 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { View } from "../native";
 import styles from "./ActionButton.module.scss";
+import "../theme.module.scss";
 
 interface Props {
   size: "sm" | "md" | "lg";
@@ -19,10 +20,24 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
   style,
   inverted
 }) => {
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log(isAnimating);
+      if (isAnimating) {
+        setIsAnimating(false);
+      }
+    }, 500);
+  }, [isAnimating]);
+
   return (
     <View
       style={style}
-      onClick={(e: Event) => onClick(e)}
+      onClick={(e: Event) => {
+        setIsAnimating(true);
+        onClick(e);
+      }}
       className={
         styles.ActionButton +
         " " +
@@ -30,7 +45,9 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
         " " +
         className +
         " " +
-        (inverted && styles.inverted)
+        (inverted && styles.inverted) +
+        " " +
+        (isAnimating && (inverted ? "animToInverted" : "animFromInverted"))
       }
     >
       {children}

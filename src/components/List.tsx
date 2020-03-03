@@ -1,6 +1,7 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import { View } from "../native";
+import styles from "./List.module.scss";
 
 interface ListItemProps {
   to: string;
@@ -15,13 +16,11 @@ export const ListItem: FC<React.PropsWithChildren<ListItemProps>> = ({
   actionComponent
 }) => {
   return (
-    <Link to={to} style={{ display: "block" }}>
-      <View style={{ width: "20%", display: "inline-block" }}>{type}</View>
-      <View style={{ width: "60%", display: "inline-block" }}>{children}</View>
+    <Link to={to} className={styles.wrapper}>
+      <View className={styles.type}>{type}</View>
+      <View className={styles.children}>{children}</View>
 
-      <View style={{ width: "20%", display: "inline-block" }}>
-        {actionComponent}
-      </View>
+      <View className={styles.actionComponent}>{actionComponent}</View>
     </Link>
   );
 };

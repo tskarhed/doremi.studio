@@ -14,12 +14,12 @@ export const songs: Song[] = [
   {
     title: "High Barbary",
     id: encodeURI("High Barbary"),
-    notes: ["B4", "E4"]
+    notes: ["B3", "E4"]
   },
   {
     title: "Dåne liksom åskan",
     id: encodeURI("Dåne liksom åskan"),
-    notes: ["D4", "F#4", "A5"]
+    notes: ["D4", "F#4", "A4"]
   },
   {
     title: "Norrland",

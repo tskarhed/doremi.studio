@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { View } from "../native";
 import { ActionButton } from "./ActionButton";
 // import styles from "./NoteLayout.module.scss";
@@ -6,7 +6,6 @@ import { ActionButton } from "./ActionButton";
 // Import to get the animation
 import "./NoteLayout.scss";
 
-import { placeholderSetlist } from "../views/Setlist";
 // import { Note, ToneSequence } from "../sound/SoundSetup";
 import { playNote, playSequence } from "../sound/synth";
 
@@ -18,6 +17,16 @@ interface Props {
 export const NoteLayout: FC<Props> = ({ edit, notes }) => {
   const [noteDuration, setNoteDuration] = useState();
   const [playingNote, setPlayingNote] = useState();
+
+  useEffect(() => {
+    // Remove the animation class so it doesn't play double when clicked
+    if (playingNote === notes[notes.length - 1]) {
+      setTimeout(() => {
+        setPlayingNote("");
+      }, noteDuration + 500);
+    }
+  }, [playingNote]);
+
   const handleClick = () => {
     playSequence(notes, (note, duration) => {
       console.log(duration);
@@ -39,7 +48,7 @@ export const NoteLayout: FC<Props> = ({ edit, notes }) => {
               size="lg"
               onClick={() => {
                 playNote(note);
-                setPlayingNote(note);
+                // setPlayingNote(note);
               }}
             >
               {note}
