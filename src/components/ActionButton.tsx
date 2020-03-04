@@ -35,6 +35,7 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
     <View
       style={style}
       onClick={(e: Event) => {
+        e.preventDefault();
         setIsAnimating(true);
         onClick(e);
       }}
