@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Link, withRouter, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { View } from "../native";
 import styles from "./List.module.scss";
 

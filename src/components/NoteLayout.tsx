@@ -25,7 +25,7 @@ export const NoteLayout: FC<Props> = ({ edit, notes }) => {
         setPlayingNote("");
       }, noteDuration + 500);
     }
-  }, [playingNote]);
+  }, [playingNote, noteDuration, notes]);
 
   const handleClick = () => {
     playSequence(notes, (note, duration) => {

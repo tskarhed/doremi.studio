@@ -6,25 +6,34 @@ import {
   Redirect
 } from "react-router-dom";
 import { Main, Play, Setlist, Song } from "./views";
+// Initialize Sampler
+import "./sound/synth";
 import "./App.scss";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/setlist/:setlistName/play/:songNumber">
+        <Route exact path="/setlist/:setlistName/play/:songNumber">
           <Play />
         </Route>
-        <Route path="/setlist/:setlistName">
+        <Route exact path="/setlist/:setlistName">
           <Setlist />
         </Route>
         <Route path="/song/:songName">
           <Song />
         </Route>
-        <Route path="/">
+
+        <Redirect exact from="/setlist" to="/" />
+        <Redirect
+          exact
+          from="/setlist/:setlistName/play"
+          to="/setlist/:setlistName"
+        />
+        {/* <Redirect to="/" /> */}
+        <Route path="/*">
           <Main />
         </Route>
-        <Route render={() => <Redirect to="/" />} />
       </Switch>
     </Router>
   );
