@@ -1,3 +1,8 @@
+export type SongState = string[];
+
+export type SetlistState = SongState[];
+
+// Song interfaces and types
 export interface AddNote {
   id: "ADD_NOTE";
   note: string;
@@ -14,6 +19,23 @@ export interface DeleteNote {
   index: number;
 }
 
-export type SongAction = AddNote | UpdateNote | DeleteNote;
+export interface UpdateTitle {
+  id: "UPDATE_TITLE";
+  text: string;
+}
 
-export type SongState = string[];
+export type SongAction = AddNote | UpdateNote | DeleteNote | UpdateTitle;
+
+// Setlist interfaces and types
+
+export interface AddSong {
+  id: "ADD_SONG";
+  song: SongState;
+}
+
+export interface RemoveSong {
+  id: "REMOVE_SONG";
+  index: number;
+}
+
+export type SetlistAction = AddSong | RemoveSong | UpdateTitle;

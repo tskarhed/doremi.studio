@@ -1,4 +1,4 @@
-import { SongAction, SongState } from "./types";
+import { SongAction, SongState, SetlistAction, SetlistState } from "./types";
 
 export const song = (prevState: SongState, action: SongAction) => {
   switch (action.id) {
@@ -16,5 +16,11 @@ export const song = (prevState: SongState, action: SongAction) => {
       return prevState.filter((_note, index) => index !== action.index);
     default:
       return prevState;
+  }
+};
+
+export const setlist = (prevState: SetlistState, action: SetlistAction) => {
+  if (action.id === "ADD_SONG") {
+    return prevState;
   }
 };
