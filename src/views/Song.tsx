@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect } from "react";
+import React, { FC } from "react";
 import { Page } from "./Page";
 import { useParams, useHistory } from "react-router-dom";
 import { NoteLayout } from "../components/NoteLayout";
@@ -9,15 +9,8 @@ export const SongPage: FC<{songs: Song[]}> = ({songs}) => {
   const { songName } = useParams();
   const history = useHistory();
 
-  const song = songs.find(song => song.id === songName);
+  const song = songs.find(song => song.id === songName) ?? history.push('/');
   
-  useLayoutEffect(() => {
-    if(!song){
-      history.push('/');
-    }
-  });
-  
-
   return (
     <Page title={song ? song.title : ""}>
       <NoteLayout notes={song ? song.notes : []} edit />

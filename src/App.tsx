@@ -6,6 +6,7 @@ import {
   Redirect
 } from "react-router-dom";
 import { Main, Play, Setlist, Song } from "./views";
+
 // Initialize Sampler
 import "./sound/synth";
 import "./App.scss";

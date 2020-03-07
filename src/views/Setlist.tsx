@@ -4,7 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 
 import { ActionButton } from "../components/ActionButton";
 import { songs } from "../mockData";
-import { ListItem } from "../components/List";
+import SetlistSongList from "../components/SetlistSongList";
 
 export const placeholderSetlist = [
   {
@@ -36,11 +36,7 @@ export const Setlist = () => {
         </ActionButton>
       }
     >
-      {songs.map(song => (
-        <ListItem type="song" to={`/song/${song.id}`} key={song.id}>
-          {song.title}
-        </ListItem>
-      ))}
+      <SetlistSongList id={setlistName || ""}/>
     </Page>
   );
 };
