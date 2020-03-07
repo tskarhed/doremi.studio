@@ -1,4 +1,7 @@
 import { NotesAction, Notes, SetlistAction, Setlist, Song, SongAction, SongsAction, SetlistsAction } from "./types";
+import { combineReducers } from "redux";
+import { mockSongs, mockSetlists } from "./mocks";
+
 
 export const notes = (prevState: Notes, action: NotesAction) => {
   switch (action.type) {
@@ -60,7 +63,7 @@ export const setlist = (prevState: Setlist, action: SetlistAction) => {
   return prevState;
 };
 
-export const songs = (prevState: Song[], action: SongsAction) => {
+export const songs = (prevState: Song[] = mockSongs, action: SongsAction) => {
   if(action.type === "CREATE_SONG"){
     return [...prevState, song({} as Song, action)];
   }
@@ -75,7 +78,7 @@ export const songs = (prevState: Song[], action: SongsAction) => {
   })
 }
 
-export const setlists = (prevState: Setlist[], action: SetlistsAction) => {
+export const setlists = (prevState: Setlist[] = mockSetlists, action: SetlistsAction) => {
   if(action.type === "CREATE_SETLIST"){
     return [...prevState, setlist({} as Setlist, action)];
   }
@@ -88,3 +91,5 @@ export const setlists = (prevState: Setlist[], action: SetlistsAction) => {
     return setlist(list, action);
   });
 }
+
+export default combineReducers({setlists, songs});

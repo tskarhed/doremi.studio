@@ -1,6 +1,11 @@
 export type Notes = string[];
-type SongId = string;
-type SetlistId = string;
+export type SongId = string;
+export type SetlistId = string;
+
+export interface StoreState{
+  songs: Song[];
+  setlists: Setlist[];
+}
 
 export interface Song {
   id: string;
@@ -37,13 +42,6 @@ export interface UpdateSongTitle {
   title: string;
 }
 
-/**
- *  Create a song without the context of a setlist
- */
-export interface CreateSong {
-  type: "CREATE_SONG";
-  id: SongId;
-}
 
 // Setlist interfaces and types
 
