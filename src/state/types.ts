@@ -88,9 +88,17 @@ export interface DeleteSetlist {
 }
 
 
+
 export type NotesAction = AddNote | UpdateNote | DeleteNote;
 export type SongAction = UpdateSongTitle | NotesAction | CreateSong;
 export type SongsAction = DeleteSong | SongAction;
 
 export type SetlistAction = CreateSong | AddSongToSetlist | RemoveSong | UpdateSetlistTitle | CreateSetlist;
 export type SetlistsAction = DeleteSetlist | SetlistAction; 
+
+export interface SetSearchState {
+  type: "SET_SEARCH_STATE";
+  search: SearchState;
+}
+
+export type SearchState = "all" | "setlists" | "songs" | false

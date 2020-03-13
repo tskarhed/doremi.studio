@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import { StoreState, SetlistId, Setlist } from "../state/types";
+import { StoreState, SetlistId } from "../state/types";
 import { ListItem } from "./List";
 import { connect } from "react-redux";
 

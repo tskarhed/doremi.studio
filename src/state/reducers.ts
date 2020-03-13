@@ -1,4 +1,4 @@
-import { NotesAction, Notes, SetlistAction, Setlist, Song, SongAction, SongsAction, SetlistsAction } from "./types";
+import { NotesAction, Notes, SetlistAction, Setlist, Song, SongAction, SongsAction, SetlistsAction, SearchState, SetSearchState } from "./types";
 import { combineReducers } from "redux";
 import { mockSongs, mockSetlists } from "./mocks";
 
@@ -92,4 +92,11 @@ export const setlists = (prevState: Setlist[] = mockSetlists, action: SetlistsAc
   });
 }
 
-export default combineReducers({setlists, songs});
+const isSearching = (prevState: SearchState = "all", action: SetSearchState) => {
+  if(action.type === "SET_SEARCH_STATE"){
+    return action.search;
+  }
+  return prevState;
+}
+
+export default combineReducers({setlists, songs, isSearching});

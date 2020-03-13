@@ -6,13 +6,15 @@ import * as serviceWorker from "./serviceWorker";
 import {createStore} from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./state/reducers";
+import { Search } from "./components/Search";
 
 // @ts-ignore
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
+const state = store.getState()
 ReactDOM.render(
 <Provider store={store}>
     <App />
+    {state.isSearching && <Search isSearching={state.isSearching} setlists={state.setlists} songs={state.songs} />}
 </Provider>,
 document.getElementById("root"));
 
