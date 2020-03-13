@@ -5,6 +5,7 @@ export type SetlistId = string;
 export interface StoreState{
   songs: Song[];
   setlists: Setlist[];
+  isSearching: SearchState;
 }
 
 export interface Song {

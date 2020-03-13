@@ -2,6 +2,7 @@ $primary-color: #770082;
 $secondary-color: white;
 $accent-color: #8e3096;
 
+
 $sm: 25px;
 $md: 50px;
 $lg: 70px;
@@ -62,4 +63,12 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     color: $secondary-color;
     background-color: $primary-color;
   }
+}
+
+:export {
+  primary: $primary-color;
+  secondary: $secondary-color;
+  accent: $accent-color;
+  fontFamily: $font-family;
+  fontSize: $font-size;
 }

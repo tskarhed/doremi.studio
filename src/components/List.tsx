@@ -20,7 +20,7 @@ export const ListItem: FC<React.PropsWithChildren<ListItemProps>> = ({
       <View className={styles.type}>{type}</View>
       <View className={styles.children}>{children}</View>
 
-      <View className={styles.actionComponent}>{actionComponent}</View>
+      {actionComponent && <View className={styles.actionComponent}>{actionComponent}</View>}
     </Link>
   );
 };
