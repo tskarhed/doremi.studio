@@ -1,7 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import { View } from "../native";
 import { ActionButton } from "./ActionButton";
-// import styles from "./NoteLayout.module.scss";
 
 // Import to get the animation
 import "./NoteLayout.scss";
@@ -57,8 +56,8 @@ export const NoteLayout: FC<Props> = ({ edit, notes }) => {
         </View>
       </View>
       <View className="actionWrapper">
-        <ActionButton inverted size="lg" onClick={handleClick}>
-          {edit ? "+" : "Play"}
+        <ActionButton displayPlay={!edit} inverted size="lg" onClick={handleClick}>
+          {edit && "+"}
         </ActionButton>
       </View>
     </View>

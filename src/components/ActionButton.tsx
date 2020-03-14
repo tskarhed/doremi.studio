@@ -2,6 +2,8 @@ import React, { FC, useState, useEffect } from "react";
 import { View } from "../native";
 import styles from "./ActionButton.module.scss";
 import "../theme.module.scss";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   size: "sm" | "md" | "lg";
@@ -10,6 +12,7 @@ interface Props {
   className?: string;
   style?: Object;
   inverted?: boolean;
+  displayPlay?: boolean;
 }
 
 export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
@@ -18,7 +21,8 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
   size,
   className,
   style,
-  inverted
+  inverted,
+  displayPlay
 }) => {
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -51,7 +55,8 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
         (isAnimating && (inverted ? "animToInverted" : "animFromInverted"))
       }
     >
-      {children}
+      {displayPlay && <Icon style={{margin: "auto", paddingLeft: "5%", paddingTop: "2%"}} icon={faPlay}/>}
+      {!displayPlay && children}
     </View>
   );
 };

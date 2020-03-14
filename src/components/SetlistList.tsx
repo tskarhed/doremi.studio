@@ -27,9 +27,8 @@ return (<>{setlists.map(setlist => {
             }}
             size="md"
             inverted
-          >
-            Play
-          </ActionButton>
+            displayPlay
+          />
         }
       >
         {setlist.title}
