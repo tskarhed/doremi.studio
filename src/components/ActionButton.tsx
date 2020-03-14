@@ -32,7 +32,7 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
       if (isAnimating) {
         setIsAnimating(false);
       }
-    }, 500);
+    }, 200);
   }, [isAnimating]);
 
   return (
@@ -55,7 +55,7 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
         (isAnimating && (inverted ? "animToInverted" : "animFromInverted"))
       }
     >
-      {displayPlay && <Icon style={{margin: "auto", paddingLeft: "5%", paddingTop: "2%"}} icon={faPlay}/>}
+      {displayPlay && <Icon style={{paddingLeft: "5%", paddingTop: "2%"}} icon={faPlay}/>}
       {!displayPlay && children}
     </View>
   );

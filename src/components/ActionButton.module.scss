@@ -19,6 +19,12 @@
     transform: translateY(1px);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   }
+  &:hover {
+    cursor: pointer;
+  }
+  svg {
+    margin: auto;
+  }
 }
 
 .inverted {

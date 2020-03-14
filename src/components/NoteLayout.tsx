@@ -2,6 +2,9 @@ import React, { FC, useState, useEffect } from "react";
 import { View } from "../native";
 import { ActionButton } from "./ActionButton";
 
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
 // Import to get the animation
 import "./NoteLayout.scss";
 
@@ -57,7 +60,7 @@ export const NoteLayout: FC<Props> = ({ edit, notes }) => {
       </View>
       <View className="actionWrapper">
         <ActionButton displayPlay={!edit} inverted size="lg" onClick={handleClick}>
-          {edit && "+"}
+          {edit && <Icon icon={faPlus}/>}
         </ActionButton>
       </View>
     </View>
