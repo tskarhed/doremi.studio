@@ -5,7 +5,6 @@ import { useParams, useHistory } from "react-router-dom";
 import { ActionButton } from "../components/ActionButton";
 import { SongList } from "../components/SongList";
 import { StoreState, Song, Setlist as SetlistType } from "../state/types";
-import StateManager from "react-select";
 import { connect } from "react-redux";
 
 interface Props {
@@ -22,7 +21,13 @@ export const UnconnectedSetlist: FC<Props> = ({songs, setlists}) => {
     return <></>
   }
 
-  const setlistSongs = setlist.songs.map(songId => songs.find(song => song.id === songId) as Song)
+  const setlistSongs = setlist.songs.reduce<Song[]>((songArray, songId) => {
+    const song = songs.find(song => song.id === songId);
+    if(song){
+      return [...songArray, song];
+    }
+    return songArray;
+  }, []);
 
   return (
     <Page
