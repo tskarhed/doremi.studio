@@ -141,6 +141,21 @@ describe("Toggle searching", () => {
     });
 
     it("handle random action", () => {
-        expect(reducerTest({type: "RANDOM_ACTION", search: "all"})).toEqual(false);
+        expect(reducerTest({type: "RANDOM_ACTION"})).toEqual(false);
+    });
+    it("all", () => {
+        expect(reducerTest({type: "SEARCH_ALL"})).toEqual("all");
+    });
+    
+    it("songs", () => {
+        expect(reducerTest({type: "SEARCH_SETLISTS"})).toEqual("setlists");
+    });
+    
+    it("setlists", () => {
+        expect(reducerTest({type: "SEARCH_SONGS"})).toEqual("songs");
+    });
+
+    it("reset search", () => {
+        expect(reducerTest({type: "SEARCH_NONE"})).toEqual(false);
     });
 })

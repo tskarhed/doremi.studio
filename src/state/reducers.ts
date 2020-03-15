@@ -93,8 +93,18 @@ export const setlists = (prevState: Setlist[] = mockSetlists, action: SetlistsAc
 }
 
 export const isSearching = (prevState: SearchState = false, action: SetSearchState) => {
-  if(action.type === "SET_SEARCH_STATE"){
-    return action.search;
+  if(action.type === "SEARCH_ALL"){
+    return "all";
+  }
+  if(action.type === "SEARCH_SETLISTS"){
+    return "setlists";
+  }
+  if(action.type === "SEARCH_SONGS"){
+    return "songs";
+  }
+  
+  if(action.type === "SEARCH_NONE"){
+    return false;
   }
   return prevState;
 }

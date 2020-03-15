@@ -23,3 +23,5 @@ export const addSongToSetlist = (song: SongId, setlist: SetlistId): AddSongToSet
 //Setlists
 export const createSetlist = (id: SetlistId): CreateSetlist => ({type: "CREATE_SETLIST", id})
 export const deleteSetlist = (id: SetlistId): DeleteSetlist => ({type: "DELETE_SETLIST", id})
+
+//Search

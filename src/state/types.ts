@@ -97,9 +97,12 @@ export type SongsAction = DeleteSong | SongAction;
 export type SetlistAction = CreateSong | AddSongToSetlist | RemoveSong | UpdateSetlistTitle | CreateSetlist;
 export type SetlistsAction = DeleteSetlist | SetlistAction; 
 
+export type SearchStateType = "SEARCH_ALL" | "SEARCH_SETLISTS" | "SEARCH_SONGS" | "SEARCH_NONE";
+
+
 export interface SetSearchState {
-  type: "SET_SEARCH_STATE";
-  search: SearchState;
+  type: SearchStateType;
 }
+
 
 export type SearchState = "all" | "setlists" | "songs" | false
