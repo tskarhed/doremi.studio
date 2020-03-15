@@ -11,7 +11,7 @@ import { Main, Play, Setlist, Song } from "./views";
 import "./sound/synth";
 import "./App.scss";
 import { StoreState } from "./state/types";
-import { Search } from "./components/Search";
+import Search from "./components/Search";
 
 function App({state}: {state: StoreState}) {
   return (

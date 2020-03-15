@@ -25,7 +25,7 @@ export const mockSongs: Song[] = [
 ];
 
 export const mockSetlists: Setlist[] = [
-    {title: "Setlist 1", id: "setlist1", songs: ["song1", "song2", "song4"]},
+    {title: "Setlist  dawqwdaw  1", id: "setlist1", songs: ["song1", "song2", "song4"]},
     {title: "Setlist 2", id: "setlist2", songs: ["song3", "song2", "song4"]},
     {title: "Setlist 3", id: "setlist3", songs: ["song1", "song2"]}
 ];

@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { SearchState, Setlist, Song } from '../state/types';
 import CreatableSelect from 'react-select/creatable';
+import { components } from 'react-select';
 import { setlists } from '../mockData';
 import theme from '../theme.module.scss'
-import { ListItem } from './List';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { View } from '../native';
+import styles from "./List.module.scss";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import { faMusic, faListUl } from '@fortawesome/free-solid-svg-icons';
 
-interface Props{
+interface Props extends RouteComponentProps<any>{
     isSearching: SearchState;
     setlists: Setlist[];
     songs: Song[];
@@ -59,11 +64,21 @@ const customStyles = {
         height: "auto",
         maxHeight: "90vh",
     }),
+    option: () => ({}),
     menuList: (provided: any) => ({...provided, maxHeight: "none"}),
     indicatorContainer: () => ({color: theme.secondary})
 };
 
-const Option = (props: any) => (<ListItem to="/" type="song">{props.children}</ListItem>);
+const Option: FC<any> = (props: any) => {
+    const { children, data, ...rest} = props;
+    // const { data, innerRef,  } = props;
+    // const { type, value } = props.data;
+    // return (<ListItem onClick={props.onClick} ref={props.innerRef} to={`/${type}/${value}`} type={type}>{props.children}</ListItem>)
+    return <components.Option {...rest} className={styles.wrapper}>
+        {data.type && <View className={styles.type}><Icon icon={data.type === "song" ? faMusic : faListUl}/></View>}
+        <View className={styles.children}>{children}</View>
+    </components.Option>
+};
 
 
 export class Search extends React.PureComponent<Props>{
@@ -80,6 +95,12 @@ export class Search extends React.PureComponent<Props>{
 
     }
 
+    onSelect = (val: any) => {
+        console.log(val);
+        const { history } = this.props;  
+        history.push(`/${val.type}/${val.value}`);
+    }
+
     
     songsToOptions = (songs: Song[]): Option[] => {
         return songs.map(song => ({value: song.id, label: song.title, type: "song" }))
@@ -89,6 +110,8 @@ export class Search extends React.PureComponent<Props>{
     }
 
     render(){
-        return (<CreatableSelect components={{Option}} openMenuOnFocus styles={customStyles} options={this.options}/>);
+        return (<CreatableSelect components={{Option}} placeholder="Search..." openMenuOnFocus onChange={this.onSelect} styles={customStyles} options={this.options}/>);
     }
 }
+
+export default withRouter(Search);
