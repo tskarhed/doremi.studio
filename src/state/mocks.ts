@@ -4,7 +4,7 @@ export const mockSongs: Song[] = [
     {
         title: "Song 1",
         id: "song1",
-        notes: ["B4", "B3"],
+        notes: ["B4", "B3", "A3", "C2", "E4", "F4", "G#3"],
     },
     {
         title: "Song 2",
