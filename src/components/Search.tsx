@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { SearchState, Setlist, Song } from '../state/types';
 import CreatableSelect from 'react-select/creatable';
 import { components } from 'react-select';
-import { setlists } from '../mockData';
 import theme from '../theme.module.scss'
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { View } from '../native';
@@ -105,7 +104,7 @@ export class Search extends React.PureComponent<Props>{
     songsToOptions = (songs: Song[]): Option[] => {
         return songs.map(song => ({value: song.id, label: song.title, type: "song" }))
     }
-    setlistsToOptions = (songs: Setlist[]): Option[] => {
+    setlistsToOptions = (setlists: Setlist[]): Option[] => {
         return setlists.map(setlist => ({value: setlist.id, label: setlist.title, type: "setlist" }))
     }
 

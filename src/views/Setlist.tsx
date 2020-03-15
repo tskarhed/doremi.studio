@@ -3,18 +3,7 @@ import { Page } from "./Page";
 import { useParams, useHistory } from "react-router-dom";
 
 import { ActionButton } from "../components/ActionButton";
-import { songs } from "../mockData";
 import SetlistSongList from "../components/SetlistSongList";
-
-export const placeholderSetlist = [
-  {
-    songName: "A whole new world",
-    notes: ["C#4", "E#4", "G#4", "C#5", "E#5", "G#5", "C#6"]
-  },
-  { songName: "You give love a bad name", notes: ["D4", "E4", "A5", "B5"] },
-  { songName: "Nessum dorma", notes: ["D4", "E4", "A5", "B5"] },
-  { songName: "Bumbibjörnarna", notes: ["D4", "E4", "A5", "B5"] }
-];
 
 export const Setlist = () => {
   const { setlistName } = useParams();
@@ -29,7 +18,7 @@ export const Setlist = () => {
           style={{ margin: "5px" }}
           size="lg"
           onClick={() =>
-            history.push(`/setlist/${setlistName}/play/${songs[0].id}`)
+            history.push(`/setlist/${setlistName}/play/`)
           }
         >
           Play
