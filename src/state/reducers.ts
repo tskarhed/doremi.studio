@@ -92,7 +92,7 @@ export const setlists = (prevState: Setlist[] = mockSetlists, action: SetlistsAc
   });
 }
 
-const isSearching = (prevState: SearchState = "all", action: SetSearchState) => {
+export const isSearching = (prevState: SearchState = false, action: SetSearchState) => {
   if(action.type === "SET_SEARCH_STATE"){
     return action.search;
   }
