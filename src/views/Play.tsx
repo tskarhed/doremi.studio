@@ -18,7 +18,7 @@ export const UnconnectedPlay: FC<Props> = ({songs}) => {
     return <></>
   }
   return (
-    <Page editable={false} title={decodeURIComponent(song.id || "")}>
+    <Page editable={false} title={decodeURIComponent(song.id)}>
       <NoteLayout notes={song.notes} edit={false} />
     </Page>
   );
