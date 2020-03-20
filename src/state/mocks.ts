@@ -14,12 +14,12 @@ export const mockSongs: Song[] = [
     {
         title: "High Barbary",
         id: "song3",
-        notes: ["B3", "E3"],
+        notes: ["B2", "E3"],
     },
     {
         title: "Song 4",
         id: "song4",
-        notes: ["B4", "B3","B4", "B3", "B4", "B3", "B4", "B3"],
+        notes: ["B4", "B3"],
     }
 
 ];

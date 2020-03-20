@@ -117,7 +117,7 @@ export class Search extends React.PureComponent<AllProps>{
     }
 
     render(){
-        return (<CreatableSelect components={{Option}} placeholder="Search..." openMenuOnFocus onChange={this.onSelect} styles={customStyles} options={this.options}/>);
+        return (<CreatableSelect autoFocus components={{Option}} placeholder="Search..." openMenuOnFocus onChange={this.onSelect} styles={customStyles} options={this.options}/>);
     }
 }
 
