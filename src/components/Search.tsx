@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { SearchState, Setlist, Song } from '../state/types';
+import React, { FC, Dispatch } from 'react';
+import { SearchState, Setlist, Song, SetSearchState } from '../state/types';
 import CreatableSelect from 'react-select/creatable';
 import { components } from 'react-select';
 import theme from '../theme.module.scss'
@@ -8,6 +8,8 @@ import { View } from '../native';
 import styles from "./List.module.scss";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faMusic, faListUl } from '@fortawesome/free-solid-svg-icons';
+import { setSearch } from '../state/actions';
+import { connect } from 'react-redux';
 
 interface Props extends RouteComponentProps<any>{
     isSearching: SearchState;
@@ -15,13 +17,18 @@ interface Props extends RouteComponentProps<any>{
     songs: Song[];
 }
 
+interface DispatchProps {
+    resetSearch: () => void;
+}
+
+type AllProps = Props & DispatchProps;
+
 interface Option {
     value: string;
     label: string;
     type: "song" | "setlist";
 }
 
-console.log(theme.secondary)
 const customStyles = {
     // Container that holds everything together
     container: (provided: any, state: any) => ({
@@ -80,9 +87,9 @@ const Option: FC<any> = (props: any) => {
 };
 
 
-export class Search extends React.PureComponent<Props>{
+export class Search extends React.PureComponent<AllProps>{
     private options: Option[] = [];
-    constructor(props: Props){
+    constructor(props: AllProps){
         super(props);
         if(props.isSearching === "songs"){
             this.options = this.songsToOptions(props.songs);
@@ -98,6 +105,7 @@ export class Search extends React.PureComponent<Props>{
         console.log(val);
         const { history } = this.props;  
         history.push(`/${val.type}/${val.value}`);
+        this.props.resetSearch();
     }
 
     
@@ -113,4 +121,8 @@ export class Search extends React.PureComponent<Props>{
     }
 }
 
-export default withRouter(Search);
+const mapDispatchToProps = (dispatch: Dispatch<SetSearchState>) => ({
+    resetSearch: () => dispatch(setSearch(false))
+})
+
+export default withRouter(connect(null, mapDispatchToProps)(Search));

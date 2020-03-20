@@ -1,16 +1,14 @@
 import React, { FC } from "react";
-import { Setlist, StoreState } from "../state/types";
+import { Setlist } from "../state/types";
 import { ListItem } from "./List";
 import { ActionButton } from "./ActionButton";
 import { useHistory } from "react-router-dom";
-import { connect } from "react-redux";
-
 
 interface Props {
     setlists: Setlist[];
 }
 
-const SetlistList: FC<Props> = ({setlists}) => {
+export const SetlistList: FC<Props> = ({setlists}) => {
     const history = useHistory();
 return (<>{setlists.map(setlist => {
     return (
@@ -37,9 +35,3 @@ return (<>{setlists.map(setlist => {
      })}
   </>);
 }
-
-const mapStateToProps = (state: StoreState): {setlists: Setlist[]} => ({
-    setlists: state.setlists,
-})
-
-export default connect(mapStateToProps)(SetlistList);

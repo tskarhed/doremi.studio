@@ -12,8 +12,10 @@ import "./sound/synth";
 import "./App.scss";
 import { StoreState } from "./state/types";
 import Search from "./components/Search";
+import { useSelector } from "react-redux";
 
-function App({state}: {state: StoreState}) {
+function App() {
+  const state = useSelector((state: StoreState) => state);
   return (
     <Router>
       <Switch>

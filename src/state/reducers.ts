@@ -2,7 +2,6 @@ import { NotesAction, Notes, SetlistAction, Setlist, Song, SongAction, SongsActi
 import { combineReducers } from "redux";
 import { mockSongs, mockSetlists } from "./mocks";
 
-
 export const notes = (prevState: Notes, action: NotesAction) => {
   switch (action.type) {
     case "ADD_NOTE":
@@ -93,6 +92,7 @@ export const setlists = (prevState: Setlist[] = mockSetlists, action: SetlistsAc
 }
 
 export const isSearching = (prevState: SearchState = false, action: SetSearchState) => {
+  console.log(action);
   if(action.type === "SEARCH_ALL"){
     return "all";
   }

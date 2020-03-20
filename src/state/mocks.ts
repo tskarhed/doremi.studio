@@ -2,24 +2,24 @@ import { Song, Setlist } from "./types";
 
 export const mockSongs: Song[] = [
     {
-        title: "Song 1",
+        title: "Dåne liksom åskan",
         id: "song1",
-        notes: ["B4", "B3", "A3", "C2", "E4", "F4", "G#3"],
+        notes: ["D3", "F#3", "A3"]
     },
     {
-        title: "Song 2",
+        title: "Norrland",
         id: "song2",
-        notes: ["B4", "B3"],
+        notes: ["Bb4"],
     },
     {
-        title: "Song 3",
+        title: "High Barbary",
         id: "song3",
-        notes: ["B4", "B3"],
+        notes: ["B3", "E3"],
     },
     {
         title: "Song 4",
         id: "song4",
-        notes: ["B4", "B3"],
+        notes: ["B4", "B3","B4", "B3", "B4", "B3", "B4", "B3"],
     }
 
 ];

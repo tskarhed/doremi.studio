@@ -1,4 +1,4 @@
-import { SongId, AddNote, UpdateNote, DeleteNote, UpdateSongTitle, CreateSong, SetlistId, DeleteSong, UpdateSetlistTitle, CreateSetlist, DeleteSetlist, AddSongToSetlist, SearchState } from "./types";
+import { SongId, AddNote, UpdateNote, DeleteNote, UpdateSongTitle, CreateSong, SetlistId, DeleteSong, UpdateSetlistTitle, CreateSetlist, DeleteSetlist, AddSongToSetlist, SearchState, SetSearchState } from "./types";
 
 // Notes
 
@@ -25,15 +25,16 @@ export const createSetlist = (id: SetlistId): CreateSetlist => ({type: "CREATE_S
 export const deleteSetlist = (id: SetlistId): DeleteSetlist => ({type: "DELETE_SETLIST", id})
 
 //Search
-export const setSearch = (state: SearchState) => {
+export const setSearch = (state: SearchState): SetSearchState => {
     switch(state){
-        case state === "all":
+        case "all":
             return { type: "SEARCH_ALL"};
-        case state === "setlists":
+        case "setlists":
             return { type: "SEARCH_SETLISTS"};
-        case state === "songs":
+        case "songs":
             return { type: "SEARCH_SONGS"};
-        case state === false:
+        case false:
+            default:
             return { type: "SEARCH_NONE"};
     }
 }
