@@ -6,17 +6,19 @@ interface PageProps {
   title?: string;
   headerElement?: React.ReactElement;
   editable?: boolean;
+  onHeaderClick?: (e: any) => void;
 }
 
 export const Page: FC<React.PropsWithChildren<PageProps>> = ({
   title,
   headerElement,
   children,
-  editable = true
+  editable = true,
+  onHeaderClick
 }) => {
   return (
     <View className={styles.body}>
-      <header>
+      <header onClick={onHeaderClick}>
         {editable ? (
           <Input value={title || ""} />
         ) : (

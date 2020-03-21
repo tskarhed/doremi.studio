@@ -15,12 +15,13 @@ export const Main: FC = () => {
     <Page
       editable={false}
       title="Setlist"
+      onHeaderClick={() => dispatch(setSearch("all"))}
       headerElement={
         <Icon icon={faSearch} size="2x" style={{
           margin: "auto 0",
           padding: "15px",
-          maxHeight: "100%"
-
+          maxHeight: "100%",
+          cursor: "pointer"
         }}
         onClick={() => dispatch(setSearch("all"))}
         />
