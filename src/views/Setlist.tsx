@@ -6,6 +6,7 @@ import { ActionButton } from "../components/ActionButton";
 import { SongList } from "../components/SongList";
 import { StoreState, Song, Setlist as SetlistType } from "../state/types";
 import { connect } from "react-redux";
+import { Back } from "../components/Back";
 
 interface Props {
   songs: Song[];
@@ -32,6 +33,7 @@ export const UnconnectedSetlist: FC<Props> = ({songs, setlists}) => {
   return (
     <Page
       title={setlistName}
+      prefixElement={<Back to="/"/>}
       headerElement={
         <ActionButton
         displayPlay  

@@ -5,6 +5,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { StoreState, Song, SongId, SetlistId, Setlist } from "../state/types";
 import { View } from "../native";
+import { Back } from "../components/Back";
 
 
 interface PlayFooterProps{
@@ -65,7 +66,7 @@ export const UnconnectedPlay: FC<Props> = ({songs, setlists}) => {
   }
   const songIndex = setlist.songs.indexOf(song.id);
   return (
-    <Page editable={false} title={song.title}>
+    <Page editable={false} title={song.title} prefixElement={<Back to={`/setlist/${setlistName}`}/>}>
       <NoteLayout notes={song.notes} edit={false} />
       <PlayFooter setlistId={setlistName} prev={setlistSongs[songIndex-1]} next={setlistSongs[songIndex + 1]}/>
     </Page>

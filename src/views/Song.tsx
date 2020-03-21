@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { NoteLayout } from "../components/NoteLayout";
 import { StoreState, Song } from "../state/types";
 import { connect } from "react-redux";
+import { Back } from "../components/Back";
 
 export const SongPage: FC<{songs: Song[]}> = ({songs}) => {
   const { songName } = useParams();
@@ -12,7 +13,7 @@ export const SongPage: FC<{songs: Song[]}> = ({songs}) => {
   const song = songs.find(song => song.id === songName) ?? history.push('/');
   
   return (
-    <Page title={song ? song.title : ""}>
+    <Page title={song ? song.title : ""} prefixElement={<Back/>}>
       <NoteLayout notes={song ? song.notes : []} edit />
     </Page>
   );
