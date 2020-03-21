@@ -96,7 +96,7 @@ export class Search extends React.PureComponent<AllProps>{
         } else if(props.isSearching === "setlists"){
             this.options = this.setlistsToOptions(props.setlists);
         } else {
-            this.options = [...this.setlistsToOptions(props.setlists), ...this.songsToOptions(props.songs)];
+            this.options = [...this.songsToOptions(props.songs), ...this.setlistsToOptions(props.setlists)];
         }
 
     }
