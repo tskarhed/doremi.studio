@@ -28,11 +28,12 @@ export const song = (prevState: Song, action: SongAction) => {
 
   if(action.type === "CREATE_SONG"){
     return {
-      title: "",
+      title: action.title,
       notes: [],
       id: action.id
     };
   }
+
   return {...prevState, notes: notes(prevState.notes, action)};
 }
 
@@ -73,7 +74,7 @@ export const songs = (prevState: Song[] = mockSongs, action: SongsAction) => {
 
 
   return prevState.map(listItem => {
-    return song(listItem, action);
+    return action.songId === listItem.id ? song(listItem, action) : listItem;
   })
 }
 

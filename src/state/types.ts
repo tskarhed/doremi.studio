@@ -22,23 +22,27 @@ export interface Setlist {
 }
 
 // Song interfaces and types
-export interface AddNote {
+interface NoteActions {
+  songId: SongId;
+}
+
+export interface AddNote extends NoteActions {
   type: "ADD_NOTE";
   note: string;
 }
 
-export interface UpdateNote {
+export interface UpdateNote extends NoteActions {
   type: "UPDATE_NOTE";
   index: number;
   note: string;
 }
 
-export interface DeleteNote {
+export interface DeleteNote extends NoteActions {
   type: "DELETE_NOTE";
   index: number;
 }
 
-export interface UpdateSongTitle {
+export interface UpdateSongTitle extends NoteActions {
   type: "UPDATE_SONG_TITLE";
   title: string;
 }
@@ -66,6 +70,7 @@ export interface DeleteSong {
 export interface CreateSong {
   type: "CREATE_SONG";
   id: SongId;
+  title: string;
   /**
    *  If the song was created from a setlist we want to assign it directly
    */

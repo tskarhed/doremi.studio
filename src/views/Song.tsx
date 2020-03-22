@@ -10,11 +10,15 @@ export const SongPage: FC<{songs: Song[]}> = ({songs}) => {
   const { songName } = useParams();
   const history = useHistory();
 
-  const song = songs.find(song => song.id === songName) ?? history.push('/');
+  const song = songs.find(song => song.id === songName);
+  if(!song){
+    history.push('/');
+    return <></>;
+  }
   
   return (
     <Page title={song ? song.title : ""} prefixElement={<Back/>}>
-      <NoteLayout notes={song ? song.notes : []} edit />
+      <NoteLayout notes={song ? song.notes : []} edit songId={song.id}/>
     </Page>
   );
 };

@@ -13,4 +13,6 @@ const Text: FC<any> = ({ children, ...props }) => (
 
 const Input: FC<any> = props => <input className={styles.Input} {...props} />;
 
-export { View, Text, Input };
+const Button: FC<any> = props => <button {...props}/>;
+
+export { View, Text, Input, Button };

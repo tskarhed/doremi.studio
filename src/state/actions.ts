@@ -3,14 +3,14 @@ import { SongId, AddNote, UpdateNote, DeleteNote, UpdateSongTitle, CreateSong, S
 // Notes
 
 
-export const addNote = (note: string):AddNote => ({type: "ADD_NOTE", note  });
-export const updateNote = (note: string, index: number): UpdateNote => ({type: "UPDATE_NOTE", index, note});
-export const deleteNote = (index: number): DeleteNote => ({type: "DELETE_NOTE", index});
+export const addNote = (note: string, songId: SongId):AddNote => ({type: "ADD_NOTE", note, songId  });
+export const updateNote = (note: string, index: number, songId: SongId): UpdateNote => ({type: "UPDATE_NOTE", index, note, songId});
+export const deleteNote = (index: number, songId: SongId): DeleteNote => ({type: "DELETE_NOTE", index, songId});
 
 
 //Song
-export const updateSongTitle = (title: string): UpdateSongTitle => ({type: "UPDATE_SONG_TITLE", title});
-export const createSong = (id: SongId, setlist?: SetlistId): CreateSong => ({type: "CREATE_SONG", id, setlist});
+export const updateSongTitle = (title: string, songId: SongId): UpdateSongTitle => ({type: "UPDATE_SONG_TITLE", title, songId});
+export const createSong = (title: string, setlist?: SetlistId): CreateSong => ({type: "CREATE_SONG", id: encodeURI(title), setlist, title});
 
 //Songs
 export const deleteSong = (id: SongId): DeleteSong => ({type: "DELETE_SONG", id});

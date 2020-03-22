@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import { View } from "../native";
+import { View, Input, Button } from "../native";
 import { ActionButton } from "./ActionButton";
 
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
@@ -10,15 +10,21 @@ import "./NoteLayout.scss";
 
 // import { Note, ToneSequence } from "../sound/SoundSetup";
 import { playNote, playSequence } from "../sound/synth";
+import { useDispatch } from "react-redux";
+import { SongId } from "../state/types";
+import { addNote } from "../state/actions";
 
 interface Props {
   edit: boolean;
   notes: string[];
+  songId: SongId;
 }
 
-export const NoteLayout: FC<Props> = ({ edit, notes }) => {
+export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
   const [noteDuration, setNoteDuration] = useState();
   const [playingNote, setPlayingNote] = useState();
+  const [isEditingNote, setIsEditingNote] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Remove the animation class so it doesn't play double when clicked
@@ -30,6 +36,11 @@ export const NoteLayout: FC<Props> = ({ edit, notes }) => {
   }, [playingNote, noteDuration, notes]);
 
   const handleClick = () => {
+    if(edit) {
+      const note = prompt("Write note with an octave you want to add", "A4") || "A4";
+      dispatch(addNote(note, songId));
+      return;
+    }
     playSequence(notes, (note, duration) => {
       console.log(duration);
       setNoteDuration(duration);
@@ -66,3 +77,12 @@ export const NoteLayout: FC<Props> = ({ edit, notes }) => {
     </View>
   );
 };
+
+
+interface EditNoteProps {
+  onSubmit: (note: string) => void;
+}
+
+const EditNote: FC = () => {
+  return <View style={{position: "fixed", backgroundColor: "red"}}><Input/><Button>Delete</Button><Button>Add</Button></View>
+}

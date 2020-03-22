@@ -59,7 +59,7 @@ export const UnconnectedPlay: FC<Props> = ({songs, setlists}) => {
     return songArray;
   }, []);
 
-  let song = songs.find(song => song.id === songNumber);
+  const song = songs.find(song => song.id === songNumber);
   if(!song){
     history.push(`/setlist/${setlistName}`);
     return <></>
@@ -67,7 +67,7 @@ export const UnconnectedPlay: FC<Props> = ({songs, setlists}) => {
   const songIndex = setlist.songs.indexOf(song.id);
   return (
     <Page editable={false} title={song.title} prefixElement={<Back to={`/setlist/${setlistName}`}/>}>
-      <NoteLayout notes={song.notes} edit={false} />
+      <NoteLayout notes={song.notes} edit={false} songId={song.id} />
       <PlayFooter setlistId={setlistName} prev={setlistSongs[songIndex-1]} next={setlistSongs[songIndex + 1]}/>
     </Page>
   );
