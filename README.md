@@ -1,3 +1,36 @@
+# :musical_note: Setlist webapp [![Netlify Status](https://api.netlify.com/api/v1/badges/a26707d9-4e39-4b3d-9ded-54a484df13bd/deploy-status)](https://app.netlify.com/sites/skarhed-setlist/deploys)
+
+When doing simple performances with our choir we noticed a couple of issues
+
+Taking the correct notes at the beginning of a song requires:
+  - Remembering the setlist and the correct start tones
+  - Knowing how to take these notes with a tuning fork or using a piano - which can be rather cumbersome
+  - Using a piano app requires the person to know how to play piano and it's rather fiddely
+  
+Wouldn't the best way be that anyone, __regardless of musical competence__, could take the correct start tones in a simple way?
+
+Is this what you've always looked for? Look no further! I present to you Setlist!
+
+## Roadmap
+### MVP
+- [ ] Create and edit setlists
+- [ ] Create and edit songs
+- [ ] Play setlists
+- [ ] Save changes locally (Localstorage)
+
+### Next version
+- [ ] Login and save remotely (Probably using Firebase)
+- [ ] Offline sync using ServiceWorker
+- [ ] Look into further requirements for PWA
+
+### Some time in the future
+- [ ] Create organizations
+- [ ] Share and play across organizations
+- [ ] Payment solution to support running costs? Donations?
+
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
