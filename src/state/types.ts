@@ -86,6 +86,7 @@ export interface UpdateSetlistTitle {
 export interface CreateSetlist {
   type: "CREATE_SETLIST",
   id: SetlistId;
+  title: string;
 }
 
 export interface DeleteSetlist {

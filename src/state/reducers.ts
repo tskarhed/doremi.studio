@@ -51,11 +51,12 @@ export const setlist = (prevState: Setlist, action: SetlistAction) => {
 
   if(action.type === "CREATE_SETLIST"){
     return {
-      title: "",
+      title: action.title,
       songs: [],
       id: action.id
     };
   }
+  console.log(action);
   if(action.type === "CREATE_SONG" && prevState.id === action.setlist){
     return {...prevState, songs: [...prevState.songs, action.id]}
   }

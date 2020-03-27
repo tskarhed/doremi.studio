@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import { View, Input, Button } from "../native";
+import { View } from "../native";
 import { ActionButton } from "./ActionButton";
 
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
@@ -23,7 +23,7 @@ interface Props {
 export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
   const [noteDuration, setNoteDuration] = useState();
   const [playingNote, setPlayingNote] = useState();
-  const [isEditingNote, setIsEditingNote] = useState();
+  // const [isEditingNote, setIsEditingNote] = useState();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -77,12 +77,3 @@ export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
     </View>
   );
 };
-
-
-interface EditNoteProps {
-  onSubmit: (note: string) => void;
-}
-
-const EditNote: FC = () => {
-  return <View style={{position: "fixed", backgroundColor: "red"}}><Input/><Button>Delete</Button><Button>Add</Button></View>
-}
