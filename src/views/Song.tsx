@@ -9,8 +9,7 @@ import { Back } from "../components/Back";
 export const SongPage: FC<{songs: Song[]}> = ({songs}) => {
   const { songName } = useParams();
   const history = useHistory();
-
-  const song = songs.find(song => song.id === songName);
+  const song = songs.find(song => song.id === encodeURI(songName || ''));
   if(!song){
     history.push('/');
     return <></>;

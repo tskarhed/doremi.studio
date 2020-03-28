@@ -16,7 +16,7 @@ interface Props {
 export const UnconnectedSetlist: FC<Props> = ({songs, setlists}) => {
   const { setlistName } = useParams();
   const history = useHistory();
-  const setlist = setlists.find(setlist => setlist.id === setlistName);
+  const setlist = setlists.find(setlist => setlist.id === encodeURI(setlistName || ''));
   if(!setlist){
     history.push(`/`)
     return <></>
@@ -46,7 +46,7 @@ export const UnconnectedSetlist: FC<Props> = ({songs, setlists}) => {
         />
       }
     >
-      <SongList songs={setlistSongs}/>
+      <SongList songs={setlistSongs} setlist={setlist.id}/>
     </Page>
   );
 };

@@ -29,6 +29,7 @@ export const song = (prevState: Song, action: SongAction) => {
   if(action.type === "CREATE_SONG"){
     return {
       title: action.title,
+      setlists: [action.setlist],
       notes: [],
       id: action.id
     };
@@ -56,7 +57,6 @@ export const setlist = (prevState: Setlist, action: SetlistAction) => {
       id: action.id
     };
   }
-  console.log(action);
   if(action.type === "CREATE_SONG" && prevState.id === action.setlist){
     return {...prevState, songs: [...prevState.songs, action.id]}
   }

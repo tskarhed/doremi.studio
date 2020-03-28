@@ -20,6 +20,9 @@
   justify-content: center;
   flex-wrap: wrap-reverse;
   padding: 10% 0;
+  & > * {
+    margin: 5px;
+  }
 }
 
 .notesPosition {

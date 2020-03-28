@@ -21,7 +21,7 @@ export const addSongToSetlist = (song: SongId, setlist: SetlistId): AddSongToSet
 
 
 //Setlists
-export const createSetlist = (title: string): CreateSetlist => ({type: "CREATE_SETLIST", title, id: encodeURI(title)})
+export const createSetlist = (title: string): CreateSetlist => ({type: "CREATE_SETLIST", title, id: encodeURIComponent(title)})
 export const deleteSetlist = (id: SetlistId): DeleteSetlist => ({type: "DELETE_SETLIST", id})
 
 //Search

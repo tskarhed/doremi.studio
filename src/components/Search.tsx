@@ -1,29 +1,21 @@
-import React, { FC, Dispatch } from 'react';
-import { SearchState, Setlist, Song, SetSearchState, SetlistId, CreateSong, CreateSetlist } from '../state/types';
+import React, { FC } from 'react';
+import { SearchState, Setlist, Song } from '../state/types';
 import CreatableSelect from 'react-select/creatable';
 import { components } from 'react-select';
 import theme from '../theme.module.scss'
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { useHistory, useLocation, matchPath } from 'react-router-dom';
 import { View } from '../native';
 import styles from "./List.module.scss";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faMusic, faListUl } from '@fortawesome/free-solid-svg-icons';
 import { setSearch, createSong, createSetlist } from '../state/actions';
-import { connect } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 
-interface Props extends RouteComponentProps<any>{
+interface Props{
     isSearching: SearchState;
     setlists: Setlist[];
     songs: Song[];
 }
-
-interface DispatchProps {
-    resetSearch: () => void;
-    createSong: (title: string, setlistId?: SetlistId) => void;
-    createSetlist: (title: string) => void;
-}
-
-type AllProps = Props & DispatchProps;
 
 interface Option {
     value: string;
@@ -85,65 +77,69 @@ const Option: FC<any> = (props: any) => {
     </components.Option>
 };
 
+const songsToOptions = (songs: Song[]): Option[] => {
+    return songs.map(song => ({value: song.id, label: song.title, type: "song" }))
+}
+const setlistsToOptions = (setlists: Setlist[]): Option[] => {
+    return setlists.map(setlist => ({value: setlist.id, label: setlist.title, type: "setlist" }))
+}
 
-export class Search extends React.PureComponent<AllProps>{
-    private options: Option[] = [];
-    private onCreate: (inputVal: string) => void;
-    constructor(props: AllProps){
-        super(props);
-        console.log(props);
-        if(props.isSearching === "songs"){
-            this.options = this.songsToOptions(props.songs);
-            this.onCreate = this.createSong;
-        } else if(props.isSearching === "setlists"){
-            this.options = this.setlistsToOptions(props.setlists);
-            this.onCreate = this.createSetlist;
-        } else {
-            this.options = [...this.songsToOptions(props.songs), ...this.setlistsToOptions(props.setlists)];
-            this.onCreate = this.createSetlist;
-        }
 
-    }
+export const Search: FC<Props> = (props) => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    let location = useLocation();
 
-    onSelect = (val: any) => {
-        const { history } = this.props;  
+    let options: Option[] = [];
+    let onCreate: (inputVal: string) => void;
+
+    const onSelect = (val: any) => {
+
         history.push(`/${val.type}/${val.value}`);
-        this.props.resetSearch();
+        dispatch(setSearch(false));
     }
 
-    createSong = (songName: string) => {
-        let { history } = this.props;
-        const {setlistName} = this.props.match.params;
-        console.log(this.props.match.params);
+    const onCreateSong = (songName: string) => {
+        const params = matchPath<{setlistName: string}>(location.pathname, {
+            path: "/setlist/:setlistName",
+        })?.params;
+        const setlistName = params?.setlistName;
         //Dispatch action
-        this.props.createSong(songName, setlistName);
+        dispatch(createSong(songName, setlistName));
         //Reroute to song
         history.push(`/song/${createSong(songName).id}`);
     }
 
-    createSetlist = (setlistName: string) => {
-        let { history } = this.props;
-        this.props.createSetlist(setlistName);
+    const onCreateSetlist = (setlistName: string) => {
+        dispatch(createSetlist(setlistName));
         history.push(`/setlist/${createSetlist(setlistName).id}`);
     }
 
+    if(props.isSearching === "songs"){
+        options = songsToOptions(props.songs);
+        onCreate = onCreateSong;
+    } else if(props.isSearching === "setlists"){
+        options = setlistsToOptions(props.setlists);
+        onCreate = onCreateSetlist;
+    } else {
+        options = [...songsToOptions(props.songs), ...setlistsToOptions(props.setlists)];
+        onCreate = onCreateSetlist;
+    }
+
+
     
-    songsToOptions = (songs: Song[]): Option[] => {
-        return songs.map(song => ({value: song.id, label: song.title, type: "song" }))
-    }
-    setlistsToOptions = (setlists: Setlist[]): Option[] => {
-        return setlists.map(setlist => ({value: setlist.id, label: setlist.title, type: "setlist" }))
-    }
 
-    render(){
-        return (<CreatableSelect autoFocus onCreateOption={this.onCreate} onBlur={() => this.props.resetSearch()} components={{Option}} placeholder="Search..." openMenuOnFocus onChange={this.onSelect} styles={customStyles} options={this.options}/>);
-    }
+    return (
+    <CreatableSelect
+    autoFocus
+    onCreateOption={onCreate}
+    onBlur={() => dispatch(setSearch(false))}
+    components={{Option}}
+    placeholder="Search..."
+    openMenuOnFocus
+    onChange={onSelect}
+    styles={customStyles}
+    options={options}
+    />);
+
 }
-
-const mapDispatchToProps = (dispatch: Dispatch<SetSearchState | CreateSong | CreateSetlist>) => ({
-    resetSearch: () => dispatch(setSearch(false)),
-    createSong: (title: string, setlistId?: SetlistId) => dispatch(createSong(title, setlistId)),
-    createSetlist: (title: string) => dispatch(createSetlist(title)) 
-})
-
-export default withRouter(connect(null, mapDispatchToProps)(Search));
