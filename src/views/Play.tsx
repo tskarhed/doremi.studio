@@ -44,7 +44,7 @@ export const UnconnectedPlay: FC<Props> = ({songs, setlists}) => {
   const history = useHistory();
   const { songNumber, setlistName } = useParams();
   
-  const setlist = setlists.find(setlist => setlist.id === setlistName);
+  const setlist = setlists.find(setlist => setlist.id === encodeURI(setlistName || ''));
   
   if(!setlistName || !setlist){
     history.push(`/`);
@@ -59,7 +59,7 @@ export const UnconnectedPlay: FC<Props> = ({songs, setlists}) => {
     return songArray;
   }, []);
 
-  const song = songs.find(song => song.id === songNumber);
+  const song = songs.find(song => song.id === encodeURI(songNumber || ''));
   if(!song){
     history.push(`/setlist/${setlistName}`);
     return <></>

@@ -6,9 +6,20 @@ import * as serviceWorker from "./serviceWorker";
 import {createStore} from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./state/reducers";
+import { loadState, saveState } from './state/localStorage';
+import throttle from 'lodash.throttle';
 
+const persistedState = loadState();
+console.log(persistedState);
 // @ts-ignore
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(rootReducer, persistedState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+store.subscribe(throttle(() => {
+    // Save songs and setlists to localStorage when the state updates
+    console.log("saving state")
+    const { setlists, songs } = store.getState();
+    saveState({setlists, songs});
+}, 1000));
+
 ReactDOM.render(
 <Provider store={store}>
     <App/>

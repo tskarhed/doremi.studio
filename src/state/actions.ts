@@ -10,7 +10,7 @@ export const deleteNote = (index: number, songId: SongId): DeleteNote => ({type:
 
 //Song
 export const updateSongTitle = (title: string, songId: SongId): UpdateSongTitle => ({type: "UPDATE_SONG_TITLE", title, songId});
-export const createSong = (title: string, setlist?: SetlistId): CreateSong => ({type: "CREATE_SONG", id: encodeURI(title), setlist, title});
+export const createSong = (title: string, setlist?: SetlistId): CreateSong => ({type: "CREATE_SONG", id: encodeURI(title), setlist: setlist ? encodeURI(setlist) : undefined, title});
 
 //Songs
 export const deleteSong = (id: SongId): DeleteSong => ({type: "DELETE_SONG", id});
