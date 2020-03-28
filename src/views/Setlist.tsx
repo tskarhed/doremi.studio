@@ -5,8 +5,10 @@ import { useParams, useHistory } from "react-router-dom";
 import { ActionButton } from "../components/ActionButton";
 import { SongList } from "../components/SongList";
 import { StoreState, Song, Setlist as SetlistType } from "../state/types";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Back } from "../components/Back";
+import { AddToListButton } from "../components/AddToListButton";
+import { setSearch } from "../state/actions";
 
 interface Props {
   songs: Song[];
@@ -16,6 +18,7 @@ interface Props {
 export const UnconnectedSetlist: FC<Props> = ({songs, setlists}) => {
   const { setlistName } = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
   const setlist = setlists.find(setlist => setlist.id === encodeURI(setlistName || ''));
   if(!setlist){
     history.push(`/`)
@@ -36,7 +39,7 @@ export const UnconnectedSetlist: FC<Props> = ({songs, setlists}) => {
       prefixElement={<Back to="/"/>}
       headerElement={
         <ActionButton
-        displayPlay  
+        icon="play"  
         inverted
           style={{ margin: "5px" }}
           size="lg"
@@ -47,6 +50,7 @@ export const UnconnectedSetlist: FC<Props> = ({songs, setlists}) => {
       }
     >
       <SongList songs={setlistSongs} setlist={setlist.id}/>
+      <AddToListButton onClick={() => dispatch(setSearch('songs'))}/>
     </Page>
   );
 };

@@ -10,10 +10,10 @@ interface Props {
 
 export const SetlistList: FC<Props> = ({setlists}) => {
     const history = useHistory();
-return (<>{setlists.map(setlist => {
+return (<>{setlists.map((setlist, i) => {
     return (
       <ListItem
-        key={setlist.id}
+        key={`${setlist.id}-${i}`}
         type="setlist"
         to={`/setlist/${setlist.id}`}
         actionComponent={
@@ -25,7 +25,7 @@ return (<>{setlists.map(setlist => {
             }}
             size="md"
             inverted
-            displayPlay
+            icon="play"
           />
         }
       >

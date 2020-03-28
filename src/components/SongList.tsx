@@ -12,11 +12,11 @@ interface Props {
 
 export const SongList: FC<Props> = ({songs, setlist}) => {
     const history = useHistory();
-    return <>{songs.map((song) => {
+    return <>{songs.map((song, i) => {
         return (<ListItem
             type="song"
             to={`/setlist/${setlist}/play/${song.id}`}
-            key={song.id}
+            key={`${song.id}-${i}`}
             actionComponent={
                 <Icon
                 onClick={(e) =>{

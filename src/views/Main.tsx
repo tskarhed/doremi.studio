@@ -6,6 +6,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from "react-redux";
 import { setSearch } from "../state/actions";
 import { StoreState } from "../state/types";
+import { AddToListButton } from "../components/AddToListButton";
 
 export const Main: FC = () => {
 
@@ -28,6 +29,7 @@ export const Main: FC = () => {
       }
     >
   <SetlistList setlists={setlists}/>
+  <AddToListButton onClick={() => dispatch(setSearch('setlists'))}/>
     </Page>
   );
 };

@@ -23,12 +23,14 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
     <View className={styles.body}>
       <header onClick={onHeaderClick}>
         {prefixElement}
+        {!prefixElement && <View/>}
         {editable ? (
           <Input value={title || ""} />
         ) : (
           <h1 style={{ fontSize: theme.fontSize ,margin: "auto", marginLeft: "10px" }}>{title}</h1>
         )}
         {headerElement}
+        {!headerElement && <View/>}
       </header>
 
       {children}

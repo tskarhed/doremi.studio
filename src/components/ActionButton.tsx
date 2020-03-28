@@ -4,6 +4,7 @@ import styles from "./ActionButton.module.scss";
 import "../theme.module.scss";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   size: "sm" | "md" | "lg";
@@ -12,7 +13,7 @@ interface Props {
   className?: string;
   style?: Object;
   inverted?: boolean;
-  displayPlay?: boolean;
+  icon?: "play" | "plus";
 }
 
 export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
@@ -22,7 +23,7 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
   className,
   style,
   inverted,
-  displayPlay
+  icon
 }) => {
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -55,8 +56,9 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
         (isAnimating && (inverted ? "animToInverted" : "animFromInverted"))
       }
     >
-      {displayPlay && <Icon style={{paddingLeft: "5%", paddingTop: "2%"}} icon={faPlay}/>}
-      {!displayPlay && children}
+      {icon === "play" && <Icon style={{paddingLeft: "5%", paddingTop: "2%"}} icon={faPlay}/>}
+      {icon === "plus" && <Icon style={{paddingTop: "2%"}} icon={faPlus}/>}
+      {!icon && children}
     </View>
   );
 };

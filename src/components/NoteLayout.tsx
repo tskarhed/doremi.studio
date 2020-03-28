@@ -2,9 +2,6 @@ import React, { FC, useState, useEffect } from "react";
 import { View } from "../native";
 import { ActionButton } from "./ActionButton";
 
-import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-
 // Import to get the animation
 import "./NoteLayout.scss";
 
@@ -53,7 +50,7 @@ export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
         <View className="noteWrapper">
           {notes.map((note, i) => (
             <ActionButton
-              key={note}
+              key={`${note}-${i}`}
               style={{
                 animationDuration: `${noteDuration}s`
               }}
@@ -70,9 +67,7 @@ export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
         </View>
       </View>
       <View className="actionWrapper">
-        <ActionButton displayPlay={!edit} inverted size="lg" onClick={handleClick}>
-          {edit && <Icon icon={faPlus}/>}
-        </ActionButton>
+        <ActionButton icon={edit ? "plus" : "play"} inverted size="lg" onClick={handleClick}/>
       </View>
     </View>
   );

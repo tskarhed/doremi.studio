@@ -8,7 +8,7 @@ import { View } from '../native';
 import styles from "./List.module.scss";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faMusic, faListUl } from '@fortawesome/free-solid-svg-icons';
-import { setSearch, createSong, createSetlist } from '../state/actions';
+import { setSearch, createSong, createSetlist, addSongToSetlist } from '../state/actions';
 import {  useDispatch } from 'react-redux';
 
 interface Props{
@@ -66,7 +66,8 @@ const customStyles = {
     }),
     option: () => ({}),
     menuList: (provided: any) => ({...provided, maxHeight: "none"}),
-    indicatorContainer: () => ({color: theme.secondary})
+    indicatorContainer: () => ({color: theme.secondary}),
+    noOptionsMessage: () => ({})
 };
 
 const Option: FC<any> = (props: any) => {
@@ -76,6 +77,12 @@ const Option: FC<any> = (props: any) => {
         <View className={styles.children}>{children}</View>
     </components.Option>
 };
+
+const NoOptionsMessage: FC<any> = (props: any) => (
+    <View className={styles.wrapper}>
+        <View className={styles.children}>Start typing to create magic!</View>
+    </View>
+);
 
 const songsToOptions = (songs: Song[]): Option[] => {
     return songs.map(song => ({value: song.id, label: song.title, type: "song" }))
@@ -89,11 +96,21 @@ export const Search: FC<Props> = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
     let location = useLocation();
+    let createLabel = (inputValue: string) => `New setlist: ${inputValue}`;
 
     let options: Option[] = [];
     let onCreate: (inputVal: string) => void;
 
     const onSelect = (val: any) => {
+        if(props.isSearching === "songs"){
+            const params = matchPath<{setlistName: string}>(location.pathname, {
+                path: "/setlist/:setlistName",
+            })?.params;
+            const setlistName = params?.setlistName || '';
+            dispatch(addSongToSetlist(val.value, setlistName));
+            dispatch(setSearch(false));
+            return;
+        }
 
         history.push(`/${val.type}/${val.value}`);
         dispatch(setSearch(false));
@@ -108,18 +125,22 @@ export const Search: FC<Props> = (props) => {
         dispatch(createSong(songName, setlistName));
         //Reroute to song
         history.push(`/song/${createSong(songName).id}`);
+        dispatch(setSearch(false));
     }
 
     const onCreateSetlist = (setlistName: string) => {
         dispatch(createSetlist(setlistName));
         history.push(`/setlist/${createSetlist(setlistName).id}`);
+        dispatch(setSearch(false));
     }
 
     if(props.isSearching === "songs"){
         options = songsToOptions(props.songs);
+        createLabel = (inputValue: string) => `New song: ${inputValue}`;
         onCreate = onCreateSong;
     } else if(props.isSearching === "setlists"){
-        options = setlistsToOptions(props.setlists);
+        // No options as you only want  to create a setlist
+        // options = setlistsToOptions(props.setlists);
         onCreate = onCreateSetlist;
     } else {
         options = [...songsToOptions(props.songs), ...setlistsToOptions(props.setlists)];
@@ -134,12 +155,13 @@ export const Search: FC<Props> = (props) => {
     autoFocus
     onCreateOption={onCreate}
     onBlur={() => dispatch(setSearch(false))}
-    components={{Option}}
+    components={{Option, NoOptionsMessage}}
     placeholder="Search..."
     openMenuOnFocus
     onChange={onSelect}
     styles={customStyles}
     options={options}
+    formatCreateLabel={createLabel}
     />);
 
 }
