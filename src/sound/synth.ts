@@ -24,7 +24,6 @@ export const constructLinkObject = () => {
   return linkObject;
 };
 
-console.log(constructLinkObject());
 
 const sampler = new Sampler(constructLinkObject(), () =>
   console.log("Sampler initialized")

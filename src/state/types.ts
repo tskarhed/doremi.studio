@@ -2,7 +2,7 @@ export type Notes = string[];
 export type SongId = string;
 export type SetlistId = string;
 
-export interface StoreState{
+export interface StoreState {
   songs: Song[];
   setlists: Setlist[];
   isSearching: SearchState;
@@ -12,7 +12,7 @@ export interface Song {
   id: string;
   title: string;
   notes: Notes;
-  inSetlists?: SetlistId[]
+  inSetlists?: SetlistId[];
 }
 
 export interface Setlist {
@@ -24,6 +24,10 @@ export interface Setlist {
 // Song interfaces and types
 interface NoteActions {
   songId: SongId;
+}
+
+interface SetlistActions {
+  setlist?: SetlistId;
 }
 
 export interface AddNote extends NoteActions {
@@ -47,7 +51,6 @@ export interface UpdateSongTitle extends NoteActions {
   title: string;
 }
 
-
 // Setlist interfaces and types
 
 export interface AddSongToSetlist {
@@ -57,7 +60,7 @@ export interface AddSongToSetlist {
   setlist: SetlistId;
 }
 
-export interface RemoveSong {
+export interface RemoveSong extends SetlistActions {
   type: "REMOVE_SONG";
   index: number;
 }
@@ -67,7 +70,7 @@ export interface DeleteSong {
   id: SongId;
 }
 
-export interface CreateSong {
+export interface CreateSong extends SetlistActions {
   type: "CREATE_SONG";
   id: SongId;
   title: string;
@@ -77,38 +80,42 @@ export interface CreateSong {
   setlist?: SetlistId;
 }
 
-
-export interface UpdateSetlistTitle {
+export interface UpdateSetlistTitle extends SetlistActions {
   type: "UPDATE_SETLIST_TITLE";
   title: string;
 }
 
 export interface CreateSetlist {
-  type: "CREATE_SETLIST",
+  type: "CREATE_SETLIST";
   id: SetlistId;
   title: string;
 }
 
 export interface DeleteSetlist {
-  type: "DELETE_SETLIST",
+  type: "DELETE_SETLIST";
   id: SetlistId;
 }
-
-
 
 export type NotesAction = AddNote | UpdateNote | DeleteNote;
 export type SongAction = UpdateSongTitle | NotesAction | CreateSong;
 export type SongsAction = DeleteSong | SongAction;
 
-export type SetlistAction = CreateSong | AddSongToSetlist | RemoveSong | UpdateSetlistTitle | CreateSetlist;
-export type SetlistsAction = DeleteSetlist | SetlistAction; 
+export type SetlistAction =
+  | CreateSong
+  | AddSongToSetlist
+  | RemoveSong
+  | UpdateSetlistTitle
+  | CreateSetlist;
+export type SetlistsAction = DeleteSetlist | SetlistAction;
 
-export type SearchStateType = "SEARCH_ALL" | "SEARCH_SETLISTS" | "SEARCH_SONGS" | "SEARCH_NONE";
-
+export type SearchStateType =
+  | "SEARCH_ALL"
+  | "SEARCH_SETLISTS"
+  | "SEARCH_SONGS"
+  | "SEARCH_NONE";
 
 export interface SetSearchState {
   type: SearchStateType;
 }
 
-
-export type SearchState = "all" | "setlists" | "songs" | false
+export type SearchState = "all" | "setlists" | "songs" | false;
