@@ -1,6 +1,6 @@
 import React, { FC, SyntheticEvent } from "react";
 import { ListItem } from "./List";
-import { Song, SetlistId, SongId } from "../state/types";
+import { Song, SetlistId } from "../state/types";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faPen, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
