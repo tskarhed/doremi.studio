@@ -12,12 +12,12 @@ Wouldn't the best way be that anyone, __regardless of musical competence__, coul
 Is this what you've always looked for? Look no further! I present to you Setlist!
 
 ## Roadmap
-### MVP
+### MVP (Done)
 - [x] Create and edit setlists
 - [x] Create and edit songs
 - [x] Play setlists
 - [x] Save changes locally (Localstorage)
-- [ ] Delete notes and remove songs
+- [x] Delete notes and remove songs
 
 ### Next version
 - [ ] Login and save remotely (Probably using Firebase)
