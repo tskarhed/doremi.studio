@@ -1,13 +1,14 @@
-import Tone, {
+import {
   Sequence,
   Transport,
   Sampler,
-  Ticks
+  Ticks,
+  Draw
   // @ts-ignore
 } from "tone";
 
 // Used to avoid lag on mobile
-Tone.context.latencyHint = "fastest";
+// Tone.context.latencyHint = "fastest";
 // Audio files courtesy of:
 //https://github.com/googlecreativelab/aiexperiments-ai-duet/blob/master/static/audio/Salamander_README
 const getSampleUrl = (note: string) =>
@@ -41,7 +42,8 @@ export const playSequence = (
   const noteLength = "4n";
   const sequence = new Sequence(
     (time: string, note: string) => {
-      onNoteChange && onNoteChange(note, Ticks(noteLength).toSeconds());
+      Draw.schedule(onNoteChange && onNoteChange(note, Ticks(noteLength).toSeconds()), time);
+      
       console.log(note, Ticks(time).toFrequency());
       sampler.triggerAttackRelease(note, noteLength);
     },
