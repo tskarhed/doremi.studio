@@ -5,8 +5,6 @@ import { NoteLayout } from "../components/NoteLayout";
 import { StoreState, Song } from "../state/types";
 import { connect } from "react-redux";
 import { Back } from "../components/Back";
-import { ActionButton } from "../components/ActionButton";
-import { playSequence } from "../sound/synth";
 
 export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
   const { songName } = useParams();
