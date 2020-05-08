@@ -12,10 +12,11 @@ export const Main: FC = () => {
 
   const dispatch = useDispatch();
   const setlists = useSelector((state: StoreState) => state.setlists);
+  console.log(process.env);
   return (
     <Page
       editable={false}
-      title="Setlist"
+      title={`Setlist ${process.env.REACT_APP_VERSION}`}
       onHeaderClick={() => dispatch(setSearch("all"))}
       headerElement={
         <Icon icon={faSearch} size="2x" style={{
