@@ -44,12 +44,12 @@ const PlayFooter: FC<PlayFooterProps> = ({prev, next, setlistId, current}) => {
 
   return <View style={{display: 'flex', position: "fixed", bottom: 0, justifyContent:"space-around", alignItems:"center", padding:"10px 0px", width: "100%"}}>
     <View style={{position:"relative"}}>
-      <View style={songTitleStyle}>{prev && ` ${prev.title}`}</View>
+      <View style={songTitleStyle}>{prev && `${prev.title}`}</View>
       <ActionButton icon="prev" size="md" onClick={() => prev && navigate(prev.id)} inverted disabled={!prev}/>
     </View>
     <ActionButton icon="play" size="xl" onClick={() => playSequence(current.notes)} inverted/>
     <View style={{position:"relative"}}>
-      <View style={songTitleStyle}>{next && ` ${next.title}`}</View>
+      <View style={songTitleStyle}>{next && `${next.title}`}</View>
       <ActionButton icon="next" size="md" onClick={() => next && navigate(next.id)} inverted disabled={!next}/>
       
     </View>
