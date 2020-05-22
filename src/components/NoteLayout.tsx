@@ -16,7 +16,16 @@ interface Props {
   notes: string[];
   songId: SongId;
 }
+// Skapa style här
+const noteLayoutStyle={
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  width:"100%",
+  alignItems: "center",
 
+
+}
 export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
   const [noteDuration, setNoteDuration] = useState();
   const [playingNote, setPlayingNote] = useState();
@@ -78,13 +87,13 @@ export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
           Click on the notes to edit them
         </p>
       )}
-      <View className="notesPosition">
-        <View className="noteWrapper">
+        <View style={noteLayoutStyle} >
           {notes.map((note, i) => (
             <ActionButton
               key={`${note}-${i}`}
               style={{
                 animationDuration: `${noteDuration}s`,
+                margin: "5px 0px"
               }}
               className={playingNote === note ? "invertAnim" : ""}
               size="lg"
@@ -94,15 +103,14 @@ export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
             </ActionButton>
           ))}
         </View>
-      </View>
-      <View className="actionWrapper">
+      {/* <View className="actionWrapper">
         <ActionButton
           icon={edit ? "plus" : "play"}
           inverted
           size="lg"
           onClick={handleClick}
         />
-      </View>
+      </View> */}
     </View>
   );
 };
