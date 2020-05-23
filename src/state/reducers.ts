@@ -39,8 +39,8 @@ export const song = (prevState: Song, action: SongAction) => {
 
   if (action.type === "CREATE_SONG") {
     return {
-      title: action.title,
-      setlists: [action.setlist],
+      title: action.title || "",
+      setlists: action.setlist ? [action.setlist] : [],
       notes: [],
       id: action.id,
     };
@@ -52,7 +52,7 @@ export const song = (prevState: Song, action: SongAction) => {
 export const setlist = (prevState: Setlist, action: SetlistAction) => {
   if (action.type === "CREATE_SETLIST") {
     return {
-      title: action.title,
+      title: action.title || "",
       songs: [],
       id: action.id,
     };
@@ -116,7 +116,6 @@ export const isSearching = (
   prevState: SearchState = false,
   action: SetSearchState
 ) => {
-  console.log(action);
   if (action.type === "SEARCH_ALL") {
     return "all";
   }

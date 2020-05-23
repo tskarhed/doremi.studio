@@ -58,7 +58,7 @@ describe("Song reducer", () => {
     });
 
     it("create new song", () => {
-        expect(reducerTest({type: "CREATE_SONG", id: "newSong"})).toEqual({title: "", notes:[], id: "newSong"})
+        expect(reducerTest({type: "CREATE_SONG", id: "newSong", title: "awesome"})).toEqual({title: "awesome", notes:[], id: "newSong", setlists: []})
     });
 
 });
@@ -119,10 +119,10 @@ describe("Song reducer", () => {
         reducerTest = reducerTestFactory(mockSongs, songs);
     });
     it("creates a song without assigned setlist", () => {
-        expect(reducerTest({type: "CREATE_SONG", id: "newSong"})).toEqual([...mockSongs, {title: "", notes:[], id: "newSong"}])
+        expect(reducerTest({type: "CREATE_SONG", id: "newSong"})).toEqual([...mockSongs, {title: "", notes:[], id: "newSong", setlists:[]}])
     })
-    it("creates a song without assigned setlist", () => {
-        expect(reducerTest({type: "CREATE_SONG", id: "newSong", setlist: "setlist1"})).toEqual([...mockSongs, {title: "", notes:[], id: "newSong"}])
+    it("creates a song with assigned setlist", () => {
+        expect(reducerTest({type: "CREATE_SONG", id: "newSong", setlist: "setlist1"})).toEqual([...mockSongs, {title: "", notes:[], id: "newSong", setlists:["setlist1"]}])
     })
     it("deletes song", () => {
         expect(reducerTest({type: "DELETE_SONG", id: "song1"}).length).toEqual(mockSongs.length-1)
