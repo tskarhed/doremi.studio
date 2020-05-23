@@ -14,7 +14,7 @@
 
   user-select: none;
 
-  &:active {
+  &:active:not(.disabled) {
     transform: translateY(1px);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   }
@@ -29,6 +29,10 @@
 .inverted {
   background: $secondary-color;
   color: $primary-color;
+}
+
+.disabled {
+  opacity: 0.33;
 }
 
 .sm {
@@ -47,4 +51,10 @@
   height: $lg;
   width: $lg;
   font-size: 1.8rem;
+}
+
+.xl {
+  height: $xl;
+  width: $xl;
+  font-size: 2rem;
 }

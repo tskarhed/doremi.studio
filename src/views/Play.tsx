@@ -6,31 +6,55 @@ import { connect } from "react-redux";
 import { StoreState, Song, SongId, SetlistId, Setlist } from "../state/types";
 import { View } from "../native";
 import { Back } from "../components/Back";
+import { ActionButton } from "../components/ActionButton";
+import { playSequence } from "../sound/synth";
 
 
 interface PlayFooterProps{
   prev?: Song;
   next?: Song;
   setlistId: SetlistId;
+  current: Song;
 }
 
-const navStyles ={
-  fontSize: "1.3rem",
-  margin: "5px",
-  fontWeight: "bold",
-  cursor: "pointer"
-};
+// const navStyles ={
+//   fontSize: "1.3rem",
+//   margin: "5px",
+//   fontWeight: "bold",
+//   cursor: "pointer"
+// };
+const songTitleStyle ={
+  maxWidth: "200%",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  position: "absolute",
+  top: "-30px",
+  textAlign: "center",
+  width: "200%",
+  left: "-50%"
+}
 
-const PlayFooter: FC<PlayFooterProps> = ({prev, next, setlistId}) => {
+const PlayFooter: FC<PlayFooterProps> = ({prev, next, setlistId, current}) => {
   const history = useHistory();
 
   const navigate = (songId: SongId) => {
     history.push(`/setlist/${setlistId}/play/${songId}`)
   }
 
-  return <View style={{display: 'flex', position: "fixed", bottom: 0, justifyContent:"space-between", width: "100%"}}>
-    <View style={navStyles} onClick={() => prev && navigate(prev.id)}>{prev && `Prev: ${prev.title}`}</View>
-<View style={navStyles} onClick={() => next && navigate(next.id)}>{next && `Next: ${next.title}`}</View>
+  return <View style={{display: 'flex', position: "fixed", bottom: 0, justifyContent:"space-around", alignItems:"center", padding:"10px 0px", width: "100%"}}>
+    <View style={{position:"relative"}}>
+      <View style={songTitleStyle}>{prev && `${prev.title}`}</View>
+      <ActionButton icon="prev" size="md" onClick={() => prev && navigate(prev.id)} inverted disabled={!prev}/>
+    </View>
+    <ActionButton icon="play" size="xl" onClick={() => playSequence(current.notes)} inverted/>
+    <View style={{position:"relative"}}>
+      <View style={songTitleStyle}>{next && `${next.title}`}</View>
+      <ActionButton icon="next" size="md" onClick={() => next && navigate(next.id)} inverted disabled={!next}/>
+      
+    </View>
+    {/* <View style={navStyles} onClick={() => prev && navigate(prev.id)}>{prev && `Prev: ${prev.title}`}</View> */}
+{/* <View style={navStyles} onClick={() => next && navigate(next.id)}>{next && `Next: ${next.title}`}</View> */}
   </View>
 }
 
@@ -68,7 +92,7 @@ export const UnconnectedPlay: FC<Props> = ({songs, setlists}) => {
   return (
     <Page editable={false} title={song.title} prefixElement={<Back to={`/setlist/${setlistName}`}/>}>
       <NoteLayout notes={song.notes} edit={false} songId={song.id} />
-      <PlayFooter setlistId={setlistName} prev={setlistSongs[songIndex-1]} next={setlistSongs[songIndex + 1]}/>
+      <PlayFooter setlistId={setlistName} prev={setlistSongs[songIndex-1]} next={setlistSongs[songIndex + 1]} current={song}/>
     </Page>
   );
 };

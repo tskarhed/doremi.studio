@@ -3,17 +3,18 @@ import { View } from "../native";
 import styles from "./ActionButton.module.scss";
 import "../theme.module.scss";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPlus, faStepBackward, faStepForward } from '@fortawesome/free-solid-svg-icons';
+
 
 interface Props {
-  size: "sm" | "md" | "lg";
+  size: "sm" | "md" | "lg" | "xl";
   onClick: (e: Event) => void;
   onPressAndHold?: Function;
   className?: string;
   style?: Object;
   inverted?: boolean;
-  icon?: "play" | "plus";
+  disabled?: boolean;
+  icon?: "play" | "plus" | "prev" | "next";
 }
 
 export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
@@ -23,6 +24,7 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
   className,
   style,
   inverted,
+  disabled=false,
   icon
 }) => {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -41,8 +43,10 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
       style={style}
       onClick={(e: Event) => {
         e.preventDefault();
-        setIsAnimating(true);
-        onClick(e);
+        if (!disabled){
+          setIsAnimating(true);
+          onClick(e);
+        }
       }}
       className={
         styles.ActionButton +
@@ -53,11 +57,15 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
         " " +
         (inverted && styles.inverted) +
         " " +
+        (disabled && styles.disabled) +
+        " " +
         (isAnimating && (inverted ? "animToInverted" : "animFromInverted"))
       }
     >
       {icon === "play" && <Icon style={{paddingLeft: "5%", paddingTop: "2%"}} icon={faPlay}/>}
       {icon === "plus" && <Icon style={{paddingTop: "2%"}} icon={faPlus}/>}
+      {icon === "prev" && <Icon style={{paddingTop: "2%"}} icon={faStepBackward}/>}
+      {icon === "next" && <Icon style={{paddingTop: "2%"}} icon={faStepForward}/>}
       {!icon && children}
     </View>
   );
