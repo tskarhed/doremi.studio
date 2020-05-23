@@ -6,10 +6,10 @@ import { ActionButton } from "./ActionButton";
 import "./NoteLayout.scss";
 
 // import { Note, ToneSequence } from "../sound/SoundSetup";
-import { playNote, playSequence } from "../sound/synth";
+import { playNote } from "../sound/synth";
 import { useDispatch } from "react-redux";
 import { SongId } from "../state/types";
-import { addNote, updateNote, deleteNote } from "../state/actions";
+import { updateNote, deleteNote } from "../state/actions";
 
 interface Props {
   edit: boolean;
@@ -27,8 +27,8 @@ const noteLayoutStyle={
 
 }
 export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
-  const [noteDuration, setNoteDuration] = useState();
-  const [playingNote, setPlayingNote] = useState();
+  const [noteDuration, ] = useState(0);
+  const [playingNote, setPlayingNote] = useState("");
   // const [isEditingNote, setIsEditingNote] = useState();
   const dispatch = useDispatch();
 
@@ -41,20 +41,20 @@ export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
     }
   }, [playingNote, noteDuration, notes]);
 
-  const handleClick = () => {
-    if (edit) {
-      const note =
-        prompt("Write note with an octave you want to add", "A4") || "A4";
-      dispatch(addNote(note, songId));
-      return;
-    }
+  // const handleClick = () => {
+  //   if (edit) {
+  //     const note =
+  //       prompt("Write note with an octave you want to add", "A4") || "A4";
+  //     dispatch(addNote(note, songId));
+  //     return;
+  //   }
 
-    playSequence(notes, (note, duration) => {
-      console.log(duration);
-      setNoteDuration(duration);
-      setPlayingNote(note);
-    });
-  };
+  //   playSequence(notes, (note, duration) => {
+  //     console.log(duration);
+  //     setNoteDuration(duration);
+  //     setPlayingNote(note);
+  //   });
+  // };
 
   const handleNoteClick = (note: string, index: number) => {
     if (!edit) {

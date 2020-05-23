@@ -16,7 +16,7 @@ export const Main: FC = () => {
   return (
     <Page
       editable={false}
-      title={`Setlist ${process.env.REACT_APP_VERSION}`}
+      title={`Setlist alpha`}
       onHeaderClick={() => dispatch(setSearch("all"))}
       headerElement={
         <Icon icon={faSearch} size="2x" style={{
