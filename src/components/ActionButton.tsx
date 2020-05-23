@@ -31,7 +31,6 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
 
   useEffect(() => {
     setTimeout(() => {
-      console.log(isAnimating);
       if (isAnimating) {
         setIsAnimating(false);
       }
