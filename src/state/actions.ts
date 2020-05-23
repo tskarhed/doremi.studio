@@ -118,13 +118,11 @@ export const playSequence = (notes: string[]): ThunkAction<any, {}, {}, AnyActio
 
 export const playSingleNote = (note: string): ThunkAction<any, {}, {}, AnyAction> => {
   return (dispatch) => {
-    return () => {
-      dispatch(playNote(note, 0.5));
-      playPianoNote(note);
-      setTimeout(() => {
-        return dispatch(stopPlaying());
-      }, 500);
-    }
+    dispatch(playNote(note, 0.5));
+    playPianoNote(note);
+    setTimeout(() => {
+      return dispatch(stopPlaying());
+    }, 500);
   }
 }
 

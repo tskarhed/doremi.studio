@@ -6,7 +6,7 @@ import { ActionButton } from "./ActionButton";
 import "./NoteLayout.scss";
 
 // import { Note, ToneSequence } from "../sound/SoundSetup";
-import { playNote } from "../sound/synth";
+import { playSingleNote } from "../state/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { SongId, StoreState } from "../state/types";
 import { updateNote, deleteNote } from "../state/actions";
@@ -19,7 +19,7 @@ interface Props {
 // Skapa style här
 const noteLayoutStyle={
   display: "flex",
-  flexDirection: "column",
+  flexDirection: "column-reverse",
   justifyContent: "center",
   width:"100%",
   alignItems: "center",
@@ -34,7 +34,7 @@ export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
 
   const handleNoteClick = (note: string, index: number) => {
     if (!edit) {
-      playNote(note);
+      dispatch(playSingleNote(note));
       return;
     }
     const newNote = prompt(
@@ -74,6 +74,7 @@ export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
               className={playingNote === note ? "invertAnim" : ""}
               size="lg"
               onClick={() => handleNoteClick(note, i)}
+              disableAnimation
             >
               {note}
             </ActionButton>

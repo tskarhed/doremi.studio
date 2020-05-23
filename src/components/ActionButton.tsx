@@ -14,6 +14,7 @@ interface Props {
   style?: Object;
   inverted?: boolean;
   disabled?: boolean;
+  disableAnimation?: boolean;
   icon?: "play" | "plus" | "prev" | "next";
 }
 
@@ -25,7 +26,8 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
   style,
   inverted,
   disabled=false,
-  icon
+  icon,
+  disableAnimation = false
 }) => {
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -58,7 +60,7 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
         " " +
         (disabled && styles.disabled) +
         " " +
-        (isAnimating && (inverted ? "animToInverted" : "animFromInverted"))
+        (!disableAnimation && isAnimating && (inverted ? "animToInverted" : "animFromInverted"))
       }
     >
       {icon === "play" && <Icon style={{paddingLeft: "5%", paddingTop: "2%"}} icon={faPlay}/>}
