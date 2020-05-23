@@ -23,8 +23,8 @@ const noteLayoutStyle={
   justifyContent: "center",
   width:"100%",
   alignItems: "center",
-
-
+  flexWrap: "wrap",
+  padding: "90px 0"
 }
 export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
   const [noteDuration, ] = useState(0);
