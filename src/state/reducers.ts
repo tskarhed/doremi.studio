@@ -9,6 +9,7 @@ import {
   SetlistsAction,
   SearchState,
   SetSearchState,
+  PlayActionState,
 } from "./types";
 import { combineReducers } from "redux";
 import { mockSongs, mockSetlists } from "./mocks";
@@ -132,4 +133,16 @@ export const isSearching = (
   return prevState;
 };
 
-export default combineReducers({ setlists, songs, isSearching });
+export const playingNote = (prevState = {}, action: PlayActionState) => {
+  if(action.type === "PLAY_NOTE"){
+    return {note: action.note, duration: action.duration};
+  }
+
+  if(action.type === "STOP_NOTE"){
+    return {};
+  }
+
+  return prevState;
+}
+
+export default combineReducers({ setlists, songs, isSearching, playingNote });

@@ -2,12 +2,12 @@ import React, { FC } from "react";
 import { Page } from "./Page";
 import { NoteLayout } from "../components/NoteLayout";
 import { useParams, useHistory } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { StoreState, Song, SongId, SetlistId, Setlist } from "../state/types";
 import { View } from "../native";
 import { Back } from "../components/Back";
 import { ActionButton } from "../components/ActionButton";
-import { playSequence } from "../sound/synth";
+import { playSequence } from "../state/actions";
 
 
 interface PlayFooterProps{
@@ -37,6 +37,7 @@ const songTitleStyle ={
 
 const PlayFooter: FC<PlayFooterProps> = ({prev, next, setlistId, current}) => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const navigate = (songId: SongId) => {
     history.push(`/setlist/${setlistId}/play/${songId}`)
@@ -47,7 +48,7 @@ const PlayFooter: FC<PlayFooterProps> = ({prev, next, setlistId, current}) => {
       <View style={songTitleStyle}>{prev && `${prev.title}`}</View>
       <ActionButton icon="prev" size="md" onClick={() => prev && navigate(prev.id)} inverted disabled={!prev}/>
     </View>
-    <ActionButton icon="play" size="xl" onClick={() => playSequence(current.notes)} inverted/>
+    <ActionButton icon="play" size="xl" onClick={() => dispatch(playSequence(current.notes))} inverted/>
     <View style={{position:"relative"}}>
       <View style={songTitleStyle}>{next && `${next.title}`}</View>
       <ActionButton icon="next" size="md" onClick={() => next && navigate(next.id)} inverted disabled={!next}/>

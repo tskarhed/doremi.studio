@@ -3,8 +3,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import {createStore} from "redux";
+import {createStore, applyMiddleware, compose} from "redux";
 import { Provider } from "react-redux";
+import thunk from "redux-thunk";
 import rootReducer from "./state/reducers";
 import { loadState, saveState } from './state/localStorage';
 import throttle from 'lodash.throttle';
@@ -12,7 +13,7 @@ import throttle from 'lodash.throttle';
 const persistedState = loadState();
 console.log(persistedState);
 // @ts-ignore
-const store = createStore(rootReducer, persistedState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(rootReducer, persistedState, compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 store.subscribe(throttle(() => {
     // Save songs and setlists to localStorage when the state updates
     console.log("saving state")

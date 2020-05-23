@@ -1,3 +1,5 @@
+import { Note } from "../sound/SoundSetup";
+
 export type Notes = string[];
 export type SongId = string;
 export type SetlistId = string;
@@ -6,6 +8,10 @@ export interface StoreState {
   songs: Song[];
   setlists: Setlist[];
   isSearching: SearchState;
+  playingNote: {
+    note: string;
+    duration: number;
+  }
 }
 
 export interface Song {
@@ -119,3 +125,23 @@ export interface SetSearchState {
 }
 
 export type SearchState = "all" | "setlists" | "songs" | false;
+
+
+// Playing notes
+
+export interface PlayNote {
+  type: "PLAY_NOTE"
+  note: string;
+  duration: number;
+}
+
+export interface PlaySequence {
+  notes: string[]
+}
+
+export interface StopNote {
+  type: "STOP_NOTE"
+}
+
+export type PlayActionType = "STOP_NOTE" | "PLAY_NOTE";
+export type PlayActionState = PlayNote | StopNote;

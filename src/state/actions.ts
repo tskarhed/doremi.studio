@@ -15,6 +15,9 @@ import {
   SetSearchState,
   RemoveSong,
 } from "./types";
+import { playSequence as playPianoSequnece, playNote as playPianoNote } from '../sound/synth';
+import { ThunkAction } from "redux-thunk";
+import { AnyAction } from "redux";
 
 // Notes
 
@@ -91,3 +94,43 @@ export const setSearch = (state: SearchState): SetSearchState => {
       return { type: "SEARCH_NONE" };
   }
 };
+
+
+// Play note
+
+export const playSequence = (notes: string[]): ThunkAction<any, {}, {}, AnyAction> => {
+  console.log("called")
+  return (dispatch) => {
+    let i = 0;
+    playPianoSequnece(notes, (note, duration) => {
+      dispatch(playNote(note, duration));
+      if(i === 0){
+        setTimeout(() => {
+          dispatch(stopPlaying());
+        }, duration * notes.length * 1000);
+      }
+      i++;
+    });
+
+  };
+
+}
+
+export const playSingleNote = (note: string): ThunkAction<any, {}, {}, AnyAction> => {
+  return (dispatch) => {
+    return () => {
+      dispatch(playNote(note, 0.5));
+      playPianoNote(note);
+      setTimeout(() => {
+        return dispatch(stopPlaying());
+      }, 500);
+    }
+  }
+}
+
+const playNote = (note: string, duration: number): ThunkAction<any, {}, {}, AnyAction> => {
+  return (dispatch) => {
+    return dispatch({type: "PLAY_NOTE", note, duration});
+  }
+};
+export const stopPlaying = () => ({type: "STOP_NOTE"});

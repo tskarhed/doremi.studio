@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC } from "react";
 import { View } from "../native";
 import { ActionButton } from "./ActionButton";
 
@@ -7,8 +7,8 @@ import "./NoteLayout.scss";
 
 // import { Note, ToneSequence } from "../sound/SoundSetup";
 import { playNote } from "../sound/synth";
-import { useDispatch } from "react-redux";
-import { SongId } from "../state/types";
+import { useDispatch, useSelector } from "react-redux";
+import { SongId, StoreState } from "../state/types";
 import { updateNote, deleteNote } from "../state/actions";
 
 interface Props {
@@ -27,34 +27,10 @@ const noteLayoutStyle={
   padding: "90px 0"
 }
 export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
-  const [noteDuration, ] = useState(0);
-  const [playingNote, setPlayingNote] = useState("");
-  // const [isEditingNote, setIsEditingNote] = useState();
+  const noteDuration = useSelector((state: StoreState) => state.playingNote.duration);
+  const playingNote = useSelector((state: StoreState) => state.playingNote.note);
+
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    // Remove the animation class so it doesn't play double when clicked
-    if (playingNote === notes[notes.length - 1]) {
-      setTimeout(() => {
-        setPlayingNote("");
-      }, noteDuration + 500);
-    }
-  }, [playingNote, noteDuration, notes]);
-
-  // const handleClick = () => {
-  //   if (edit) {
-  //     const note =
-  //       prompt("Write note with an octave you want to add", "A4") || "A4";
-  //     dispatch(addNote(note, songId));
-  //     return;
-  //   }
-
-  //   playSequence(notes, (note, duration) => {
-  //     console.log(duration);
-  //     setNoteDuration(duration);
-  //     setPlayingNote(note);
-  //   });
-  // };
 
   const handleNoteClick = (note: string, index: number) => {
     if (!edit) {
