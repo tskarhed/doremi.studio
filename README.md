@@ -28,6 +28,7 @@ Is this what you've always looked for? Look no further! I present to you Setlist
 - [ ] Create organizations
 - [ ] Share and play across organizations
 - [ ] Payment solution to support running costs? Donations?
+- [ ] Display lyrics and/or sheet music
 
 
 ---
