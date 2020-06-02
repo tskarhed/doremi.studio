@@ -37,7 +37,7 @@ export const UnconnectedSetlist: FC<Props> = ({ songs, setlists }) => {
 
   return (
     <Page
-      title={setlistName}
+      title={setlist.title}
       prefixElement={<Back to="/" />}
       headerElement={
         <ActionButton

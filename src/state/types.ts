@@ -18,7 +18,7 @@ export interface Song {
   id: string;
   title: string;
   notes: Notes;
-  inSetlists?: SetlistId[];
+  setlists?: SetlistId[];
 }
 
 export interface Setlist {
