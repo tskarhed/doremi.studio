@@ -12,8 +12,14 @@ import throttle from 'lodash.throttle';
 
 const persistedState = loadState();
 console.log(persistedState);
-// @ts-ignore
-const store = createStore(rootReducer, persistedState, compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+
+const middleware = [
+    // @ts-ignore
+    ...(window.__REDUX_DEVTOOLS_EXTENSION__ ? [window.__REDUX_DEVTOOLS_EXTENSION__()] : []),
+    applyMiddleware(thunk)
+];
+
+const store = createStore(rootReducer, persistedState, compose(...middleware));
 store.subscribe(throttle(() => {
     // Save songs and setlists to localStorage when the state updates
     console.log("saving state")
