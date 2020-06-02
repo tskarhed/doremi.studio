@@ -107,7 +107,7 @@ export const mockSongs: Song[] = [
     {
         title: "Das königslied (Ein könig ist der wein)",
         id: "das-konigslied",
-        notes: ["a"],
+        notes: ["A3"],
         setlists: [
             "bordsvisor"
         ]
