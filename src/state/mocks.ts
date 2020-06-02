@@ -67,7 +67,7 @@ export const mockSongs: Song[] = [
     {
         title: "Helan",
         id: "helan",
-        notes: ["C#2","A3","A3","A3", "A4", "A5"],
+        notes: ["C#2","A3"],
         setlists: [
             "bordsvisor"
         ]

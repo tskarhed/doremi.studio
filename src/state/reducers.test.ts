@@ -107,7 +107,7 @@ describe("Setlists reducer", () => {
     });
 
     it("deletes setlist", () => {
-        expect(reducerTest({type: "DELETE_SETLIST", id: "setlist1"}).length).toEqual(mockSetlists.length-1);
+        expect(reducerTest({type: "DELETE_SETLIST", id: mockSetlists[0].id}).length).toEqual(mockSetlists.length-1);
     });
     
 });
@@ -125,7 +125,7 @@ describe("Song reducer", () => {
         expect(reducerTest({type: "CREATE_SONG", id: "newSong", setlist: "setlist1"})).toEqual([...mockSongs, {title: "", notes:[], id: "newSong", setlists:["setlist1"]}])
     })
     it("deletes song", () => {
-        expect(reducerTest({type: "DELETE_SONG", id: "song1"}).length).toEqual(mockSongs.length-1)
+        expect(reducerTest({type: "DELETE_SONG", id: mockSongs[0].id}).length).toEqual(mockSongs.length-1)
     });
 
     it("returns prevState for unknown action", () => {
