@@ -24,7 +24,13 @@ const noteLayoutStyle={
   width:"100%",
   alignItems: "center",
   flexWrap: "wrap",
-  padding: "90px 0"
+  padding: "15vh 0px",
+  maxHeight: "100vh",
+  height: "65vh",
+  position: "fixed",
+  top: "0",
+  left: "0",
+  alignContent: "center"
 }
 export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
   const noteDuration = useSelector((state: StoreState) => state.playingNote.duration);
@@ -69,7 +75,7 @@ export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
               key={`${note}-${i}`}
               style={{
                 animationDuration: `${noteDuration}s`,
-                margin: "5px 0px"
+                margin: "5px 5%"
               }}
               className={playingNote === note ? "invertAnim" : ""}
               size="lg"
