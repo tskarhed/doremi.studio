@@ -6,7 +6,7 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faMusic, faListUl } from '@fortawesome/free-solid-svg-icons';
 
 interface ListItemProps {
-  to: string;
+  to: string;   // Vars den länkar
   type?: 'song' | 'setlist';
   actionComponent?: React.ReactElement;
   ref?: RefObject<any>;
