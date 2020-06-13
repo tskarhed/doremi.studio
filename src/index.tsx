@@ -18,10 +18,13 @@ const middleware = [
   ...(window.__REDUX_DEVTOOLS_EXTENSION__
     ? [(window as any).__REDUX_DEVTOOLS_EXTENSION__()]
     : []),
-  applyMiddleware(thunk),
 ];
 
-const store = createStore(rootReducer, persistedState, compose(...middleware));
+const store = createStore(
+  rootReducer,
+  persistedState,
+  compose(applyMiddleware(thunk), ...middleware)
+);
 store.subscribe(
   throttle(() => {
     // Save songs and setlists to localStorage when the state updates
