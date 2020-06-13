@@ -103,10 +103,9 @@ export const setSearch = (state: SearchState): SetSearchState => {
 export const playSequence = (
   notes: string[]
 ): ThunkAction<any, {}, {}, AnyAction> => {
-  console.log('called');
   return (dispatch) => {
     let i = 0;
-    playPianoSequnece(notes, (note, duration) => {
+    playPianoSequnece(notes, function (note, duration) {
       dispatch(playNote(note, duration));
       if (i === 0) {
         setTimeout(() => {
@@ -130,12 +129,7 @@ export const playSingleNote = (
   };
 };
 
-const playNote = (
-  note: string,
-  duration: number
-): ThunkAction<any, {}, {}, AnyAction> => {
-  return (dispatch) => {
-    return dispatch({ type: 'PLAY_NOTE', note, duration });
-  };
+const playNote = (note: string, duration: number) => {
+  return { type: 'PLAY_NOTE', note, duration };
 };
 export const stopPlaying = () => ({ type: 'STOP_NOTE' });
