@@ -12,41 +12,41 @@ interface Song {
 
 export const songs: Song[] = [
   {
-    title: "High Barbary",
-    id: encodeURI("High Barbary"),
-    notes: ["B3", "E4"]
+    title: 'High Barbary',
+    id: encodeURI('High Barbary'),
+    notes: ['B3', 'E4'],
   },
   {
-    title: "Dåne liksom åskan",
-    id: encodeURI("Dåne liksom åskan"),
-    notes: ["D4", "F#4", "A4"]
+    title: 'Dåne liksom åskan',
+    id: encodeURI('Dåne liksom åskan'),
+    notes: ['D4', 'F#4', 'A4'],
   },
   {
-    title: "Norrland",
-    id: encodeURI("Norrland"),
-    notes: ["Bb4"]
-  }
+    title: 'Norrland',
+    id: encodeURI('Norrland'),
+    notes: ['Bb4'],
+  },
 ];
 
 export const setlists: Setlist[] = [
   {
-    title: "Feb 26 på TD-galan",
+    title: 'Feb 26 på TD-galan',
     songs: songs,
-    id: encodeURI("Feb 26 på TD-galan")
+    id: encodeURI('Feb 26 på TD-galan'),
   },
   {
-    title: "Barhäng med grabbarna",
+    title: 'Barhäng med grabbarna',
     songs: songs,
-    id: encodeURI("Barhäng med grabbarna")
+    id: encodeURI('Barhäng med grabbarna'),
   },
   {
-    title: "Viktig sjunging (mycket para)",
+    title: 'Viktig sjunging (mycket para)',
     songs: songs,
-    id: encodeURI("Viktig sjunging (mycket para)")
+    id: encodeURI('Viktig sjunging (mycket para)'),
   },
   {
-    title: "Alla hjärtans dag - Serenader",
+    title: 'Alla hjärtans dag - Serenader',
     songs: songs,
-    id: encodeURI("Alla hjärtans dag - Serenader")
-  }
+    id: encodeURI('Alla hjärtans dag - Serenader'),
+  },
 ];

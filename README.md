@@ -3,16 +3,19 @@
 When doing simple performances with our choir we noticed a couple of issues
 
 Taking the correct notes at the beginning of a song requires:
-  - Remembering the setlist and the correct start tones
-  - Knowing how to take these notes with a tuning fork or using a piano - which can be rather cumbersome
-  - Using a piano app requires the person to know how to play piano and it's rather fiddely
-  
-Wouldn't the best way be that anyone, __regardless of musical competence__, could take the correct start tones in a simple way?
+
+- Remembering the setlist and the correct start tones
+- Knowing how to take these notes with a tuning fork or using a piano - which can be rather cumbersome
+- Using a piano app requires the person to know how to play piano and it's rather fiddely
+
+Wouldn't the best way be that anyone, **regardless of musical competence**, could take the correct start tones in a simple way?
 
 Is this what you've always looked for? Look no further! I present to you Setlist!
 
 ## Roadmap
+
 ### MVP (Done)
+
 - [x] Create and edit setlists
 - [x] Create and edit songs
 - [x] Play setlists
@@ -20,16 +23,17 @@ Is this what you've always looked for? Look no further! I present to you Setlist
 - [x] Delete notes and remove songs
 
 ### Next version
+
 - [ ] Login and save remotely (Probably using Firebase)
 - [ ] Offline sync using ServiceWorker
 - [ ] Look into further requirements for PWA
 
 ### Some time in the future
+
 - [ ] Create organizations
 - [ ] Share and play across organizations
 - [ ] Payment solution to support running costs? Donations?
 - [ ] Display lyrics and/or sheet music
-
 
 ---
 

@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
-} from "react-router-dom";
-import { Main, Play, Setlist, Song } from "./views";
+  Redirect,
+} from 'react-router-dom';
+import { Main, Play, Setlist, Song } from './views';
 
 // Initialize Sampler
-import "./sound/synth";
-import "./App.scss";
-import { StoreState } from "./state/types";
-import { Search } from "./components/Search";
-import { useSelector } from "react-redux";
+import './sound/synth';
+import './App.scss';
+import { StoreState } from './state/types';
+import { Search } from './components/Search';
+import { useSelector } from 'react-redux';
 
 function App() {
   const state = useSelector((state: StoreState) => state);
@@ -40,7 +40,13 @@ function App() {
           <Main />
         </Route>
       </Switch>
-      {state.isSearching && <Search isSearching={state.isSearching} setlists={state.setlists} songs={state.songs} />}
+      {state.isSearching && (
+        <Search
+          isSearching={state.isSearching}
+          setlists={state.setlists}
+          songs={state.songs}
+        />
+      )}
     </Router>
   );
 }

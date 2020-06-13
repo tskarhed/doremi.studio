@@ -1,13 +1,17 @@
-import React, { FC, useState, useEffect } from "react";
-import { View } from "../native";
-import styles from "./ActionButton.module.scss";
-import "../theme.module.scss";
-import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
-import { faPlay, faPlus, faStepBackward, faStepForward } from '@fortawesome/free-solid-svg-icons';
-
+import React, { FC, useState, useEffect } from 'react';
+import { View } from '../native';
+import styles from './ActionButton.module.scss';
+import '../theme.module.scss';
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import {
+  faPlay,
+  faPlus,
+  faStepBackward,
+  faStepForward,
+} from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
-  size: "sm" | "md" | "lg" | "xl";
+  size: 'sm' | 'md' | 'lg' | 'xl';
   onClick: (e: Event) => void;
   onPressAndHold?: Function;
   className?: string;
@@ -15,7 +19,7 @@ interface Props {
   inverted?: boolean;
   disabled?: boolean;
   disableAnimation?: boolean;
-  icon?: "play" | "plus" | "prev" | "next";
+  icon?: 'play' | 'plus' | 'prev' | 'next';
 }
 
 export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
@@ -25,9 +29,9 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
   className,
   style,
   inverted,
-  disabled=false,
+  disabled = false,
   icon,
-  disableAnimation = false
+  disableAnimation = false,
 }) => {
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -44,29 +48,37 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
       style={style}
       onClick={(e: Event) => {
         e.preventDefault();
-        if (!disabled){
+        if (!disabled) {
           setIsAnimating(true);
           onClick(e);
         }
       }}
       className={
         styles.ActionButton +
-        " " +
+        ' ' +
         styles[size] +
-        " " +
+        ' ' +
         className +
-        " " +
+        ' ' +
         (inverted && styles.inverted) +
-        " " +
+        ' ' +
         (disabled && styles.disabled) +
-        " " +
-        (!disableAnimation && isAnimating && (inverted ? "animToInverted" : "animFromInverted"))
+        ' ' +
+        (!disableAnimation &&
+          isAnimating &&
+          (inverted ? 'animToInverted' : 'animFromInverted'))
       }
     >
-      {icon === "play" && <Icon style={{paddingLeft: "5%", paddingTop: "2%"}} icon={faPlay}/>}
-      {icon === "plus" && <Icon style={{paddingTop: "2%"}} icon={faPlus}/>}
-      {icon === "prev" && <Icon style={{paddingTop: "2%"}} icon={faStepBackward}/>}
-      {icon === "next" && <Icon style={{paddingTop: "2%"}} icon={faStepForward}/>}
+      {icon === 'play' && (
+        <Icon style={{ paddingLeft: '5%', paddingTop: '2%' }} icon={faPlay} />
+      )}
+      {icon === 'plus' && <Icon style={{ paddingTop: '2%' }} icon={faPlus} />}
+      {icon === 'prev' && (
+        <Icon style={{ paddingTop: '2%' }} icon={faStepBackward} />
+      )}
+      {icon === 'next' && (
+        <Icon style={{ paddingTop: '2%' }} icon={faStepForward} />
+      )}
       {!icon && children}
     </View>
   );

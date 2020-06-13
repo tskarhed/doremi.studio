@@ -21,6 +21,7 @@
     "@types/react-select": "^3.0.10",
     "lodash.throttle": "^4.1.1",
     "node-sass": "^4.13.1",
+    "prettier": "^2.0.5",
     "query-string": "^6.11.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

@@ -1,7 +1,7 @@
-import { View, Input } from "../native";
-import React, { FC } from "react";
-import styles from "./styles/Page.module.scss";
-import theme from "../theme.module.scss";
+import { View, Input } from '../native';
+import React, { FC } from 'react';
+import styles from './styles/Page.module.scss';
+import theme from '../theme.module.scss';
 
 interface PageProps {
   title?: string;
@@ -17,20 +17,28 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
   children,
   editable = true,
   onHeaderClick,
-  prefixElement
+  prefixElement,
 }) => {
   return (
     <View className={styles.body}>
       <header onClick={onHeaderClick}>
         {prefixElement}
-        {!prefixElement && <View/>}
+        {!prefixElement && <View />}
         {editable ? (
-          <Input value={title || ""} />
+          <Input value={title || ''} />
         ) : (
-          <h1 style={{ fontSize: theme.fontSize ,margin: "auto", marginLeft: "10px" }}>{title}</h1>
+          <h1
+            style={{
+              fontSize: theme.fontSize,
+              margin: 'auto',
+              marginLeft: '10px',
+            }}
+          >
+            {title}
+          </h1>
         )}
         {headerElement}
-        {!headerElement && <View/>}
+        {!headerElement && <View />}
       </header>
 
       {children}

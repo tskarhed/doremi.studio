@@ -1,14 +1,14 @@
-import React, { FC } from "react";
-import { Page } from "./Page";
-import { useParams, useHistory } from "react-router-dom";
+import React, { FC } from 'react';
+import { Page } from './Page';
+import { useParams, useHistory } from 'react-router-dom';
 
-import { ActionButton } from "../components/ActionButton";
-import { SongList } from "../components/SongList";
-import { StoreState, Song, Setlist as SetlistType } from "../state/types";
-import { connect, useDispatch } from "react-redux";
-import { Back } from "../components/Back";
-import { AddToListButton } from "../components/AddToListButton";
-import { setSearch, removeSongFromSetlist } from "../state/actions";
+import { ActionButton } from '../components/ActionButton';
+import { SongList } from '../components/SongList';
+import { StoreState, Song, Setlist as SetlistType } from '../state/types';
+import { connect, useDispatch } from 'react-redux';
+import { Back } from '../components/Back';
+import { AddToListButton } from '../components/AddToListButton';
+import { setSearch, removeSongFromSetlist } from '../state/actions';
 
 interface Props {
   songs: Song[];
@@ -20,7 +20,7 @@ export const UnconnectedSetlist: FC<Props> = ({ songs, setlists }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const setlist = setlists.find(
-    (setlist) => setlist.id === encodeURI(setlistName || "")
+    (setlist) => setlist.id === encodeURI(setlistName || '')
   );
   if (!setlist) {
     history.push(`/`);
@@ -43,7 +43,7 @@ export const UnconnectedSetlist: FC<Props> = ({ songs, setlists }) => {
         <ActionButton
           icon="play"
           inverted
-          style={{ margin: "5px" }}
+          style={{ margin: '5px' }}
           size="lg"
           onClick={() =>
             history.push(`/setlist/${setlistName}/play/${setlistSongs[0].id}`)
@@ -56,7 +56,7 @@ export const UnconnectedSetlist: FC<Props> = ({ songs, setlists }) => {
         setlist={setlist.id}
         onRemove={(index) => dispatch(removeSongFromSetlist(setlist.id, index))}
       />
-      <AddToListButton onClick={() => dispatch(setSearch("songs"))} />
+      <AddToListButton onClick={() => dispatch(setSearch('songs'))} />
     </Page>
   );
 };
