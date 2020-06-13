@@ -37,7 +37,7 @@ export const mockSongs: Song[] = [
   {
     title: 'Gute Nacth (Warum bist du so ferne)',
     id: 'gute-nacht',
-    notes: ['C3'],
+    notes: ['C4'],
     setlists: ['serenader'],
   },
   {
@@ -55,7 +55,7 @@ export const mockSongs: Song[] = [
   {
     title: 'Helan',
     id: 'helan',
-    notes: ['A3', 'A3', 'C#4'],
+    notes: ['A3', 'C#4'],
     setlists: ['bordsvisor'],
   },
   {

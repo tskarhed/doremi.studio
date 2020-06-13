@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { SearchState, Setlist, Song } from '../state/types';
 import {ListItem} from './List';
+import { Input } from '../native';
+
 
 // Create interface
 interface Props {
@@ -22,6 +24,9 @@ const searchStyles = {
     height: '100%',
     overflowY: 'auto',
   }as React.CSSProperties,
+  input: {
+    backgroundColor: 'gray',
+  }as React.CSSProperties,
 }
 
 // Skapa en funktion som genererar alla list-items
@@ -35,15 +40,23 @@ const generateListItems = (list: any, type:'setlist'|'song') => {
 
 // Create a function which exports so that otehrs can reach
 export const Search: FC<Props> = ({isSearching, setlists, songs}) => {
+  const [list, setList] = useState<Song[]>(songs);
 
+  const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.currentTarget.value;
 
-
+// Lägg in grejen som givet en lista filtrar och sparar enligt input.
+  setList(songs.filter((item) => item.title.toLowerCase().includes(inputValue.toLowerCase())))
+  console.log(songs.filter((item) => item.title.includes(inputValue)))
+  }
 
 // Lägg till inputs, lista mm här
 return <div style={searchStyles.container}>
-  
+  <div style={searchStyles.input}>
+    <Input autoFocus onChange={onInputChange}/>
+  </div>
   <div style={searchStyles.list}>
-  {generateListItems(songs, 'song')}
+  {generateListItems(list, 'song')}
   </div>
 </div>  
 }
