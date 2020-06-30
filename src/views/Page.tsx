@@ -1,6 +1,9 @@
 import { View, Input } from '../native';
 import React, { FC, CSSProperties } from 'react';
 import theme from '../theme.module.scss';
+import { useSelector } from 'react-redux';
+import { StoreState } from '../state/types';
+import { Search } from '../components/Search';
 
 interface PageProps {
   title?: string;
@@ -18,22 +21,33 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
   onHeaderClick,
   prefixElement,
 }) => {
-  return (
-    <View style={styles.body}>
-      <header style={styles.header as CSSProperties} onClick={onHeaderClick}>
-        <View style={styles.prefix}>{prefixElement}</View>
-        <View style={styles.titleWrapper}>
-          {editable ? (
-            <Input value={title || ''} />
-          ) : (
-            <h1 style={styles.title as CSSProperties}>{title}</h1>
-          )}
-        </View>
-        <View style={styles.postfix}>{headerElement}</View>
-      </header>
+  const state = useSelector((state: StoreState) => state);
 
-      {children}
-    </View>
+  return (
+    <>
+      {state.isSearching && (
+        <Search
+          isSearching={state.isSearching}
+          setlists={state.setlists}
+          songs={state.songs}
+        />
+      )}
+      <View style={styles.body}>
+        <header style={styles.header as CSSProperties} onClick={onHeaderClick}>
+          <View style={styles.prefix}>{prefixElement}</View>
+          <View style={styles.titleWrapper}>
+            {editable ? (
+              <Input value={title || ''} />
+            ) : (
+              <h1 style={styles.title as CSSProperties}>{title}</h1>
+            )}
+          </View>
+          <View style={styles.postfix}>{headerElement}</View>
+        </header>
+
+        {children}
+      </View>
+    </>
   );
 };
 

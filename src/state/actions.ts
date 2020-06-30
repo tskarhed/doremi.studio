@@ -88,9 +88,9 @@ export const setSearch = (state: SearchState): SetSearchState => {
   switch (state) {
     case 'all':
       return { type: 'SEARCH_ALL' };
-    case 'setlists':
+    case 'setlist':
       return { type: 'SEARCH_SETLISTS' };
-    case 'songs':
+    case 'song':
       return { type: 'SEARCH_SONGS' };
     case false:
     default:

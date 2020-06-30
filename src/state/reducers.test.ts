@@ -195,11 +195,11 @@ describe('Toggle searching', () => {
   });
 
   it('songs', () => {
-    expect(reducerTest({ type: 'SEARCH_SETLISTS' })).toEqual('setlists');
+    expect(reducerTest({ type: 'SEARCH_SETLISTS' })).toEqual('setlist');
   });
 
   it('setlists', () => {
-    expect(reducerTest({ type: 'SEARCH_SONGS' })).toEqual('songs');
+    expect(reducerTest({ type: 'SEARCH_SONGS' })).toEqual('song');
   });
 
   it('reset search', () => {

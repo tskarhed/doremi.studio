@@ -10,12 +10,8 @@ import { Main, Play, Setlist, Song } from './views';
 // Initialize Sampler
 import './sound/synth';
 import './App.scss';
-import { StoreState } from './state/types';
-import { Search } from './components/Search';
-import { useSelector } from 'react-redux';
 
 function App() {
-  const state = useSelector((state: StoreState) => state);
   return (
     <Router>
       <Switch>
@@ -40,13 +36,6 @@ function App() {
           <Main />
         </Route>
       </Switch>
-      {state.isSearching && (
-        <Search
-          isSearching={state.isSearching}
-          setlists={state.setlists}
-          songs={state.songs}
-        />
-      )}
     </Router>
   );
 }

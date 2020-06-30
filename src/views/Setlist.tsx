@@ -56,7 +56,7 @@ export const UnconnectedSetlist: FC<Props> = ({ songs, setlists }) => {
         setlist={setlist.id}
         onRemove={(index) => dispatch(removeSongFromSetlist(setlist.id, index))}
       />
-      <AddToListButton onClick={() => dispatch(setSearch('songs'))} />
+      <AddToListButton onClick={() => dispatch(setSearch('song'))} />
     </Page>
   );
 };
