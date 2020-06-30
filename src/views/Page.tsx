@@ -52,6 +52,7 @@ const styles = {
     justifyContent: 'flex-start',
     zIndex: 10,
     position: 'relative',
+    boxShadow: "0px 4px 6px black",
   },
   titleWrapper: {
     flexGrow: 1,
@@ -79,6 +80,6 @@ const styles = {
       top: "0",
       left: "0",
       position: "absolute",
-      filter: "blur(2px) brightness(55%) saturate(88%)",
+      filter: "blur(2px) brightness(70%) saturate(88%)",
   },
 };
