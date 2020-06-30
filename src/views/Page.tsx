@@ -21,6 +21,7 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
 }) => {
   return (
     <View className={styles.body}>
+      <img src="/bg_test.jpg"/>
       <header onClick={onHeaderClick}>
         {prefixElement}
         {!prefixElement && <View />}
