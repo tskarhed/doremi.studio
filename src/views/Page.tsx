@@ -4,7 +4,6 @@ import theme from '../theme.module.scss';
 import { useSelector } from 'react-redux';
 import { StoreState } from '../state/types';
 import { Search } from '../components/Search';
-import { url } from 'inspector';
 
 interface PageProps {
   title?: string;
