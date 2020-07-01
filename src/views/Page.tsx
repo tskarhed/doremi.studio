@@ -33,6 +33,10 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
         />
       )}
       <View style={styles.body}>
+        
+        <div style={styles.backgroundImage as CSSProperties}>
+          
+        </div>
         <header style={styles.header as CSSProperties} onClick={onHeaderClick}>
           <View style={styles.prefix}>{prefixElement}</View>
           <View style={styles.titleWrapper}>
@@ -53,7 +57,6 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
 
 const styles = {
   body: {
-    backgroundColor: theme.primary,
     height: '100vh',
     maxHeight: '100vh',
   },
@@ -65,6 +68,7 @@ const styles = {
     justifyContent: 'flex-start',
     zIndex: 10,
     position: 'relative',
+    boxShadow: "0px 4px 6px black",
   },
   titleWrapper: {
     flexGrow: 1,
@@ -83,5 +87,16 @@ const styles = {
   postfix: {
     justifySelf: 'flex-end',
     marginLeft: 'auto',
+  },
+  backgroundImage: {
+      width: "100%",
+      maxWidth: "100%",
+      height: "100%",
+      zIndex: "-1",
+      top: "0",
+      left: "0",
+      position: "absolute",
+      background: "url(/bg_test.jpg) repeat",
+      filter: "blur(5px) brightness(100%) sepia(2%)",
   },
 };
