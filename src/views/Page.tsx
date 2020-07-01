@@ -4,6 +4,7 @@ import theme from '../theme.module.scss';
 import { useSelector } from 'react-redux';
 import { StoreState } from '../state/types';
 import { Search } from '../components/Search';
+import { url } from 'inspector';
 
 interface PageProps {
   title?: string;
@@ -33,7 +34,10 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
         />
       )}
       <View style={styles.body}>
-        <img src="/bg_test.jpg" style={styles.backgroundImage as CSSProperties}/>
+        
+        <div style={styles.backgroundImage as CSSProperties}>
+          
+        </div>
         <header style={styles.header as CSSProperties} onClick={onHeaderClick}>
           <View style={styles.prefix}>{prefixElement}</View>
           <View style={styles.titleWrapper}>
@@ -54,7 +58,6 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
 
 const styles = {
   body: {
-    //backgroundColor: theme.primary,
     height: '100vh',
     maxHeight: '100vh',
   },
@@ -87,13 +90,14 @@ const styles = {
     marginLeft: 'auto',
   },
   backgroundImage: {
-      width: "auto",
+      width: "100%",
       maxWidth: "100%",
       height: "100%",
       zIndex: "-1",
       top: "0",
       left: "0",
       position: "absolute",
-      filter: "blur(2px) brightness(70%) saturate(88%)",
+      background: "url(/bg_test.jpg) repeat",
+      filter: "blur(5px) brightness(100%) sepia(2%)",
   },
 };
