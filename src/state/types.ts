@@ -124,7 +124,7 @@ export interface SetSearchState {
   type: SearchStateType;
 }
 
-export type SearchState = 'all' | 'setlists' | 'songs' | false;
+export type SearchState = 'all' | 'setlist' | 'song' | false;
 
 // Playing notes
 

@@ -32,7 +32,7 @@ export const Main: FC = () => {
       }
     >
       <SetlistList setlists={setlists} />
-      <AddToListButton onClick={() => dispatch(setSearch('setlists'))} />
+      <AddToListButton onClick={() => dispatch(setSearch('setlist'))} />
     </Page>
   );
 };

@@ -121,10 +121,10 @@ export const isSearching = (
     return 'all';
   }
   if (action.type === 'SEARCH_SETLISTS') {
-    return 'setlists';
+    return 'setlist';
   }
   if (action.type === 'SEARCH_SONGS') {
-    return 'songs';
+    return 'song';
   }
 
   if (action.type === 'SEARCH_NONE') {
