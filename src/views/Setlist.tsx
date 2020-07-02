@@ -46,7 +46,7 @@ export const UnconnectedSetlist: FC<Props> = ({ songs, setlists }) => {
           style={{ margin: '5px' }}
           size="lg"
           onClick={() =>
-            history.push(`/setlist/${setlistName}/play/${setlistSongs[0].id}`)
+            history.push(`/setlist/${setlist.id}/play/${setlistSongs[0].id}`)
           }
         />
       }

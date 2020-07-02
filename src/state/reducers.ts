@@ -58,9 +58,7 @@ export const setlist = (prevState: Setlist, action: SetlistAction) => {
       id: action.id,
     };
   }
-  if (action.setlist && prevState.id !== action.setlist) {
-    return prevState;
-  }
+
   if (action.type === 'ADD_SONG_TO_SETLIST') {
     return { ...prevState, songs: [...prevState.songs, action.song] };
   }

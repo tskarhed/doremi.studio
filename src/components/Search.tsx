@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
-import { SearchState, Setlist, Song } from '../state/types';
+import { SearchState, Setlist, Song, SetlistId } from '../state/types';
 import { ListItem } from './List';
 import { Input } from '../native';
 import { useDispatch } from 'react-redux';
-import { setSearch } from '../state/actions';
+import { setSearch, addSongToSetlist } from '../state/actions';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { createSong, createSetlist } from '../state/actions';
@@ -47,7 +47,14 @@ type SearchList = Array<Song | Setlist>;
 // Create a function which exports so that otehrs can reach
 export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
   const dispatch = useDispatch();
-  const [list, setList] = useState<SearchList>([...songs, ...setlists]);
+  const searchableList =
+    isSearching === 'setlist'
+      ? []
+      : [...songs, ...(isSearching === 'song' ? [...setlists] : [])];
+  const [list, setList] = useState<SearchList>(searchableList);
+
+  const { setlistName } = useParams();
+
   const [inputValue, setInputValue] = useState<string>('');
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +63,7 @@ export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
 
     // Lägg in grejen som givet en lista filtrar och sparar enligt input.
     setList(
-      songs.filter((item) =>
+      searchableList.filter((item) =>
         item.title.toLowerCase().includes(inputValue.toLowerCase())
       )
     );
@@ -65,8 +72,21 @@ export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
   const generateListItems = (list: SearchList) => {
     return list.map((item) => {
       const type = !!(item as Setlist).songs ? 'setlist' : 'song';
+      const url = `/${type}/${item.id}`;
       return (
-        <ListItem key={item.id} to={`/${type}/${item.id}`} type={type}>
+        <ListItem
+          onClick={(event: React.MouseEvent) => {
+            // Add song to current setlist
+            if (isSearching === 'song' && setlistName) {
+              event.preventDefault();
+              console.log(addSongToSetlist(item.id, setlistName));
+              dispatch(addSongToSetlist(item.id, setlistName));
+            }
+          }}
+          key={item.id}
+          to={url}
+          type={type}
+        >
           {item.title}
         </ListItem>
       );
@@ -85,7 +105,9 @@ export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
           autoFocus
           value={inputValue}
           onChange={onInputChange}
-          placeholder="Search..."
+          placeholder={
+            isSearching === 'setlist' ? 'Create new setlist:' : 'Search...'
+          }
         />
         <Icon
           size="2x"
@@ -96,7 +118,11 @@ export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
       </div>
       <div style={searchStyles.list} onClick={onSearchSelect}>
         {generateListItems(list)}
-        {isSearching && <CreateNew type={isSearching}>{inputValue}</CreateNew>}
+        {isSearching && (
+          <CreateNew setlist={setlistName} type={isSearching}>
+            {inputValue}
+          </CreateNew>
+        )}
       </div>
     </div>
   );
@@ -105,21 +131,20 @@ export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
 interface CreateNewProps {
   children: string;
   type: string;
+  setlist?: SetlistId;
 }
-const CreateNew: FC<CreateNewProps> = ({ type, children }) => {
+const CreateNew: FC<CreateNewProps> = ({ setlist, type, children }) => {
   const dispatch = useDispatch();
 
-  const params = useParams();
   let history = useHistory();
-  console.log(params);
 
   const onClick = () => {
     if (type === 'all' || type === 'song') {
-      dispatch(createSong(children, undefined));
+      dispatch(createSong(children, setlist));
       // Redirect to place
       history.push(`/song/${encodeURI(children)}`);
     } else if (type === 'setlist') {
-      dispatch(createSetlist(encodeURI(children)));
+      dispatch(createSetlist(children));
       // Redirect
       history.push(`/setlist/${encodeURI(children)}`);
     }
