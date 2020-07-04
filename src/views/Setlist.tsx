@@ -8,7 +8,11 @@ import { StoreState, Song, Setlist as SetlistType } from '../state/types';
 import { connect, useDispatch } from 'react-redux';
 import { Back } from '../components/Back';
 import { AddToListButton } from '../components/AddToListButton';
-import { setSearch, removeSongFromSetlist } from '../state/actions';
+import {
+  setSearch,
+  removeSongFromSetlist,
+  updateSetlistTitle,
+} from '../state/actions';
 
 interface Props {
   songs: Song[];
@@ -38,6 +42,9 @@ export const UnconnectedSetlist: FC<Props> = ({ songs, setlists }) => {
   return (
     <Page
       title={setlist.title}
+      onTitleChange={(newTitle) => {
+        dispatch(updateSetlistTitle(newTitle, setlist.id));
+      }}
       prefixElement={<Back to="/" />}
       headerElement={
         <ActionButton

@@ -59,9 +59,13 @@ export const deleteSong = (id: SongId): DeleteSong => ({
 });
 
 //Setlist
-export const updateSetlistTitle = (title: string): UpdateSetlistTitle => ({
+export const updateSetlistTitle = (
+  title: string,
+  setlist: SetlistId
+): UpdateSetlistTitle => ({
   type: 'UPDATE_SETLIST_TITLE',
   title,
+  setlist,
 });
 export const addSongToSetlist = (
   song: SongId,

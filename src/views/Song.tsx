@@ -7,7 +7,7 @@ import { connect, useDispatch } from 'react-redux';
 import { Back } from '../components/Back';
 import { View } from '../native';
 import { ActionButton } from '../components/ActionButton';
-import { addNote, playSequence } from '../state/actions';
+import { addNote, playSequence, updateSongTitle } from '../state/actions';
 
 export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
   const dispatch = useDispatch();
@@ -22,6 +22,9 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
   return (
     <Page
       title={song ? song.title : ''}
+      onTitleChange={(newTitle) => {
+        dispatch(updateSongTitle(newTitle, song.id));
+      }}
       prefixElement={<Back />}
       footer={
         <View

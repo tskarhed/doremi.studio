@@ -107,7 +107,7 @@ export const setlists = (
   }
 
   return prevState.map((list) => {
-    return setlist(list, action);
+    return action.setlist === list.id ? setlist(list, action) : list;
   });
 };
 

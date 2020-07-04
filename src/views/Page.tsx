@@ -1,5 +1,5 @@
 import { View, Input } from '../native';
-import React, { FC, CSSProperties } from 'react';
+import React, { FC, CSSProperties, useState } from 'react';
 import theme from '../theme.module.scss';
 import { useSelector } from 'react-redux';
 import { StoreState } from '../state/types';
@@ -12,10 +12,12 @@ interface PageProps {
   footer?: React.ReactElement;
   editable?: boolean;
   onHeaderClick?: (e: any) => void;
+  onTitleChange?: (newTitle: string) => void;
 }
 
 export const Page: FC<React.PropsWithChildren<PageProps>> = ({
   title,
+  onTitleChange,
   headerElement,
   children,
   footer,
@@ -24,7 +26,7 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
   prefixElement,
 }) => {
   const state = useSelector((state: StoreState) => state);
-
+  const [tempTitle, setTempTitle] = useState(title || '');
   return (
     <>
       {state.isSearching && (
@@ -40,7 +42,15 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
           <View style={styles.prefix}>{prefixElement}</View>
           <View style={styles.titleWrapper}>
             {editable ? (
-              <Input value={title || ''} />
+              <Input
+                onBlur={() => {
+                  onTitleChange && onTitleChange(tempTitle);
+                }}
+                onChange={(event: React.KeyboardEvent<HTMLInputElement>) => {
+                  setTempTitle(event.currentTarget.value);
+                }}
+                value={tempTitle}
+              />
             ) : (
               <h1 style={styles.title as CSSProperties}>{title}</h1>
             )}
