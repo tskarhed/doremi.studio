@@ -7,8 +7,7 @@ import { connect, useDispatch } from 'react-redux';
 import { Back } from '../components/Back';
 import { View } from '../native';
 import { ActionButton } from '../components/ActionButton';
-import { playSequence } from '../sound/synth';
-import { addNote } from '../state/actions';
+import { addNote, playSequence } from '../state/actions';
 
 export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
   const dispatch = useDispatch();
@@ -48,7 +47,7 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
             inverted
             icon="play"
             size="lg"
-            onClick={() => playSequence(song.notes)}
+            onClick={() => dispatch(playSequence(song.notes))}
           />
         </View>
       }

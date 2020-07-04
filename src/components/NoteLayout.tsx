@@ -1,15 +1,13 @@
 import React, { FC } from 'react';
 import { View } from '../native';
-import { ActionButton } from './ActionButton';
 
 // Import to get the animation
 import './NoteLayout.scss';
 
-// import { Note, ToneSequence } from "../sound/SoundSetup";
-import { playSingleNote } from '../state/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { SongId, StoreState } from '../state/types';
+import { useDispatch } from 'react-redux';
+import { SongId } from '../state/types';
 import { updateNote, deleteNote } from '../state/actions';
+import { NoteButton } from './NoteButton';
 
 interface Props {
   edit: boolean;
@@ -29,30 +27,12 @@ const noteLayoutStyle = {
   alignContent: 'center',
 };
 export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
-  const noteDuration = useSelector(
-    (state: StoreState) => state.playingNote.duration
-  );
-  const playingNote = useSelector(
-    (state: StoreState) => state.playingNote.note
-  );
-
   const dispatch = useDispatch();
 
-  const handleNoteClick = (note: string, index: number) => {
-    if (!edit) {
-      dispatch(playSingleNote(note));
-      return;
-    }
-    const newNote = prompt(
-      'What do you want to change the note to? Remove text to delete the note.',
-      note
-    );
-    if (newNote === null) {
-      return;
-    }
-    newNote
-      ? dispatch(updateNote(newNote, index, songId))
-      : dispatch(deleteNote(index, songId));
+  const handleNoteClick = (newNote: string | null, index: number) => {
+    newNote === null
+      ? dispatch(deleteNote(index, songId))
+      : dispatch(updateNote(newNote, index, songId));
   };
   return (
     <View className="wrapper">
@@ -71,19 +51,12 @@ export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
       )}
       <View style={noteLayoutStyle}>
         {notes.map((note, i) => (
-          <ActionButton
+          <NoteButton
             key={`${note}-${i}`}
-            style={{
-              animationDuration: `${noteDuration}s`,
-              margin: '5px 5%',
-            }}
-            className={playingNote === note ? 'invertAnim' : ''}
-            size="lg"
-            onClick={() => handleNoteClick(note, i)}
-            disableAnimation
-          >
-            {note}
-          </ActionButton>
+            note={note}
+            editable={edit}
+            onChange={(newNote) => handleNoteClick(newNote, i)}
+          />
         ))}
       </View>
     </View>
