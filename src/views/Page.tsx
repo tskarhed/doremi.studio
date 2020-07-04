@@ -9,6 +9,7 @@ interface PageProps {
   title?: string;
   headerElement?: React.ReactElement;
   prefixElement?: React.ReactElement;
+  footer?: React.ReactElement;
   editable?: boolean;
   onHeaderClick?: (e: any) => void;
 }
@@ -17,6 +18,7 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
   title,
   headerElement,
   children,
+  footer,
   editable = true,
   onHeaderClick,
   prefixElement,
@@ -32,11 +34,8 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
           songs={state.songs}
         />
       )}
-      <View style={styles.body}>
-        
-        <div style={styles.backgroundImage as CSSProperties}>
-          
-        </div>
+      <View style={styles.body} className="wtf">
+        <div style={styles.backgroundImage as CSSProperties}></div>
         <header style={styles.header as CSSProperties} onClick={onHeaderClick}>
           <View style={styles.prefix}>{prefixElement}</View>
           <View style={styles.titleWrapper}>
@@ -48,8 +47,8 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
           </View>
           <View style={styles.postfix}>{headerElement}</View>
         </header>
-
-        {children}
+        <main style={styles.main}>{children}</main>
+        <footer>{footer}</footer>
       </View>
     </>
   );
@@ -59,6 +58,8 @@ const styles = {
   body: {
     height: '100vh',
     maxHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
   },
   header: {
     height: '10vh',
@@ -68,7 +69,11 @@ const styles = {
     justifyContent: 'flex-start',
     zIndex: 10,
     position: 'relative',
-    boxShadow: "0px 4px 6px black",
+    boxShadow: '0px 4px 6px black',
+  },
+  main: {
+    flexGrow: 1,
+    overflow: 'auto',
   },
   titleWrapper: {
     flexGrow: 1,
@@ -89,14 +94,15 @@ const styles = {
     marginLeft: 'auto',
   },
   backgroundImage: {
-      width: "100%",
-      maxWidth: "100%",
-      height: "100%",
-      zIndex: "-1",
-      top: "0",
-      left: "0",
-      position: "absolute",
-      background: "url(/bg_test.jpg) repeat",
-      filter: "blur(5px) brightness(100%) sepia(2%)",
+    width: '100%',
+    maxWidth: '100%',
+    height: '100%',
+    zIndex: '-1',
+    top: '0',
+    left: '0',
+    position: 'absolute',
+    background: 'url(/bg_test.jpg) repeat',
+    backgroundAttachment: 'fixed',
+    filter: 'blur(5px) brightness(100%) sepia(2%)',
   },
 };

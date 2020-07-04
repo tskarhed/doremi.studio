@@ -21,35 +21,39 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
   }
 
   return (
-    <Page title={song ? song.title : ''} prefixElement={<Back />}>
-      <NoteLayout notes={song ? song.notes : []} edit songId={song.id} />
-      <View
-        style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          padding: '15px 0',
-          position: 'fixed',
-          bottom: 0,
-          width: '100%',
-        }}
-      >
-        <ActionButton
-          inverted
-          icon="plus"
-          size="lg"
-          onClick={() => {
-            const note =
-              prompt('Write note with an octave you want to add', 'A4') || 'A4';
-            dispatch(addNote(note, song.id));
+    <Page
+      title={song ? song.title : ''}
+      prefixElement={<Back />}
+      footer={
+        <View
+          style={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            padding: '15px 0',
+            width: '100%',
           }}
-        />
-        <ActionButton
-          inverted
-          icon="play"
-          size="lg"
-          onClick={() => playSequence(song.notes)}
-        />
-      </View>
+        >
+          <ActionButton
+            inverted
+            icon="plus"
+            size="lg"
+            onClick={() => {
+              const note =
+                prompt('Write note with an octave you want to add', 'A4') ||
+                'A4';
+              dispatch(addNote(note, song.id));
+            }}
+          />
+          <ActionButton
+            inverted
+            icon="play"
+            size="lg"
+            onClick={() => playSequence(song.notes)}
+          />
+        </View>
+      }
+    >
+      <NoteLayout notes={song ? song.notes : []} edit songId={song.id} />
     </Page>
   );
 };

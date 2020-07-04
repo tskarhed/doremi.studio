@@ -52,8 +52,6 @@ const PlayFooter: FC<PlayFooterProps> = ({
     <View
       style={{
         display: 'flex',
-        position: 'fixed',
-        bottom: 0,
         justifyContent: 'space-around',
         alignItems: 'center',
         padding: '10px 0px',
@@ -86,8 +84,6 @@ const PlayFooter: FC<PlayFooterProps> = ({
           disabled={!next}
         />
       </View>
-      {/* <View style={navStyles} onClick={() => prev && navigate(prev.id)}>{prev && `Prev: ${prev.title}`}</View> */}
-      {/* <View style={navStyles} onClick={() => next && navigate(next.id)}>{next && `Next: ${next.title}`}</View> */}
     </View>
   );
 };
@@ -129,14 +125,16 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
       editable={false}
       title={song.title}
       prefixElement={<Back to={`/setlist/${setlist.id}`} />}
+      footer={
+        <PlayFooter
+          setlistId={setlist.id}
+          prev={setlistSongs[songIndex - 1]}
+          next={setlistSongs[songIndex + 1]}
+          current={song}
+        />
+      }
     >
       <NoteLayout notes={song.notes} edit={false} songId={song.id} />
-      <PlayFooter
-        setlistId={setlist.id}
-        prev={setlistSongs[songIndex - 1]}
-        next={setlistSongs[songIndex + 1]}
-        current={song}
-      />
     </Page>
   );
 };
