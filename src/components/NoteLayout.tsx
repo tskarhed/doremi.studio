@@ -24,12 +24,8 @@ const noteLayoutStyle = {
   width: '100%',
   alignItems: 'center',
   flexWrap: 'wrap',
-  padding: '15vh 0px',
   maxHeight: '100vh',
-  height: '65vh',
-  position: 'fixed',
-  top: '0',
-  left: '0',
+  height: '100%',
   alignContent: 'center',
 };
 export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
@@ -90,14 +86,6 @@ export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
           </ActionButton>
         ))}
       </View>
-      {/* <View className="actionWrapper">
-        <ActionButton
-          icon={edit ? "plus" : "play"}
-          inverted
-          size="lg"
-          onClick={handleClick}
-        />
-      </View> */}
     </View>
   );
 };
