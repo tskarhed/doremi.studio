@@ -8,13 +8,6 @@ import {
   faPlus,
   faStepBackward,
   faStepForward,
-  faFileWord,
-  faEnvelopeOpenText,
-  faFileContract,
-  faFileSignature,
-  faTextHeight,
-  faScroll,
-  faBookOpen,
   faFileAlt,
 } from '@fortawesome/free-solid-svg-icons';
 

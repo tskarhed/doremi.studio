@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Page } from './Page';
 import { NoteLayout } from '../components/NoteLayout';
 import { useParams, useHistory } from 'react-router-dom';
@@ -15,7 +15,7 @@ interface PlayFooterProps {
   setlistId: SetlistId;
   current: Song;
 }
-let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000`;
+
 // const navStyles ={
 //   fontSize: "1.3rem",
 //   margin: "5px",
@@ -77,13 +77,6 @@ const PlayFooter: FC<PlayFooterProps> = ({
         onClick={() => dispatch(playSequence(current.notes))}
         inverted
       />
-      <ActionButton
-        icon="text"
-        size="xl"
-            
-        onClick={() => window.open('/', 'test', params)}
-        inverted
-      />
       <View style={{ position: 'relative' }}>
         <View style={songTitleStyle}>{next && `${next.title}`}</View>
         <ActionButton
@@ -106,7 +99,7 @@ interface Props {
 export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
   const history = useHistory();
   const { songNumber, setlistName } = useParams();
-
+  const [isLyricVisible, setisLyricVisible] = useState(false);
   const setlist = setlists.find(
     (setlist) => setlist.id === encodeURI(setlistName || '')
   );
@@ -135,6 +128,13 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
       editable={false}
       title={song.title}
       prefixElement={<Back to={`/setlist/${setlist.id}`} />}
+      headerElement={<ActionButton
+        icon={isLyricVisible ? "play":"text"}
+        size="xl"
+            
+        onClick={() => setisLyricVisible(!isLyricVisible)}
+        inverted
+      />}
       footer={
         <PlayFooter
           setlistId={setlist.id}
@@ -144,7 +144,11 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
         />
       }
     >
-      <NoteLayout notes={song.notes} edit={false} songId={song.id} />
+      {isLyricVisible ?  "Här är vår text"
+      :
+      <NoteLayout notes={song.notes} edit={false} songId={song.id} />}
+      
+      
     </Page>
   );
 };
