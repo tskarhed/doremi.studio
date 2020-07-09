@@ -48,6 +48,7 @@ const PlayFooter: FC<PlayFooterProps> = ({
   };
   console.log(current);
 
+  // Previous song, Play and next song
   return (
     <View
       style={{
@@ -58,6 +59,7 @@ const PlayFooter: FC<PlayFooterProps> = ({
         width: '100%',
       }}
     >
+      
       <View style={{ position: 'relative' }}>
         <View style={songTitleStyle}>{prev && `${prev.title}`}</View>
         <ActionButton
@@ -70,6 +72,12 @@ const PlayFooter: FC<PlayFooterProps> = ({
       </View>
       <ActionButton
         icon="play"
+        size="xl"
+        onClick={() => dispatch(playSequence(current.notes))}
+        inverted
+      />
+      <ActionButton
+        icon="text"
         size="xl"
         onClick={() => dispatch(playSequence(current.notes))}
         inverted
