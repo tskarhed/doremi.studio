@@ -15,7 +15,7 @@ interface PlayFooterProps {
   setlistId: SetlistId;
   current: Song;
 }
-
+let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000`;
 // const navStyles ={
 //   fontSize: "1.3rem",
 //   margin: "5px",
@@ -48,6 +48,7 @@ const PlayFooter: FC<PlayFooterProps> = ({
   };
   console.log(current);
 
+  
   // Previous song, Play and next song
   return (
     <View
@@ -79,7 +80,8 @@ const PlayFooter: FC<PlayFooterProps> = ({
       <ActionButton
         icon="text"
         size="xl"
-        onClick={() => dispatch(playSequence(current.notes))}
+            
+        onClick={() => window.open('/', 'test', params)}
         inverted
       />
       <View style={{ position: 'relative' }}>
