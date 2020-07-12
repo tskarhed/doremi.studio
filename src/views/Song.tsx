@@ -7,7 +7,12 @@ import { connect, useDispatch } from 'react-redux';
 import { Back } from '../components/Back';
 import { View } from '../native';
 import { ActionButton } from '../components/ActionButton';
-import { addNote, playSequence, updateSongTitle } from '../state/actions';
+import {
+  addNote,
+  playSequence,
+  updateSongTitle,
+  updateSongLyrics,
+} from '../state/actions';
 import { LyricLayout } from '../components/LyricLayout';
 
 export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
@@ -15,13 +20,11 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
   const { songName } = useParams();
   const history = useHistory();
   const song = songs.find((song) => song.id === encodeURI(songName || ''));
-  const [isLyricVisible, setisLyricVisible] = useState(false); 
+  const [isLyricVisible, setisLyricVisible] = useState(false);
   if (!song) {
     history.push('/');
     return <></>;
   }
-
- 
 
   return (
     <Page
@@ -39,7 +42,6 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
             width: '100%',
           }}
         >
-          
           <ActionButton
             inverted
             icon="text"
@@ -66,9 +68,15 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
         </View>
       }
     >
-      {isLyricVisible ?  <LyricLayout edit={true} lyrics={song.lyrics}/>
-      :
-      <NoteLayout notes={song ? song.notes : []} edit songId={song.id} />}
+      {isLyricVisible ? (
+        <LyricLayout
+          edit={true}
+          lyrics={song.lyrics}
+          onChange={(lyrics) => dispatch(updateSongLyrics(lyrics, song.id))}
+        />
+      ) : (
+        <NoteLayout notes={song ? song.notes : []} edit songId={song.id} />
+      )}
     </Page>
   );
 };

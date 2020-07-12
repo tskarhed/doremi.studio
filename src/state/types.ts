@@ -58,6 +58,11 @@ export interface UpdateSongTitle extends NoteActions {
   title: string;
 }
 
+export interface UpdateSongLyrics extends NoteActions {
+  type: 'UPDATE_SONG_LYRICS';
+  lyrics: string;
+}
+
 // Setlist interfaces and types
 
 export interface AddSongToSetlist {
@@ -104,7 +109,7 @@ export interface DeleteSetlist {
 }
 
 export type NotesAction = AddNote | UpdateNote | DeleteNote;
-export type SongAction = UpdateSongTitle | NotesAction | CreateSong;
+export type SongAction = UpdateSongTitle | NotesAction | CreateSong | UpdateSongLyrics;
 export type SongsAction = DeleteSong | SongAction;
 
 export type SetlistAction =

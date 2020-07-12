@@ -30,7 +30,7 @@ export const mockSongs: Song[] = [
     Ljus dit upp vi vilja sprida, odla byggd, och bryta mark,
     och vid dina älvar strida stå som skyddsvakt stolt och starkt.
     Norrland, Norrland, Du skall tona rikt på nya släktens sång.
-    Och i Sveriges kungakrona pärlan varder du en gång.`
+    Och i Sveriges kungakrona pärlan varder du en gång.`,
   },
   {
     title: 'High Barbary',
