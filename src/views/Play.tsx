@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Page } from './Page';
 import { NoteLayout } from '../components/NoteLayout';
+import { LyricLayout } from '../components/LyricLayout';
 import { useParams, useHistory } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { StoreState, Song, SongId, SetlistId, Setlist } from '../state/types';
@@ -144,7 +145,7 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
         />
       }
     >
-      {isLyricVisible ?  "Här är vår text"
+      {isLyricVisible ?  <LyricLayout edit={false} lyrics={song.lyrics}/>
       :
       <NoteLayout notes={song.notes} edit={false} songId={song.id} />}
       

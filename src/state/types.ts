@@ -19,6 +19,7 @@ export interface Song {
   title: string;
   notes: Notes;
   setlists?: SetlistId[];
+  lyrics?: string;
 }
 
 export interface Setlist {

@@ -5,11 +5,32 @@ export const mockSongs: Song[] = [
     title: 'Dåne liksom åskan',
     id: 'dane-liksom-askan',
     notes: ['D3', 'F#3', 'A3'],
+    lyrics: `Dåne liksom åskan, bröder,
+    Högt vår fosterländska sång.
+    Pulsen brinner, hjertat glöder;
+    Marsch framåt ännu en gång!
+    Sångens ädla känslor föder,
+    Hjertats nyckel heter sång.
+    Må vi då i toner svära
+    Trohetseden hand i hand:
+    Lif och blod för Sveriges ära!
+    Hell! Vårt dyra fosterland!
+    Lif och blod för Sveriges ära,
+    Svära
+    Trogne bröder hand i hand.`,
   },
   {
     title: 'Norrland',
     id: 'norrland',
     notes: ['Bb4'],
+    lyrics: `Vaktat av de vita fjällar och de mörka furors krans,
+    vilar nu i vårens kvällar Norrland i sin fägrings glans.
+    Sagoland där älven blänker. Svanen glänser i det blå.
+    Framtidsland som skatter skänker tag vårt löfte då.
+    Ljus dit upp vi vilja sprida, odla byggd, och bryta mark,
+    och vid dina älvar strida stå som skyddsvakt stolt och starkt.
+    Norrland, Norrland, Du skall tona rikt på nya släktens sång.
+    Och i Sveriges kungakrona pärlan varder du en gång.`
   },
   {
     title: 'High Barbary',
