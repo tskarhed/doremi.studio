@@ -14,6 +14,7 @@ interface PlayFooterProps {
   next?: Song;
   setlistId: SetlistId;
   current: Song;
+  currentIndex: number;
 }
 
 // const navStyles ={
@@ -39,12 +40,13 @@ const PlayFooter: FC<PlayFooterProps> = ({
   next,
   setlistId,
   current,
+  currentIndex,
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const navigate = (songId: SongId) => {
-    history.push(`/setlist/${setlistId}/play/${songId}`);
+  const navigate = (songNumber: number) => {
+    history.push(`/setlist/${setlistId}/play/${songNumber}`);
   };
   console.log(current);
 
@@ -63,7 +65,7 @@ const PlayFooter: FC<PlayFooterProps> = ({
         <ActionButton
           icon="prev"
           size="md"
-          onClick={() => prev && navigate(prev.id)}
+          onClick={() => prev && navigate(currentIndex - 1)}
           inverted
           disabled={!prev}
         />
@@ -79,7 +81,7 @@ const PlayFooter: FC<PlayFooterProps> = ({
         <ActionButton
           icon="next"
           size="md"
-          onClick={() => next && navigate(next.id)}
+          onClick={() => next && navigate(currentIndex + 1)}
           inverted
           disabled={!next}
         />
@@ -97,11 +99,13 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
   const history = useHistory();
   const { songNumber, setlistName } = useParams();
 
+  const songIndex = parseInt(songNumber as string) || 0;
+
   const setlist = setlists.find(
     (setlist) => setlist.id === encodeURI(setlistName || '')
   );
 
-  if (!setlistName || !setlist) {
+  if (!setlist) {
     history.push(`/`);
     return <></>;
   }
@@ -114,12 +118,11 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
     return songArray;
   }, []);
 
-  const song = songs.find((song) => song.id === encodeURI(songNumber || ''));
+  const song = songs[songIndex];
   if (!song) {
     history.push(`/setlist/${setlist.id}`);
     return <></>;
   }
-  const songIndex = setlist.songs.indexOf(song.id);
   return (
     <Page
       editable={false}
@@ -131,6 +134,7 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
           prev={setlistSongs[songIndex - 1]}
           next={setlistSongs[songIndex + 1]}
           current={song}
+          currentIndex={songIndex}
         />
       }
     >
