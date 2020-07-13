@@ -1,8 +1,6 @@
 import React, { FC, CSSProperties, ChangeEvent } from 'react';
 import { View } from '../native';
 import theme from '../theme.module.scss';
-// Import to get the animation
-import './NoteLayout.scss';
 
 interface Props {
   edit: boolean;
