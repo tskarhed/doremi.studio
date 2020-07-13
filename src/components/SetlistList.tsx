@@ -21,9 +21,7 @@ export const SetlistList: FC<Props> = ({ setlists }) => {
             actionComponent={
               <ActionButton
                 onClick={() => {
-                  history.push(
-                    `/setlist/${setlist.id}/play/${setlist.songs[0]}`
-                  );
+                  history.push(`/setlist/${setlist.id}/play/0`);
                 }}
                 size="md"
                 inverted

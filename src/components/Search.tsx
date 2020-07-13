@@ -79,8 +79,7 @@ export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
             // Add song to current setlist
             if (isSearching === 'song' && setlistName) {
               event.preventDefault();
-              console.log(addSongToSetlist(item.id, setlistName));
-              dispatch(addSongToSetlist(item.id, setlistName));
+              dispatch(addSongToSetlist(item.id, encodeURI(setlistName)));
             }
           }}
           key={item.id}

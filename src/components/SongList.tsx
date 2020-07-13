@@ -20,7 +20,7 @@ export const SongList: FC<Props> = ({ songs, setlist, onRemove }) => {
         return (
           <ListItem
             type="song"
-            to={`/setlist/${setlist}/play/${song.id}`}
+            to={`/setlist/${setlist}/play/${i}`}
             key={`${song.id}-${i}`}
             actionComponent={
               <>
