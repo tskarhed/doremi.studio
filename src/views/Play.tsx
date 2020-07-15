@@ -8,6 +8,7 @@ import { View } from '../native';
 import { Back } from '../components/Back';
 import { ActionButton } from '../components/ActionButton';
 import { playSequence } from '../state/actions';
+import { motion } from 'framer-motion';
 
 interface PlayFooterProps {
   prev?: Song;
@@ -61,7 +62,9 @@ const PlayFooter: FC<PlayFooterProps> = ({
       }}
     >
       <View style={{ position: 'relative' }}>
-        <View style={songTitleStyle}>{prev && `${prev.title}`}</View>
+        <motion.div layoutId={prev && prev.id} style={songTitleStyle as any}>
+          {prev && `${prev.title}`}
+        </motion.div>
         <ActionButton
           icon="prev"
           size="md"
@@ -77,7 +80,9 @@ const PlayFooter: FC<PlayFooterProps> = ({
         inverted
       />
       <View style={{ position: 'relative' }}>
-        <View style={songTitleStyle}>{next && `${next.title}`}</View>
+        <motion.div layoutId={next && next.id} style={songTitleStyle as any}>
+          {next && `${next.title}`}
+        </motion.div>
         <ActionButton
           icon="next"
           size="md"
@@ -104,6 +109,7 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
   const setlist = setlists.find(
     (setlist) => setlist.id === encodeURI(setlistName || '')
   );
+  console.log(setlist);
 
   if (!setlist) {
     history.push(`/`);
@@ -118,13 +124,15 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
     return songArray;
   }, []);
 
-  const song = songs[songIndex];
+  const song = setlistSongs[songIndex];
+
   if (!song) {
     history.push(`/setlist/${setlist.id}`);
     return <></>;
   }
   return (
     <Page
+      titleLayoutId={song.id}
       editable={false}
       title={song.title}
       prefixElement={<Back to={`/setlist/${setlist.id}`} />}

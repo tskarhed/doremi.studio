@@ -4,6 +4,7 @@ import { Song, SetlistId } from '../state/types';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faPen, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 interface Props {
   songs: Song[];
@@ -43,7 +44,7 @@ export const SongList: FC<Props> = ({ songs, setlist, onRemove }) => {
               </>
             }
           >
-            {song.title}
+            <motion.span layoutId={song.id}>{song.title}</motion.span>
           </ListItem>
         );
       })}
