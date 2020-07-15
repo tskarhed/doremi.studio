@@ -140,12 +140,15 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
       title={song.title}
       prefixElement={<Back to={`/setlist/${setlist.id}`} />}
       headerElement={
-        <ActionButton
-          icon={isLyricVisible ? 'play' : 'text'}
-          size="xl"
-          onClick={() => setisLyricVisible(!isLyricVisible)}
-          inverted
-        />
+        song.lyrics ? (
+          <ActionButton
+            icon={isLyricVisible ? 'music' : 'text'}
+            size="lg"
+            onClick={() => setisLyricVisible(!isLyricVisible)}
+          />
+        ) : (
+          <></>
+        )
       }
       footer={
         <PlayFooter
