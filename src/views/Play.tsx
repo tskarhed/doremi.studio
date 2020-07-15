@@ -4,7 +4,7 @@ import { NoteLayout } from '../components/NoteLayout';
 import { LyricLayout } from '../components/LyricLayout';
 import { useParams, useHistory } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
-import { StoreState, Song, SongId, SetlistId, Setlist } from '../state/types';
+import { StoreState, Song, SetlistId, Setlist } from '../state/types';
 import { View } from '../native';
 import { Back } from '../components/Back';
 import { ActionButton } from '../components/ActionButton';
@@ -51,7 +51,6 @@ const PlayFooter: FC<PlayFooterProps> = ({
   };
   console.log(current);
 
-  
   // Previous song, Play and next song
   return (
     <View
@@ -63,7 +62,6 @@ const PlayFooter: FC<PlayFooterProps> = ({
         width: '100%',
       }}
     >
-      
       <View style={{ position: 'relative' }}>
         <View style={songTitleStyle}>{prev && `${prev.title}`}</View>
         <ActionButton
@@ -133,13 +131,14 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
       editable={false}
       title={song.title}
       prefixElement={<Back to={`/setlist/${setlist.id}`} />}
-      headerElement={<ActionButton
-        icon={isLyricVisible ? "play":"text"}
-        size="xl"
-            
-        onClick={() => setisLyricVisible(!isLyricVisible)}
-        inverted
-      />}
+      headerElement={
+        <ActionButton
+          icon={isLyricVisible ? 'play' : 'text'}
+          size="xl"
+          onClick={() => setisLyricVisible(!isLyricVisible)}
+          inverted
+        />
+      }
       footer={
         <PlayFooter
           setlistId={setlist.id}
@@ -150,11 +149,11 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
         />
       }
     >
-      {isLyricVisible ?  <LyricLayout edit={false} lyrics={song.lyrics}/>
-      :
-      <NoteLayout notes={song.notes} edit={false} songId={song.id} />}
-      
-      
+      {isLyricVisible ? (
+        <LyricLayout edit={false} lyrics={song.lyrics} />
+      ) : (
+        <NoteLayout notes={song.notes} edit={false} songId={song.id} />
+      )}
     </Page>
   );
 };
