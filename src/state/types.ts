@@ -19,6 +19,7 @@ export interface Song {
   title: string;
   notes: Notes;
   setlists?: SetlistId[];
+  lyrics?: string;
 }
 
 export interface Setlist {
@@ -55,6 +56,11 @@ export interface DeleteNote extends NoteActions {
 export interface UpdateSongTitle extends NoteActions {
   type: 'UPDATE_SONG_TITLE';
   title: string;
+}
+
+export interface UpdateSongLyrics extends NoteActions {
+  type: 'UPDATE_SONG_LYRICS';
+  lyrics: string;
 }
 
 // Setlist interfaces and types
@@ -103,7 +109,7 @@ export interface DeleteSetlist {
 }
 
 export type NotesAction = AddNote | UpdateNote | DeleteNote;
-export type SongAction = UpdateSongTitle | NotesAction | CreateSong;
+export type SongAction = UpdateSongTitle | NotesAction | CreateSong | UpdateSongLyrics;
 export type SongsAction = DeleteSong | SongAction;
 
 export type SetlistAction =

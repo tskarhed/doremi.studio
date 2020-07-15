@@ -8,6 +8,7 @@ import {
   faPlus,
   faStepBackward,
   faStepForward,
+  faFileAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
@@ -19,7 +20,7 @@ interface Props {
   inverted?: boolean;
   disabled?: boolean;
   disableAnimation?: boolean;
-  icon?: 'play' | 'plus' | 'prev' | 'next';
+  icon?: 'play' | 'plus' | 'prev' | 'next' | 'text';
 }
 
 export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
@@ -79,6 +80,7 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
       {icon === 'next' && (
         <Icon style={{ paddingTop: '2%' }} icon={faStepForward} />
       )}
+      {icon === 'text' && <Icon style={{ paddingTop: '2%' }} icon={faFileAlt} />}
       {!icon && children}
     </View>
   );

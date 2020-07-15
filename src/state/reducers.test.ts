@@ -55,7 +55,12 @@ describe('Song reducer', () => {
   let initialSongState: Song;
   let reducerTest: Function;
   beforeEach(() => {
-    initialSongState = { id: '', notes: ['B3'], title: 'My title' };
+    initialSongState = {
+      id: '',
+      notes: ['B3'],
+      title: 'My title',
+      lyrics: 'Old lyrics',
+    };
     reducerTest = reducerTestFactory(initialSongState, song);
   });
 
@@ -63,6 +68,12 @@ describe('Song reducer', () => {
     expect(
       reducerTest({ type: 'UPDATE_SONG_TITLE', title: 'New title' }).title
     ).toEqual('New title');
+  });
+
+  it('update song lyrics', () => {
+    expect(
+      reducerTest({ type: 'UPDATE_SONG_LYRICS', lyrics: 'New lyrics' }).lyrics
+    ).toEqual('New lyrics');
   });
 
   it('create new song', () => {

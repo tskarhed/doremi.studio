@@ -37,7 +37,9 @@ export const song = (prevState: Song, action: SongAction) => {
   if (action.type === 'UPDATE_SONG_TITLE') {
     return { ...prevState, title: action.title };
   }
-
+  if (action.type === 'UPDATE_SONG_LYRICS'){
+    return { ...prevState, lyrics: action.lyrics};
+  }
   if (action.type === 'CREATE_SONG') {
     return {
       title: action.title || '',

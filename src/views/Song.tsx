@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Page } from './Page';
 import { useParams, useHistory } from 'react-router-dom';
 import { NoteLayout } from '../components/NoteLayout';
@@ -7,13 +7,20 @@ import { connect, useDispatch } from 'react-redux';
 import { Back } from '../components/Back';
 import { View } from '../native';
 import { ActionButton } from '../components/ActionButton';
-import { addNote, playSequence, updateSongTitle } from '../state/actions';
+import {
+  addNote,
+  playSequence,
+  updateSongTitle,
+  updateSongLyrics,
+} from '../state/actions';
+import { LyricLayout } from '../components/LyricLayout';
 
 export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
   const dispatch = useDispatch();
   const { songName } = useParams();
   const history = useHistory();
   const song = songs.find((song) => song.id === encodeURI(songName || ''));
+  const [isLyricVisible, setisLyricVisible] = useState(false);
   if (!song) {
     history.push('/');
     return <></>;
@@ -37,8 +44,14 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
         >
           <ActionButton
             inverted
-            icon="plus"
+            icon="text"
             size="lg"
+            onClick={() => setisLyricVisible(!isLyricVisible)}
+          />
+          <ActionButton
+            inverted
+            icon="plus"
+            size="xl"
             onClick={() => {
               const note =
                 prompt('Write note with an octave you want to add', 'A4') ||
@@ -55,7 +68,15 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
         </View>
       }
     >
-      <NoteLayout notes={song ? song.notes : []} edit songId={song.id} />
+      {isLyricVisible ? (
+        <LyricLayout
+          edit={true}
+          lyrics={song.lyrics}
+          onChange={(lyrics) => dispatch(updateSongLyrics(lyrics, song.id))}
+        />
+      ) : (
+        <NoteLayout notes={song ? song.notes : []} edit songId={song.id} />
+      )}
     </Page>
   );
 };
