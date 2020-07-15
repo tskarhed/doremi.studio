@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { SearchState, Setlist, Song, SetlistId } from '../state/types';
-import { ListItem } from './List';
+import { ListItem, List } from './List';
 import { Input } from '../native';
 import { useDispatch } from 'react-redux';
 import { setSearch, addSongToSetlist } from '../state/actions';
@@ -115,14 +115,14 @@ export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
           onClick={onSearchSelect}
         />
       </div>
-      <div style={searchStyles.list} onClick={onSearchSelect}>
+      <List style={searchStyles.list} onClick={onSearchSelect}>
         {generateListItems(list)}
         {isSearching && (
           <CreateNew setlist={setlistName} type={isSearching}>
             {inputValue}
           </CreateNew>
         )}
-      </div>
+      </List>
     </div>
   );
 };

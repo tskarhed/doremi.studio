@@ -1,9 +1,10 @@
 import React, { FC, SyntheticEvent } from 'react';
-import { ListItem } from './List';
+import { ListItem, List } from './List';
 import { Song, SetlistId } from '../state/types';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faPen, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 interface Props {
   songs: Song[];
@@ -15,7 +16,7 @@ export const SongList: FC<Props> = ({ songs, setlist, onRemove }) => {
   const history = useHistory();
 
   return (
-    <>
+    <List>
       {songs.map((song, i) => {
         return (
           <ListItem
@@ -43,10 +44,10 @@ export const SongList: FC<Props> = ({ songs, setlist, onRemove }) => {
               </>
             }
           >
-            {song.title}
+            <motion.span layoutId={song.id}>{song.title}</motion.span>
           </ListItem>
         );
       })}
-    </>
+    </List>
   );
 };
