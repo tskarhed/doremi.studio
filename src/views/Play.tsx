@@ -3,7 +3,7 @@ import { Page } from './Page';
 import { NoteLayout } from '../components/NoteLayout';
 import { useParams, useHistory } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
-import { StoreState, Song, SongId, SetlistId, Setlist } from '../state/types';
+import { StoreState, Song, SetlistId, Setlist } from '../state/types';
 import { View } from '../native';
 import { Back } from '../components/Back';
 import { ActionButton } from '../components/ActionButton';

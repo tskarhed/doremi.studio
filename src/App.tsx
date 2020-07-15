@@ -1,20 +1,17 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import { Main, Play, Setlist, Song } from './views';
+import { AnimateSharedLayout } from 'framer-motion';
 
 // Initialize Sampler
 import './sound/synth';
 import './App.scss';
 
 function App() {
+  let location = useLocation();
   return (
-    <Router>
-      <Switch>
+    <AnimateSharedLayout type="crossfade">
+      <Switch location={location} key={location.key}>
         <Route exact path="/setlist/:setlistName/play/:songNumber">
           <Play />
         </Route>
@@ -36,7 +33,7 @@ function App() {
           <Main />
         </Route>
       </Switch>
-    </Router>
+    </AnimateSharedLayout>
   );
 }
 

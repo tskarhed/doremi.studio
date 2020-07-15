@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { Setlist } from '../state/types';
-import { ListItem } from './List';
+import { ListItem, List } from './List';
 import { ActionButton } from './ActionButton';
 import { useHistory } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 interface Props {
   setlists: Setlist[];
@@ -11,7 +12,7 @@ interface Props {
 export const SetlistList: FC<Props> = ({ setlists }) => {
   const history = useHistory();
   return (
-    <>
+    <List>
       {setlists.map((setlist, i) => {
         return (
           <ListItem
@@ -29,10 +30,10 @@ export const SetlistList: FC<Props> = ({ setlists }) => {
               />
             }
           >
-            {setlist.title}
+            <motion.span layoutId={setlist.id}>{setlist.title}</motion.span>
           </ListItem>
         );
       })}
-    </>
+    </List>
   );
 };

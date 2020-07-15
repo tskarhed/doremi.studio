@@ -4,6 +4,7 @@ import theme from '../theme.module.scss';
 import { useSelector } from 'react-redux';
 import { StoreState } from '../state/types';
 import { Search } from '../components/Search';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface PageProps {
   title?: string;
@@ -13,6 +14,10 @@ interface PageProps {
   editable?: boolean;
   onHeaderClick?: (e: any) => void;
   onTitleChange?: (newTitle: string) => void;
+  /**
+   *  Used when animation a tet to the header
+   */
+  titleLayoutId?: string;
 }
 
 export const Page: FC<React.PropsWithChildren<PageProps>> = ({
@@ -24,11 +29,12 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
   editable = true,
   onHeaderClick,
   prefixElement,
+  titleLayoutId,
 }) => {
   const state = useSelector((state: StoreState) => state);
   const [tempTitle, setTempTitle] = useState(title || '');
   return (
-    <>
+    <AnimatePresence>
       {state.isSearching && (
         <Search
           isSearching={state.isSearching}
@@ -36,11 +42,18 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
           songs={state.songs}
         />
       )}
-      <View style={styles.body} className="wtf">
+      <motion.div
+        variants={animations}
+        initial="initial"
+        exit="exit"
+        animate="enter"
+        style={styles.body as any}
+        className="wtf"
+      >
         <div style={styles.backgroundImage as CSSProperties}></div>
         <header style={styles.header as CSSProperties} onClick={onHeaderClick}>
           <View style={styles.prefix}>{prefixElement}</View>
-          <View style={styles.titleWrapper}>
+          <motion.div layoutId={titleLayoutId} style={styles.titleWrapper}>
             {editable ? (
               <Input
                 onBlur={() => {
@@ -54,14 +67,26 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
             ) : (
               <h1 style={styles.title as CSSProperties}>{title}</h1>
             )}
-          </View>
+          </motion.div>
           <View style={styles.postfix}>{headerElement}</View>
         </header>
         <main style={styles.main}>{children}</main>
         <footer>{footer}</footer>
-      </View>
-    </>
+      </motion.div>
+    </AnimatePresence>
   );
+};
+
+const animations = {
+  enter: {
+    opacity: 1,
+  },
+  initial: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+  },
 };
 
 const styles = {

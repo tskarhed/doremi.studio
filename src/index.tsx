@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './state/reducers';
 import { loadState, saveState } from './state/localStorage';
 import throttle from 'lodash.throttle';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const persistedState = loadState();
 console.log(persistedState);
@@ -36,7 +37,9 @@ store.subscribe(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>,
   document.getElementById('root')
 );
