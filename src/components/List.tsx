@@ -41,7 +41,7 @@ export const ListItem: FC<React.PropsWithChildren<
 export const List: FC<any> = ({ children, style, ...restProps }) => {
   return (
     <motion.ul
-      style={{ ...style, padding: 0 }}
+      style={{ ...style, padding: 0, margin: 0 }}
       variants={animations.list}
       animate="appear"
       {...restProps}

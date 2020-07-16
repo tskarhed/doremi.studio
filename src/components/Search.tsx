@@ -9,6 +9,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { createSong, createSetlist } from '../state/actions';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
+import theme from '../theme.module.scss';
 
 // Create interface
 interface Props {
@@ -18,7 +19,7 @@ interface Props {
 }
 const searchStyles = {
   container: {
-    backgroundColor: 'red',
+    backgroundColor: theme.secondary,
     position: 'fixed',
     left: 0,
     top: 0,
@@ -33,10 +34,11 @@ const searchStyles = {
   } as React.CSSProperties,
   input: {
     height: '10%',
-    backgroundColor: 'gray',
+    backgroundColor: theme.accent,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    boxShadow: '0 2px 5px black',
   } as React.CSSProperties,
 };
 
