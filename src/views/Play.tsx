@@ -135,7 +135,6 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
   }
   return (
     <Page
-      titleLayoutId={song.id}
       editable={false}
       title={song.title}
       prefixElement={<Back to={`/setlist/${setlist.id}`} />}
