@@ -64,7 +64,7 @@ const PlayFooter: FC<PlayFooterProps> = ({
       }}
     >
       <View style={{ position: 'relative' }}>
-        <motion.div layoutId={prev && prev.id} style={songTitleStyle as any}>
+        <motion.div style={songTitleStyle as any}>
           {prev && `${prev.title}`}
         </motion.div>
         <ActionButton
@@ -82,7 +82,7 @@ const PlayFooter: FC<PlayFooterProps> = ({
         inverted
       />
       <View style={{ position: 'relative' }}>
-        <motion.div layoutId={next && next.id} style={songTitleStyle as any}>
+        <motion.div style={songTitleStyle as any}>
           {next && `${next.title}`}
         </motion.div>
         <ActionButton

@@ -147,7 +147,7 @@ const CreateNew: FC<CreateNewProps> = ({ setlist, type, children }) => {
     } else if (type === 'setlist') {
       dispatch(createSetlist(children));
       // Redirect
-      history.push(`/setlist/${encodeURI(children)}`);
+      history.push(`/setlist/${encodeURIComponent(children)}`);
     }
     // Reset isSearching
 
