@@ -14,10 +14,6 @@ interface PageProps {
   editable?: boolean;
   onHeaderClick?: (e: any) => void;
   onTitleChange?: (newTitle: string) => void;
-  /**
-   *  Used when animation a tet to the header
-   */
-  titleLayoutId?: string;
 }
 
 export const Page: FC<React.PropsWithChildren<PageProps>> = ({
@@ -29,7 +25,6 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
   editable = true,
   onHeaderClick,
   prefixElement,
-  titleLayoutId,
 }) => {
   const state = useSelector((state: StoreState) => state);
   const [tempTitle, setTempTitle] = useState(title || '');

@@ -41,7 +41,6 @@ export const UnconnectedSetlist: FC<Props> = ({ songs, setlists }) => {
 
   return (
     <Page
-      titleLayoutId={setlist.id}
       title={setlist.title}
       onTitleChange={(newTitle) => {
         dispatch(updateSetlistTitle(newTitle, setlist.id));

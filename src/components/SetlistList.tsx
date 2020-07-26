@@ -30,7 +30,7 @@ export const SetlistList: FC<Props> = ({ setlists }) => {
               />
             }
           >
-            <motion.span layoutId={setlist.id}>{setlist.title}</motion.span>
+            <motion.span>{setlist.title}</motion.span>
           </ListItem>
         );
       })}

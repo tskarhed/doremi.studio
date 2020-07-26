@@ -44,7 +44,7 @@ export const SongList: FC<Props> = ({ songs, setlist, onRemove }) => {
               </>
             }
           >
-            <motion.span layoutId={song.id}>{song.title}</motion.span>
+            <motion.span>{song.title}</motion.span>
           </ListItem>
         );
       })}
