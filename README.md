@@ -37,9 +37,16 @@ Is this what you've always looked for? Look no further! I present to you Setlist
 
 ---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##  Development process
+
+
+![Development flowchart](https://github.com/tskarhed/setlist/blob/master/Setlist%20Architecture.svg)
+
 
 ## Available Scripts
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 In the project directory, you can run:
 
