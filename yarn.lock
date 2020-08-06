@@ -848,6 +848,13 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
+"@babel/runtime@^7.11.0":
+  version "7.11.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.11.2.tgz#f549c13c754cc40b87644b9fa9f09a6a95fe0736"
+  integrity sha512-TeWkU52so0mPtDcaCTxNBI/IHiz0pZgr8VEFqXFtZWpYD08ZB6FaSwVAS8MKRQAP3bYKiVjwysOJgMFY28o6Tw==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5":
   version "7.8.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.8.7.tgz#8fefce9802db54881ba59f90bb28719b4996324d"
@@ -2207,6 +2214,14 @@ atob@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
+
+automation-events@^2.0.16:
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/automation-events/-/automation-events-2.0.16.tgz#6d3a775d80f679c75a396899cbf44fb4772162fe"
+  integrity sha512-wAvQjq/ftDynGESv8fHayyw+O3A1YGg6bLsGc5/gqngqijib3mF2sXgHMnB+SCiw6ufwpAsS5SPN2V0yTb1m+A==
+  dependencies:
+    "@babel/runtime" "^7.11.0"
+    tslib "^2.0.0"
 
 autoprefixer@^9.6.1:
   version "9.7.4"
@@ -10216,6 +10231,15 @@ stack-utils@^1.0.1:
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.2.tgz#33eba3897788558bebfc2db059dc158ec36cebb8"
   integrity sha512-MTX+MeG5U994cazkjd/9KNAapsHnibjMLnfXodlkXw76JEea0UiNzrqidzo1emMwk7w5Qhc9jd4Bn9TBb1MFwA==
 
+standardized-audio-context@^24.1.5:
+  version "24.1.23"
+  resolved "https://registry.yarnpkg.com/standardized-audio-context/-/standardized-audio-context-24.1.23.tgz#2201c095786b19408a6b02997c798f95d8707222"
+  integrity sha512-r7M8B7ZnyGktQUmvH4U73MAAAGtKo1mMjCi30CCjjxeXuDaWuC/lbn5CiRwxv+2ohBl9m25csbAnyozw9pHUNw==
+  dependencies:
+    "@babel/runtime" "^7.11.0"
+    automation-events "^2.0.16"
+    tslib "^2.0.0"
+
 static-extend@^0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/static-extend/-/static-extend-0.1.2.tgz#60809c39cbff55337226fd5e0b520f341f1fb5c6"
@@ -10724,10 +10748,13 @@ toidentifier@1.0.0:
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
   integrity sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
 
-tone@^13.8.25:
-  version "13.8.25"
-  resolved "https://registry.yarnpkg.com/tone/-/tone-13.8.25.tgz#057eefb39d4c749524db0ca210e34303cdc3c025"
-  integrity sha512-8QqmLn+/R+Urib/78zf93+NqFLddXS777kQO7+EbJHwqy+nmug+SJFRp2KIytT0LQY2sJBiopNb2ceHA8uQQJg==
+tone@^14.7.39:
+  version "14.7.39"
+  resolved "https://registry.yarnpkg.com/tone/-/tone-14.7.39.tgz#6b88146bfb31542517193313935662d87670a3f7"
+  integrity sha512-lSnR8Y8PTkWaeoD4rce1MROSjxelcLwZNzLn5tzhQvP33VpurdntAm853aFO2zaGwbAEd2mAxzCgczTyDE7GBg==
+  dependencies:
+    standardized-audio-context "^24.1.5"
+    tslib "^1.10.0"
 
 tough-cookie@^2.3.3, tough-cookie@^2.3.4, tough-cookie@^2.5.0, tough-cookie@~2.5.0:
   version "2.5.0"
@@ -10768,15 +10795,15 @@ ts-pnp@1.1.5, ts-pnp@^1.1.2:
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.1.5.tgz#840e0739c89fce5f3abd9037bb091dbff16d9dec"
   integrity sha512-ti7OGMOUOzo66wLF3liskw6YQIaSsBgc4GOAlWRnIEj8htCxJUxskanMUoJOD6MDCRAXo36goXJZch+nOS0VMA==
 
-tslib@^1.10.0:
+tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
   integrity sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==
 
-tslib@^1.8.1, tslib@^1.9.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
-  integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
+tslib@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.0.tgz#18d13fc2dce04051e20f074cc8387fd8089ce4f3"
+  integrity sha512-lTqkx847PI7xEDYJntxZH89L2/aXInsyF2luSafe/+0fHOMjlBNXdH6th7f70qxLDhul7KZK0zC8V5ZIyHl0/g==
 
 tsutils@^3.17.1:
   version "3.17.1"
