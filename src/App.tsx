@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
-import { Main, Play, Setlist, Song } from './views';
-import { Login } from './firebase/auth/AuthUI';
+import { Main, Play, Setlist, Song, LoginView } from './views';
 import { AnimateSharedLayout, AnimatePresence } from 'framer-motion';
 
 // Initialize Sampler
@@ -24,7 +23,7 @@ function App() {
             <Song />
           </Route>
           <Route path="/login">
-            <Login />
+            <LoginView />
           </Route>
 
           <Redirect exact from="/setlist" to="/" />

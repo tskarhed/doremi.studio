@@ -1,30 +1,28 @@
-import React from 'react';
+
+import React, { FC } from 'react';
+import "react-firebaseui";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import firebase from 'firebase';
-import * as firebaseui from 'firebaseui';
-import { Page } from '../../views/Page';
+import {uiConfig, auth} from '../firebase';
 
-const firebaseAuthConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_AUTH_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-};
 
-firebase.initializeApp(firebaseAuthConfig);
 
-const uiConfig = {
-  signInSuccessUrl: '/',
-  signInOptions: [
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-  ],
-};
 
-export const Login = () => {
+interface LoginProps {
+  /**
+   * Runs after user has been authenticated. Good to check user fields before going further into the application.
+   * Function being run in Firebase4 UIs signInSuccessWithAuthResult.
+   */
+  afterLogin: (authResult: any, redirectUrl: string) => void; 
+}
+
+export const Login: FC<LoginProps> = ({afterLogin}) => {
+
+  uiConfig.callbacks.signInSuccessWithAuthResult = (authResult: any, redirectUrl: any) => {
+    afterLogin(authResult, redirectUrl);
+    return false;
+  };
+
   return (
-    <Page title="Login" editable={false}>
-      <p>Log in or continue anonymously</p>
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-    </Page>
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
   );
 };
