@@ -2,13 +2,18 @@ import React from 'react';
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import { Main, Play, Setlist, Song, LoginView } from './views';
 import { AnimateSharedLayout, AnimatePresence } from 'framer-motion';
-
 // Initialize Sampler
 import './sound/synth';
 import './App.scss';
+import { firebaseApp } from './firebase/firebase';
 
 function App() {
   let location = useLocation();
+
+  if (!firebaseApp.auth().currentUser && location.pathname !== '/login') {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <AnimateSharedLayout type="crossfade">
       <AnimatePresence exitBeforeEnter>
