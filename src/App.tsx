@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
-import { Main, Play, Setlist, Song } from './views';
+import { Main, Play, Setlist, Song, LoginView } from './views';
 import { AnimateSharedLayout, AnimatePresence } from 'framer-motion';
-
 // Initialize Sampler
 import './sound/synth';
 import './App.scss';
+import { firebaseApp } from './firebase/firebase';
 
 function App() {
   let location = useLocation();
+  const [ auth, setAuth ] = useState({
+    auth: false,
+    init: true
+  })
+
+  useEffect(() => firebaseApp.auth().onAuthStateChanged(user =>  {
+    if(user){
+      setAuth({auth: true, init: false});
+    } else {
+      setAuth({ auth: false, init: false});
+    }
+  }), [setAuth]);
+
+
+  if (!auth.auth && !auth.init && location.pathname !== '/login') {
+    return <Redirect to="/login" />;
+  }
+    
+  if (!auth.auth && auth.init) {
+    return <span>Loading...</span>
+  }
+
   return (
     <AnimateSharedLayout type="crossfade">
       <AnimatePresence exitBeforeEnter>
@@ -21,6 +43,9 @@ function App() {
           </Route>
           <Route path="/song/:songName">
             <Song />
+          </Route>
+          <Route path="/login">
+            <LoginView />
           </Route>
 
           <Redirect exact from="/setlist" to="/" />
