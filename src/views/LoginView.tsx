@@ -25,9 +25,6 @@ export const LoginView = () => {
   const handleLogin = async (authResult: any, redirectUrl: string) => {
     setUserId(authResult.user.uid);
     setRedirect(redirectUrl);
-    if (authResult.additionalUserInfo.isNewUser) {
-      setShowMissingFields(true);
-    }
 
     if (authResult.user.displayName) {
       setDisplayName(authResult.user.displayName);
