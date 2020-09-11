@@ -141,6 +141,7 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
       headerElement={
         song.lyrics ? (
           <ActionButton
+            inverted
             icon={isLyricVisible ? 'music' : 'text'}
             size="lg"
             onClick={() => setisLyricVisible(!isLyricVisible)}

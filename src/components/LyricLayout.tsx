@@ -10,7 +10,8 @@ interface Props {
 // Skapa style här
 const lyricLayoutStyle = {
   textAlign: 'center',
-  color: '#000000',
+  color: theme.secondary,
+  textShadow: '0 0 5px black',
   padding: '10% 10%',
   fontSize: '1.3rem',
   whiteSpace: 'pre-wrap',
