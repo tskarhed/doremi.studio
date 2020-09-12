@@ -134,6 +134,6 @@ const styles = {
     background: 'url(https://www.ltu.se/cms_fs/1.160237!/image/Snapsakademien2.jpg_gen/derivatives/landscape_fullwidth_16x9/Snapsakademien2.jpg)',
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
-    filter: 'blur(8px)',
+    filter: 'blur(8px) brightness(0.7)',
   },
 };
