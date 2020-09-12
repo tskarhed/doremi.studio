@@ -93,7 +93,7 @@ const styles = {
   },
   header: {
     height: '10vh',
-    backgroundColor: theme.accent,
+    backgroundColor: theme.primary,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
@@ -131,8 +131,9 @@ const styles = {
     top: '0',
     left: '0',
     position: 'absolute',
-    background: 'url(/bg_test.jpg) repeat',
-    backgroundAttachment: 'fixed',
-    filter: 'blur(5px) brightness(100%) sepia(2%)',
+    background: 'url(https://www.ltu.se/cms_fs/1.160237!/image/Snapsakademien2.jpg_gen/derivatives/landscape_fullwidth_16x9/Snapsakademien2.jpg)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    filter: 'blur(8px) brightness(0.7)',
   },
 };
