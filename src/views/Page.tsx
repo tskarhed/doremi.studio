@@ -92,7 +92,7 @@ const styles = {
     flexDirection: 'column',
   },
   header: {
-    height: '4rem',
+    height: '4.4rem',
     backgroundColor: theme.primary,
     display: 'flex',
     alignItems: 'center',

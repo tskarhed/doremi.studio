@@ -33,7 +33,7 @@ const searchStyles = {
     overflowY: 'auto',
   } as React.CSSProperties,
   input: {
-    height: '4rem',
+    height: '4.4rem',
     backgroundColor: theme.accent,
     display: 'flex',
     alignItems: 'center',
