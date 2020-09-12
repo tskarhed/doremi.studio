@@ -19,7 +19,7 @@ interface Props {
 }
 const searchStyles = {
   container: {
-    backgroundColor: theme.secondary,
+    backgroundColor: theme.primary,
     position: 'fixed',
     left: 0,
     top: 0,
@@ -33,7 +33,7 @@ const searchStyles = {
     overflowY: 'auto',
   } as React.CSSProperties,
   input: {
-    height: '10%',
+    height: '4rem',
     backgroundColor: theme.accent,
     display: 'flex',
     alignItems: 'center',
