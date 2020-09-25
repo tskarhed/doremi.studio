@@ -14,6 +14,7 @@ interface PageProps {
   editable?: boolean;
   onHeaderClick?: (e: any) => void;
   onTitleChange?: (newTitle: string) => void;
+  noHeader?: boolean;
 }
 
 export const Page: FC<React.PropsWithChildren<PageProps>> = ({
@@ -25,6 +26,7 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
   editable = true,
   onHeaderClick,
   prefixElement,
+  noHeader = false,
 }) => {
   const state = useSelector((state: StoreState) => state);
   const [tempTitle, setTempTitle] = useState(title || '');
@@ -39,7 +41,14 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
       )}
       <motion.div style={styles.body as any} className="wtf">
         <div style={styles.backgroundImage as CSSProperties}></div>
-        <header style={styles.header as CSSProperties} onClick={onHeaderClick}>
+        <header
+          style={
+            noHeader
+              ? (styles.headerLoginView as CSSProperties)
+              : (styles.header as CSSProperties)
+          }
+          onClick={onHeaderClick}
+        >
           <View style={styles.prefix}>{prefixElement}</View>
           <motion.div
             variants={animations}
@@ -100,6 +109,18 @@ const styles = {
     zIndex: 10,
     position: 'relative',
     boxShadow: '0px 4px 6px black',
+    opacity: 1,
+  },
+  headerLoginView: {
+    height: '4.4rem',
+    backgroundColor: theme.primary,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    zIndex: 10,
+    position: 'relative',
+    boxShadow: '0px 4px 6px black',
+    opacity: 0,
   },
   main: {
     flexGrow: 1,
@@ -131,7 +152,8 @@ const styles = {
     top: '0',
     left: '0',
     position: 'absolute',
-    background: 'url(https://www.ltu.se/cms_fs/1.160237!/image/Snapsakademien2.jpg_gen/derivatives/landscape_fullwidth_16x9/Snapsakademien2.jpg)',
+    background:
+      'url(https://www.ltu.se/cms_fs/1.160237!/image/Snapsakademien2.jpg_gen/derivatives/landscape_fullwidth_16x9/Snapsakademien2.jpg)',
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
     filter: 'blur(8px) brightness(0.7)',

@@ -29,6 +29,8 @@ const sampler = new Sampler(constructLinkObject(), () =>
   console.log('Sampler initialized')
 ).toMaster();
 
+sampler.volume.value = 9;
+
 export const playNote = (noteString: string) => {
   sampler.triggerAttackRelease(noteString, '4n');
 };

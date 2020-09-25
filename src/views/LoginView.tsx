@@ -59,7 +59,7 @@ export const LoginView = () => {
   };
 
   return (
-    <Page title="Login" editable={false}>
+    <Page title="Login" editable={false} noHeader={true}>
       <div
         style={{
           textAlign: 'center',
@@ -67,7 +67,7 @@ export const LoginView = () => {
           height: '100%',
           flexDirection: 'column',
           justifyContent: 'center',
-          padding: '5%',
+          // padding: '5%',
         }}
       >
         <p>Log in or continue anonymously</p>
