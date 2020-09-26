@@ -26,6 +26,30 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
     return <></>;
   }
 
+  var acceptedNotesArray = [
+    'Ab',
+    'A',
+    'A#',
+    'Bb',
+    'B',
+    'B#',
+    'Cb',
+    'C',
+    'C#',
+    'Db',
+    'D',
+    'D#',
+    'Eb',
+    'E',
+    'E#',
+    'Fb',
+    'F',
+    'F#',
+    'Gb',
+    'G',
+    'G#',
+  ];
+
   return (
     <Page
       title={song ? song.title : ''}
@@ -53,14 +77,23 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
             icon="plus"
             size="xl"
             onClick={() => {
-              const note = prompt(
-                'Write note with an octave you want to add',
-                'A4'
-              );
-              if (note === null) {
-                return;
+              const note =
+                prompt(
+                  'Write note (capital) with an octave (integer) you want to add',
+                  'Ab4'
+                ) || 'Ab4';
+              if (
+                !isNaN(Number(note.substring(note.length - 1, note.length)))
+              ) {
+                console.log(note.substring(0, note.length - 1));
+                var note_exists =
+                  acceptedNotesArray.indexOf(
+                    note.substring(0, note.length - 1)
+                  ) > -1;
+                if (note_exists) {
+                  dispatch(addNote(note, song.id));
+                }
               }
-              dispatch(addNote(note, song.id));
             }}
           />
           <ActionButton
