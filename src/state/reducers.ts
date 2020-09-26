@@ -10,6 +10,7 @@ import {
   SearchState,
   SetSearchState,
   PlayActionState,
+  UserAction,
 } from './types';
 import { combineReducers } from 'redux';
 import { mockSongs, mockSetlists } from './mocks';
@@ -34,11 +35,15 @@ export const notes = (prevState: Notes, action: NotesAction) => {
 };
 
 export const song = (prevState: Song, action: SongAction) => {
+  if (action.type === 'UPDATE_SONG') {
+    return action.song;
+  }
+
   if (action.type === 'UPDATE_SONG_TITLE') {
     return { ...prevState, title: action.title };
   }
-  if (action.type === 'UPDATE_SONG_LYRICS'){
-    return { ...prevState, lyrics: action.lyrics};
+  if (action.type === 'UPDATE_SONG_LYRICS') {
+    return { ...prevState, lyrics: action.lyrics };
   }
   if (action.type === 'CREATE_SONG') {
     return {
@@ -145,4 +150,17 @@ export const playingNote = (prevState = {}, action: PlayActionState) => {
   return prevState;
 };
 
-export default combineReducers({ setlists, songs, isSearching, playingNote });
+export const user = (prevState = {}, action: UserAction) => {
+  if ('UPDATE_USER') {
+    return action.payload;
+  }
+  return {};
+};
+
+export default combineReducers({
+  setlists,
+  songs,
+  user,
+  isSearching,
+  playingNote,
+});

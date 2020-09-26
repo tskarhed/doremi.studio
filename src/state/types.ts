@@ -1,10 +1,11 @@
-import { Note } from '../sound/SoundSetup';
+import { UserInfo } from 'firebase';
 
 export type Notes = string[];
 export type SongId = string;
 export type SetlistId = string;
 
 export interface StoreState {
+  user: User;
   songs: Song[];
   setlists: Setlist[];
   isSearching: SearchState;
@@ -63,6 +64,11 @@ export interface UpdateSongLyrics extends NoteActions {
   lyrics: string;
 }
 
+export interface UpdateSong {
+  type: 'UPDATE_SONG';
+  song: Song;
+}
+
 // Setlist interfaces and types
 
 export interface AddSongToSetlist {
@@ -109,7 +115,12 @@ export interface DeleteSetlist {
 }
 
 export type NotesAction = AddNote | UpdateNote | DeleteNote;
-export type SongAction = UpdateSongTitle | NotesAction | CreateSong | UpdateSongLyrics;
+export type SongAction =
+  | UpdateSongTitle
+  | NotesAction
+  | CreateSong
+  | UpdateSongLyrics
+  | UpdateSong;
 export type SongsAction = DeleteSong | SongAction;
 
 export type SetlistAction =
@@ -150,3 +161,8 @@ export interface StopNote {
 
 export type PlayActionType = 'STOP_NOTE' | 'PLAY_NOTE';
 export type PlayActionState = PlayNote | StopNote;
+
+export interface UserAction {
+  type: 'UPDATE_USER';
+  payload: UserInfo;
+}

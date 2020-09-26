@@ -15,6 +15,8 @@ import {
   SetSearchState,
   RemoveSong,
   UpdateSongLyrics,
+  Song,
+  UpdateSong,
 } from './types';
 import {
   playSequence as playPianoSequnece,
@@ -53,11 +55,15 @@ export const createSong = (title: string, setlist?: SetlistId): CreateSong => ({
   title,
 });
 
-
 export const updateSongLyrics = (
   lyrics: string,
   songId: SongId
 ): UpdateSongLyrics => ({ type: 'UPDATE_SONG_LYRICS', lyrics, songId });
+
+export const updateSong = (song: Song): UpdateSong => ({
+  type: 'UPDATE_SONG',
+  song,
+});
 
 //Songs
 export const deleteSong = (id: SongId): DeleteSong => ({
