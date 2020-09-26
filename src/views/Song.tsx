@@ -82,16 +82,23 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
                   'Write note (capital) with an octave (integer) you want to add',
                   'Ab4'
                 ) || 'Ab4';
+              var note_no_space = note.replace(/\s/g, '');
               if (
-                !isNaN(Number(note.substring(note.length - 1, note.length)))
+                !isNaN(
+                  Number(
+                    note_no_space.substring(
+                      note_no_space.length - 1,
+                      note_no_space.length
+                    )
+                  )
+                )
               ) {
-                console.log(note.substring(0, note.length - 1));
                 var note_exists =
                   acceptedNotesArray.indexOf(
-                    note.substring(0, note.length - 1)
+                    note_no_space.substring(0, note_no_space.length - 1)
                   ) > -1;
                 if (note_exists) {
-                  dispatch(addNote(note, song.id));
+                  dispatch(addNote(note_no_space, song.id));
                 }
               }
             }}
