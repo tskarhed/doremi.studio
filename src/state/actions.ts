@@ -17,6 +17,8 @@ import {
   UpdateSongLyrics,
   Song,
   UpdateSong,
+  UpdateSetlist,
+  Setlist,
 } from './types';
 import {
   playSequence as playPianoSequnece,
@@ -62,6 +64,7 @@ export const updateSongLyrics = (
 
 export const updateSong = (song: Song): UpdateSong => ({
   type: 'UPDATE_SONG',
+  songId: song.id,
   song,
 });
 
@@ -98,6 +101,12 @@ export const createSetlist = (title: string): CreateSetlist => ({
 export const deleteSetlist = (id: SetlistId): DeleteSetlist => ({
   type: 'DELETE_SETLIST',
   id,
+});
+
+export const updateSetlist = (setlist: Setlist): UpdateSetlist => ({
+  type: 'UPDATE_SETLIST',
+  id: setlist.id,
+  setlist,
 });
 
 //Search

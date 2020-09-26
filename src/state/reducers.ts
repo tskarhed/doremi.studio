@@ -66,6 +66,10 @@ export const setlist = (prevState: Setlist, action: SetlistAction) => {
     };
   }
 
+  if (action.type === 'UPDATE_SETLIST') {
+    return action.setlist;
+  }
+
   if (action.type === 'ADD_SONG_TO_SETLIST') {
     return { ...prevState, songs: [...prevState.songs, action.song] };
   }

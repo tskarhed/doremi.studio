@@ -5,7 +5,7 @@ export type SongId = string;
 export type SetlistId = string;
 
 export interface StoreState {
-  user: User;
+  user: UserInfo;
   songs: Song[];
   setlists: Setlist[];
   isSearching: SearchState;
@@ -66,11 +66,17 @@ export interface UpdateSongLyrics extends NoteActions {
 
 export interface UpdateSong {
   type: 'UPDATE_SONG';
+  songId: SongId;
   song: Song;
 }
 
 // Setlist interfaces and types
 
+export interface UpdateSetlist {
+  type: 'UPDATE_SETLIST';
+  id: SetlistId;
+  setlist: Setlist;
+}
 export interface AddSongToSetlist {
   type: 'ADD_SONG_TO_SETLIST';
 
@@ -128,7 +134,8 @@ export type SetlistAction =
   | AddSongToSetlist
   | RemoveSong
   | UpdateSetlistTitle
-  | CreateSetlist;
+  | CreateSetlist
+  | UpdateSetlist;
 export type SetlistsAction = DeleteSetlist | SetlistAction;
 
 export type SearchStateType =
