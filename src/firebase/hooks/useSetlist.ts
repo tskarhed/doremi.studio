@@ -13,6 +13,9 @@ export const useSong = (setlistId: SetlistId) => {
   );
 
   const updateSetlist = function (setlist: Setlist) {
+    if (!user) {
+      return;
+    }
     const setlistssRef = db.collection(`users/${user.uid}/setlists`); //@ts-ignore
     dispatch(updateReduxSetlist(setlist));
     return setlistssRef.doc(setlistId).set(setlist);

@@ -15,7 +15,7 @@ export const FirebaseListeners = () => {
         setUser(user);
         setUserId(user.uid);
       } else {
-        setUser({});
+        setUser(null);
         setUserId('');
       }
     });

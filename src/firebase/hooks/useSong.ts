@@ -13,6 +13,9 @@ export const useSong = (songId: SongId) => {
   );
 
   const updateSong = function (song: Song) {
+    if (!user) {
+      return;
+    }
     const songsRef = db.collection(`users/${user.uid}/songs`);
     dispatch(updateReduxSong(song));
     return songsRef.doc(songId).set(song);

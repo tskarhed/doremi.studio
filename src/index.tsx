@@ -7,12 +7,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from './state/reducers';
-import { loadState, saveState } from './state/localStorage';
-import throttle from 'lodash.throttle';
-import { BrowserRouter as Router } from 'react-router-dom';
 
-const persistedState = loadState();
-console.log(persistedState);
+import { BrowserRouter as Router } from 'react-router-dom';
+import { InitState } from './state/InitState';
 
 const middleware = [
   // @ts-ignore
@@ -21,22 +18,18 @@ const middleware = [
     : []),
 ];
 
+// const initialState = {
+//   user: null,
+// };
+
 const store = createStore(
   rootReducer,
-  persistedState,
   compose(applyMiddleware(thunk), ...middleware)
-);
-store.subscribe(
-  throttle(() => {
-    // Save songs and setlists to localStorage when the state updates
-    console.log('saving state');
-    const { setlists, songs } = store.getState();
-    saveState({ setlists, songs });
-  }, 1000)
 );
 
 ReactDOM.render(
   <Provider store={store}>
+    <InitState />
     <Router>
       <App />
     </Router>

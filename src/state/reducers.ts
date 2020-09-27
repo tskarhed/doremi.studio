@@ -154,17 +154,17 @@ export const playingNote = (prevState = {}, action: PlayActionState) => {
   return prevState;
 };
 
-export const user = (prevState = {}, action: UserAction) => {
+const user = (prevState = null, action: UserAction) => {
   if ('UPDATE_USER') {
     return action.payload;
   }
-  return {};
+  return prevState;
 };
 
 export default combineReducers({
+  user,
   setlists,
   songs,
-  user,
   isSearching,
   playingNote,
 });

@@ -1,7 +1,8 @@
-import { StoreState } from './types';
+import { StoreState, Setlist, Song } from './types';
 import { auth, db } from '../firebase/firebase';
+import { setlistsConverter, songsConverter } from '../firebase/converters';
 
-export const loadState = () => {
+export const loadState = async () => {
   // try {
   //   const serializedState = localStorage.getItem('redux-state');
   //   console.log(serializedState);
@@ -17,10 +18,18 @@ export const loadState = () => {
     const sourceOptions = {
       source: 'cache',
     } as any;
-    const songs = db.collection(`users/${user.uid}/songs`).get(sourceOptions);
-    const setlists = db
-      .collection(`users/${user.uid}/setlists`)
+    const songsQuery = await db
+      .collection(`users/${user.uid}/songs`)
+      .withConverter(songsConverter)
       .get(sourceOptions);
+    const setlistsQuery = await db
+      .collection(`users/${user.uid}/setlists`)
+      .withConverter(setlistsConverter)
+      .get(sourceOptions);
+
+    const songs = songsQuery.docs.map((doc) => doc.data());
+    const setlists = setlistsQuery.docs.map((doc) => doc.data());
+
     return { songs, setlists };
   }
 };

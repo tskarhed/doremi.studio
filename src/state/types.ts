@@ -5,7 +5,7 @@ export type SongId = string;
 export type SetlistId = string;
 
 export interface StoreState {
-  user: UserInfo;
+  user: UserInfo | null;
   songs: Song[];
   setlists: Setlist[];
   isSearching: SearchState;
