@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="doremiStudio_logo4.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   id="svg3001"
+   version="1.1"
+   viewBox="0 0 66.154785 7.6997638"
+   height="7.6997638mm"
+   width="66.154785mm">
+  <defs
+     id="defs2995" />
+  <sodipodi:namedview
+     inkscape:window-maximized="1"
+     inkscape:window-y="46"
+     inkscape:window-x="-8"
+     inkscape:window-height="961"
+     inkscape:window-width="1280"
+     fit-margin-bottom="0"
+     fit-margin-right="0"
+     fit-margin-left="0"
+     fit-margin-top="0"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="380.26503"
+     inkscape:cx="347.87406"
+     inkscape:zoom="0.35"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata2998">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-13.791655,-47.554878)"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.499999;stroke-miterlimit:4;stroke-dasharray:none"
+       x="13.357574"
+       y="55.130619"
+       id="text835-9-6-5-5"><tspan
+         sodipodi:role="line"
+         id="tspan833-9-2-8-3"
+         x="13.357574"
+         y="55.130619"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:helvetica;-inkscape-font-specification:helvetica;stroke-width:0.499999;stroke-miterlimit:4;stroke-dasharray:none"><tspan
+           style="font-weight:bold;stroke-width:0.499999;stroke-miterlimit:4;stroke-dasharray:none"
+           id="tspan839-0-9-0-2">doremi</tspan><tspan
+           style="font-size:10.5833px;stroke-width:0.499999;stroke-miterlimit:4;stroke-dasharray:none"
+           id="tspan841-7-0-56-2"><tspan
+             dy="0"
+             id="tspan1261-5"
+             style="font-size:8.1139px;fill:#2f2f2f;fill-opacity:1;stroke-width:0.499999"
+             dx="1">STUDIO</tspan></tspan></tspan></text>
+  </g>
+</svg>
