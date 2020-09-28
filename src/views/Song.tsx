@@ -57,10 +57,9 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
                 'Write note with an octave you want to add',
                 'A4'
               );
-              if (note === null) {
-                return;
+              if (note !== null) {
+                dispatch(addNote(note, song.id));
               }
-              dispatch(addNote(note, song.id));
             }}
           />
           <ActionButton
