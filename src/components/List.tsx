@@ -1,10 +1,9 @@
-import React, { FC, RefObject, MouseEvent } from 'react';
+import { motion } from 'framer-motion';
+import React, { FC, MouseEvent, RefObject } from 'react';
 import { Link } from 'react-router-dom';
 import { View } from '../native';
+import Icon from './Icon';
 import styles from './List.module.scss';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faMusic, faListUl } from '@fortawesome/free-solid-svg-icons';
-import { motion } from 'framer-motion';
 
 interface ListItemProps {
   to: string; // Vars den länkar
@@ -23,7 +22,7 @@ export const ListItem: FC<React.PropsWithChildren<
         <Link onClick={onClick} ref={ref} to={to} className={styles.wrapper}>
           {type && (
             <View className={styles.type}>
-              <Icon icon={type === 'song' ? faMusic : faListUl} />
+              <Icon icon={type === 'song' ? 'music' : 'list-ul'} />
             </View>
           )}
           <View className={styles.children}>{children}</View>

@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import { Page } from './Page';
 import { SetlistList } from '../components/SetlistList';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import Icon from '../components/Icon';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearch } from '../state/actions';
 import { StoreState } from '../state/types';
@@ -19,7 +18,7 @@ export const Main: FC = () => {
       onHeaderClick={() => dispatch(setSearch('all'))}
       headerElement={
         <Icon
-          icon={faSearch}
+          icon="search"
           size="2x"
           style={{
             margin: 'auto 0',
