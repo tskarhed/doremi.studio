@@ -10,6 +10,7 @@ import rootReducer from './state/reducers';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 import { InitState } from './state/InitState';
+import { FirebaseListeners } from './firebase/FirebaseListeners';
 
 const middleware = [
   // @ts-ignore
@@ -30,6 +31,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
+    <FirebaseListeners />
     <InitState />
     <Router>
       <App />

@@ -1,4 +1,5 @@
 import { Song, Setlist } from '../state/types';
+import { UserInfo } from 'firebase';
 
 interface Converter<T> {
   toFirestore(clientObject: T): T;
@@ -24,3 +25,4 @@ const createConverter = <T>() => {
 
 export const setlistsConverter = createConverter<Setlist[]>();
 export const songsConverter = createConverter<Song[]>();
+export const userConverter = createConverter<UserInfo>();
