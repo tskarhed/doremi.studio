@@ -155,7 +155,7 @@ export const playingNote = (prevState = {}, action: PlayActionState) => {
 };
 
 const user = (prevState = null, action: UserAction) => {
-  if ('UPDATE_USER') {
+  if (action.type === 'UPDATE_USER') {
     return action.payload;
   }
   return prevState;

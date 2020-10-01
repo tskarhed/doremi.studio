@@ -7,11 +7,6 @@ import { firestore } from 'firebase';
 import ShortUId from 'short-unique-id';
 import { useHistory } from 'react-router-dom';
 
-interface NewUser {
-  displayName: string;
-  shortId: string;
-}
-
 export const LoginView = () => {
   const [showMissingFields, setShowMissingFields] = useState(false);
   const [userId, setUserId] = useState();
