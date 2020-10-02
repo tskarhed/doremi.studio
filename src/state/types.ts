@@ -121,13 +121,17 @@ export interface DeleteSetlist {
 }
 
 export type NotesAction = AddNote | UpdateNote | DeleteNote;
+interface ResetLists {
+  type: 'RESET_LISTS';
+}
+
 export type SongAction =
   | UpdateSongTitle
   | NotesAction
   | CreateSong
   | UpdateSongLyrics
   | UpdateSong;
-export type SongsAction = DeleteSong | SongAction;
+export type SongsAction = DeleteSong | SongAction | ResetLists;
 
 export type SetlistAction =
   | CreateSong
@@ -136,7 +140,7 @@ export type SetlistAction =
   | UpdateSetlistTitle
   | CreateSetlist
   | UpdateSetlist;
-export type SetlistsAction = DeleteSetlist | SetlistAction;
+export type SetlistsAction = DeleteSetlist | SetlistAction | ResetLists;
 
 export type SearchStateType =
   | 'SEARCH_ALL'

@@ -92,6 +92,9 @@ export const setlist = (prevState: Setlist, action: SetlistAction) => {
 };
 
 export const songs = (prevState: Song[] = mockSongs, action: SongsAction) => {
+  if (action.type === 'RESET_LISTS') {
+    return [];
+  }
   if (action.type === 'CREATE_SONG') {
     return [...prevState, song({} as Song, action)];
   }
@@ -109,6 +112,9 @@ export const setlists = (
   prevState: Setlist[] = mockSetlists,
   action: SetlistsAction
 ) => {
+  if (action.type === 'RESET_LISTS') {
+    return [];
+  }
   if (action.type === 'CREATE_SETLIST') {
     return [...prevState, setlist({} as Setlist, action)];
   }
