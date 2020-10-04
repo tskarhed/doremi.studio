@@ -53,14 +53,15 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
             icon="plus"
             size="xl"
             onClick={() => {
-              const note = prompt(
-                'Write note with an octave you want to add',
-                'A4'
-              );
-              if (note === null) {
-                return;
+              const note =
+                prompt(
+                  'Write note (capital) with an octave (integer) you want to add',
+                  'Ab4'
+                ) || 'Ab4';
+              var pattern = new RegExp(/^([A-G])(b|#)?\d+$/);
+              if (pattern.test(note)) {
+                dispatch(addNote(note, song.id));
               }
-              dispatch(addNote(note, song.id));
             }}
           />
           <ActionButton
