@@ -16,14 +16,30 @@ export interface StoreState {
 }
 
 export interface Song {
+  /**
+   *  Only used by Firebase. DO NOT USE IN APP
+   */
+  uid: string;
+  /**
+   *  Used directly in app
+   */
+  shortUID: string;
+  /** Deprecated */
   id: string;
   title: string;
   notes: Notes;
-  setlists?: SetlistId[];
   lyrics?: string;
 }
 
 export interface Setlist {
+  /**
+   *  Only used by Firebase
+   */
+  uid: string;
+  /**
+   *  uid used by the app
+   */
+  shortUID: string;
   id: SetlistId;
   title: string;
   songs: SongId[];
