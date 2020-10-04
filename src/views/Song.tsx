@@ -26,30 +26,6 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
     return <></>;
   }
 
-  var acceptedNotesArray = [
-    'Ab',
-    'A',
-    'A#',
-    'Bb',
-    'B',
-    'B#',
-    'Cb',
-    'C',
-    'C#',
-    'Db',
-    'D',
-    'D#',
-    'Eb',
-    'E',
-    'E#',
-    'Fb',
-    'F',
-    'F#',
-    'Gb',
-    'G',
-    'G#',
-  ];
-
   return (
     <Page
       title={song ? song.title : ''}
@@ -82,24 +58,9 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
                   'Write note (capital) with an octave (integer) you want to add',
                   'Ab4'
                 ) || 'Ab4';
-              var note_no_space = note.replace(/\s/g, '');
-              if (
-                !isNaN(
-                  Number(
-                    note_no_space.substring(
-                      note_no_space.length - 1,
-                      note_no_space.length
-                    )
-                  )
-                )
-              ) {
-                var note_exists =
-                  acceptedNotesArray.indexOf(
-                    note_no_space.substring(0, note_no_space.length - 1)
-                  ) > -1;
-                if (note_exists) {
-                  dispatch(addNote(note_no_space, song.id));
-                }
+              var pattern = new RegExp(/^([A-G])(b|#)?\d+$/);
+              if (pattern.test(note)) {
+                dispatch(addNote(note, song.id));
               }
             }}
           />
