@@ -14,6 +14,7 @@ import {
   updateSongLyrics,
 } from '../state/actions';
 import { LyricLayout } from '../components/LyricLayout';
+import { NotePicker } from '../components/NotePicker';
 
 export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
   const history = useHistory();
   const song = songs.find((song) => song.id === encodeURI(songName || ''));
   const [isLyricVisible, setisLyricVisible] = useState(false);
+  const [isAddNoteVisible, setisAddNoteVisible] = useState(true);
   if (!song) {
     history.push('/');
     return <></>;
@@ -52,17 +54,18 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
             inverted
             icon="plus"
             size="xl"
-            onClick={() => {
-              const note =
-                prompt(
-                  'Write note (capital) with an octave (integer) you want to add',
-                  'Ab4'
-                ) || 'Ab4';
-              var pattern = new RegExp(/^([A-G])(b|#)?\d+$/);
-              if (pattern.test(note)) {
-                dispatch(addNote(note, song.id));
-              }
-            }}
+            onClick={() => setisAddNoteVisible(!isAddNoteVisible)}
+            // onClick={() => {
+            //   const note =
+            //     prompt(
+            //       'Write note (capital) with an octave (integer) you want to add',
+            //       'Ab4'
+            //     ) || 'Ab4';
+            //   var pattern = new RegExp(/^([A-G])(b|#)?\d+$/);
+            //   if (pattern.test(note)) {
+            //     dispatch(addNote(note, song.id));
+            //   }
+            // }}
           />
           <ActionButton
             inverted
@@ -73,15 +76,40 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
         </View>
       }
     >
-      {isLyricVisible ? (
-        <LyricLayout
-          edit={true}
-          lyrics={song.lyrics}
-          onChange={(lyrics) => dispatch(updateSongLyrics(lyrics, song.id))}
-        />
-      ) : (
-        <NoteLayout notes={song ? song.notes : []} edit songId={song.id} />
-      )}
+      <div style={{ height: '100%' }}>
+        {(() => {
+          if (isLyricVisible)
+            return (
+              <LyricLayout
+                edit={true}
+                lyrics={song.lyrics}
+                onChange={(lyrics) =>
+                  dispatch(updateSongLyrics(lyrics, song.id))
+                }
+              />
+            );
+          if (isAddNoteVisible) return <NotePicker />;
+          else
+            return (
+              <NoteLayout
+                notes={song ? song.notes : []}
+                edit
+                songId={song.id}
+              />
+            );
+        })()}
+      </div>
+      {/* <div>
+        {isLyricVisible ? (
+          <LyricLayout
+            edit={true}
+            lyrics={song.lyrics}
+            onChange={(lyrics) => dispatch(updateSongLyrics(lyrics, song.id))}
+          />
+        ) : (
+          <NoteLayout notes={song ? song.notes : []} edit songId={song.id} />
+        )}
+      </div> */}
     </Page>
   );
 };
