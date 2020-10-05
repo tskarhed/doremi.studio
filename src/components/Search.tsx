@@ -10,6 +10,7 @@ import { createSong, createSetlist } from '../state/actions';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import theme from '../theme.module.scss';
+import ShortUniqueId from 'short-unique-id';
 
 // Create interface
 interface Props {
@@ -74,17 +75,17 @@ export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
   const generateListItems = (list: SearchList) => {
     return list.map((item) => {
       const type = !!(item as Setlist).songs ? 'setlist' : 'song';
-      const url = `/${type}/${item.id}`;
+      const url = `/${type}/${item.shortUID}`;
       return (
         <ListItem
           onClick={(event: React.MouseEvent) => {
             // Add song to current setlist
             if (isSearching === 'song' && setlistName) {
               event.preventDefault();
-              dispatch(addSongToSetlist(item.id, encodeURI(setlistName)));
+              dispatch(addSongToSetlist(item.shortUID, encodeURI(setlistName)));
             }
           }}
-          key={item.id}
+          key={item.shortUID}
           to={url}
           type={type}
         >
@@ -141,7 +142,14 @@ const CreateNew: FC<CreateNewProps> = ({ setlist, type, children }) => {
 
   const onClick = () => {
     if (type === 'all' || type === 'song') {
-      dispatch(createSong(children, setlist));
+      const uid = new ShortUniqueId();
+      let song = {
+        title: children,
+        shortUID: uid(),
+        uid: '',
+        notes: [],
+      };
+      dispatch(createSong(song));
       // Redirect to place
       history.push(`/song/${encodeURI(children)}`);
     } else if (type === 'setlist') {

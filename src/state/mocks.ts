@@ -2,8 +2,9 @@ import { Song, Setlist } from './types';
 
 export const mockSongs: Song[] = [
   {
+    uid: 'dåne',
+    shortUID: 'dåne',
     title: 'Dåne liksom åskan',
-    id: 'dane-liksom-askan',
     notes: ['D3', 'F#3', 'A3'],
     lyrics: `Dåne liksom åskan, bröder,
     Högt vår fosterländska sång.
@@ -20,8 +21,9 @@ export const mockSongs: Song[] = [
     Trogne bröder hand i hand.`,
   },
   {
+    uid: 'norrland',
+    shortUID: 'norrland',
     title: 'Norrland',
-    id: 'norrland',
     notes: ['Bb4'],
     lyrics: `Vaktat av de vita fjällar och de mörka furors krans,
     vilar nu i vårens kvällar Norrland i sin fägrings glans.
@@ -33,103 +35,109 @@ export const mockSongs: Song[] = [
     Och i Sveriges kungakrona pärlan varder du en gång.`,
   },
   {
+    uid: 'high-barbary',
+    shortUID: 'high-barbary',
     title: 'High Barbary',
-    id: 'high-barbary',
     notes: ['B2', 'E3'],
   },
   {
+    uid: 'erlaube-mir',
+    shortUID: 'erlaube-mir',
     title: 'Erlaube mir',
-    id: 'erlaube-mir',
     notes: ['F3'],
-    setlists: ['serenader'],
   },
   {
+    uid: 'kom-du-ljuva',
+    shortUID: 'kom-du-ljuva',
     title: 'Madrigal (Kom du ljuva)',
-    id: 'kom-du-ljuva',
     notes: ['Db3', 'F3', 'Ab3', 'Db4'],
-    setlists: ['serenader'],
   },
   {
+    uid: 'kristallen-den-fina',
+    shortUID: 'kristallen-den-fina',
     title: 'Kristallen den fina',
-    id: 'kristallen-den-fina',
     notes: ['A2', 'A3'],
-    setlists: ['serenader'],
   },
   {
+    uid: 'gute-nacht',
+    shortUID: 'gute-nacht',
+
     title: 'Gute Nacth (Warum bist du so ferne)',
-    id: 'gute-nacht',
     notes: ['C4'],
-    setlists: ['serenader'],
   },
   {
+    uid: 'stjarnorna-tindra',
+    shortUID: 'stjarnorna-tindra',
     title: 'Serenad (Stjärnorna tindra)',
-    id: 'stjarnorna-tindra',
     notes: ['A2', 'A3', 'C4', 'E4'],
-    setlists: ['serenader'],
   },
   {
+    uid: 'jag-vet-en-dejlig-rosa',
+    shortUID: 'jag-vet-en-dejlig-rosa',
     title: 'Jag vet en dejlig rosa',
-    id: 'jag-vet-en-deijlig-rosa',
     notes: ['G2', 'G3', 'B3', 'D4'],
-    setlists: ['serenader'],
   },
   {
+    uid: 'helan',
+    shortUID: 'helan',
     title: 'Helan',
-    id: 'helan',
     notes: ['A3', 'C#4'],
-    setlists: ['bordsvisor'],
   },
   {
+    uid: 'halvan',
+    shortUID: 'halvan',
     title: 'Halvan',
-    id: 'halvan',
     notes: ['Eb3'],
-    setlists: ['bordsvisor'],
   },
   {
+    uid: 'tersen',
+    shortUID: 'tersen',
     title: 'Tersen',
-    id: 'tersen',
     notes: ['D4'],
-    setlists: ['bordsvisor'],
   },
   {
+    uid: 'skanklat',
+    shortUID: 'sknklat',
     title: 'Skänklåt',
-    id: 'skanklat',
     notes: ['G3'],
-    setlists: ['bordsvisor'],
   },
   {
+    uid: 'metsa',
+    shortUID: 'metsa',
     title: 'Metsämiehen juomalaulu',
-    id: 'metsa',
     notes: ['A3'],
-    setlists: ['bordsvisor'],
   },
   {
+    uid: 'das-konigslied',
+    shortUID: 'kristallen-den-fina',
     title: 'Das königslied (Ein könig ist der wein)',
-    id: 'das-konigslied',
     notes: ['A3'],
-    setlists: ['bordsvisor'],
   },
   {
+    uid: 'svensk-punschsang',
+    shortUID: 'svensk-punschsang',
     title: 'Svensk punschsång (gott så in i norden)',
-    id: 'svensk-punschsang',
     notes: ['F3', 'A3', 'C4', 'F4'],
-    setlists: ['bordsvisor'],
   },
   {
+    uid: 'nubbejojk',
+    shortUID: 'nubbejojk',
     title: 'Nubbejojk (brandbil brandbil)',
-    id: 'nubbejojk',
     notes: ['E3'],
-    setlists: ['klassiker'],
   },
 ];
 
 export const mockSetlists: Setlist[] = [
   {
+    uid: 'fina-klassiker',
+    shortUID: 'fina-klassiker',
     title: 'Fina klassiker',
     id: 'klassiker',
     songs: ['dane-liksom-askan', 'norrland', 'high-barbary', 'nubbejojk'],
   },
   {
+    uid: 'serenader',
+    shortUID: 'serenader',
     title: 'Serenader',
     id: 'serenader',
     songs: [
@@ -142,6 +150,8 @@ export const mockSetlists: Setlist[] = [
     ],
   },
   {
+    uid: 'bordsvisor',
+    shortUID: 'bordsvisor',
     title: 'Bordsvisor',
     id: 'bordsvisor',
     songs: [

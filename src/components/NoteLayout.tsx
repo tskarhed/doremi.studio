@@ -4,15 +4,12 @@ import { View } from '../native';
 // Import to get the animation
 import './NoteLayout.scss';
 
-import { useDispatch } from 'react-redux';
-import { SongId } from '../state/types';
-import { updateNote, deleteNote } from '../state/actions';
 import { NoteButton } from './NoteButton';
 
 interface Props {
   edit: boolean;
   notes: string[];
-  songId: SongId;
+  onChange?: (note: string | null, index: number) => void;
 }
 // Skapa style här
 const noteLayoutStyle = {
@@ -26,13 +23,12 @@ const noteLayoutStyle = {
   height: '100%',
   alignContent: 'center',
 };
-export const NoteLayout: FC<Props> = ({ edit, notes, songId }) => {
-  const dispatch = useDispatch();
-
+export const NoteLayout: FC<Props> = ({ edit, notes, onChange }) => {
   const handleNoteClick = (newNote: string | null, index: number) => {
-    newNote === null
-      ? dispatch(deleteNote(index, songId))
-      : dispatch(updateNote(newNote, index, songId));
+    if (onChange === undefined) {
+      return;
+    }
+    newNote === null ? onChange(null, index) : onChange(newNote, index);
   };
   return (
     <View className="wrapper">

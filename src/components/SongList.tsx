@@ -7,7 +7,10 @@ import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 interface Props {
-  songs: Song[];
+  /**
+   *  This typing can be fixed in useSongs.tsx
+   */
+  songs: (Song | undefined)[];
   setlist: SetlistId;
   onRemove: (song: number) => void;
 }
@@ -18,11 +21,14 @@ export const SongList: FC<Props> = ({ songs, setlist, onRemove }) => {
   return (
     <List>
       {songs.map((song, i) => {
+        if (!song) {
+          return <></>;
+        }
         return (
           <ListItem
             type="song"
             to={`/setlist/${setlist}/play/${i}`}
-            key={`${song.id}-${i}`}
+            key={`${song.shortUID}-${i}`}
             actionComponent={
               <>
                 <Icon
@@ -36,7 +42,7 @@ export const SongList: FC<Props> = ({ songs, setlist, onRemove }) => {
                 <Icon
                   onClick={(e: SyntheticEvent) => {
                     e.preventDefault();
-                    history.push(`/song/${song.id}`);
+                    history.push(`/song/${song.shortUID}`);
                   }}
                   size="2x"
                   icon={faPen}

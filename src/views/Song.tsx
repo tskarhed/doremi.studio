@@ -7,21 +7,17 @@ import { connect, useDispatch } from 'react-redux';
 import { Back } from '../components/Back';
 import { View } from '../native';
 import { ActionButton } from '../components/ActionButton';
-import {
-  addNote,
-  playSequence,
-  updateSongTitle,
-  updateSongLyrics,
-} from '../state/actions';
+import { playSequence } from '../state/actions';
 import { LyricLayout } from '../components/LyricLayout';
+import { useSong } from '../firebase/hooks/useSong';
 
 export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
   const dispatch = useDispatch();
-  const { songName } = useParams();
+  const { songId } = useParams();
   const history = useHistory();
-  const song = songs.find((song) => song.id === encodeURI(songName || ''));
+  const [song, updateSong] = useSong(songId);
   const [isLyricVisible, setisLyricVisible] = useState(false);
-  if (!song) {
+  if (!song || !updateSong) {
     history.push('/');
     return <></>;
   }
@@ -30,7 +26,7 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
     <Page
       title={song ? song.title : ''}
       onTitleChange={(newTitle) => {
-        dispatch(updateSongTitle(newTitle, song.id));
+        dispatch(updateSong({ ...song, title: newTitle }));
       }}
       prefixElement={<Back />}
       footer={
@@ -56,7 +52,9 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
               const note =
                 prompt('Write note with an octave you want to add', 'A4') ||
                 'A4';
-              dispatch(addNote(note, song.id));
+              const newSong = song;
+              newSong.notes.push(note);
+              dispatch(updateSong(newSong));
             }}
           />
           <ActionButton
@@ -72,10 +70,23 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
         <LyricLayout
           edit={true}
           lyrics={song.lyrics}
-          onChange={(lyrics) => dispatch(updateSongLyrics(lyrics, song.id))}
+          onChange={(lyrics) => dispatch(updateSong({ ...song, lyrics }))}
         />
       ) : (
-        <NoteLayout notes={song ? song.notes : []} edit songId={song.id} />
+        <NoteLayout
+          notes={song ? song.notes : []}
+          edit
+          onChange={(newNote, index) => {
+            let newNotes = song.notes;
+            if (!newNote) {
+              newNotes = newNotes.filter((note, i) => !(index === i));
+            } else {
+              newNotes[index] = newNote;
+            }
+
+            dispatch(updateSong({ ...song, notes: newNotes }));
+          }}
+        />
       )}
     </Page>
   );

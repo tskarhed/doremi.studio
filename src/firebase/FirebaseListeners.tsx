@@ -77,13 +77,15 @@ export const FirebaseListeners = () => {
         unsubSetlists = db
           .collection(`users/${changedUser.uid}/songs`)
           .onSnapshot((setlistDoc) => {
-            setlistDoc.forEach((doc) =>
-              dispatch({
-                type: 'UPDATE_SONG',
-                songId: doc.data().shortUID,
-                payload: doc.data(),
-              })
-            );
+            setlistDoc.forEach((doc) => {
+              if (doc.data()) {
+                dispatch({
+                  type: 'UPDATE_SONG',
+                  songId: doc.data().shortUID,
+                  ...doc.data(),
+                });
+              }
+            });
           });
       } else {
         setUser(null);

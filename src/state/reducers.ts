@@ -1,6 +1,4 @@
 import {
-  NotesAction,
-  Notes,
   SetlistAction,
   Setlist,
   Song,
@@ -13,48 +11,12 @@ import {
   UserAction,
 } from './types';
 import { combineReducers } from 'redux';
-import { mockSongs, mockSetlists } from './mocks';
-
-export const notes = (prevState: Notes, action: NotesAction) => {
-  switch (action.type) {
-    case 'ADD_NOTE':
-      return [...prevState, action.note];
-    case 'UPDATE_NOTE':
-      return prevState.map((note, i) => {
-        if (i === action.index) {
-          return action.note;
-        }
-
-        return note;
-      });
-    case 'DELETE_NOTE':
-      return prevState.filter((_note, index) => index !== action.index);
-    default:
-      return prevState;
-  }
-};
 
 export const song = (prevState: Song, action: SongAction) => {
   if (action.type === 'UPDATE_SONG') {
     return action.song;
   }
-
-  if (action.type === 'UPDATE_SONG_TITLE') {
-    return { ...prevState, title: action.title };
-  }
-  if (action.type === 'UPDATE_SONG_LYRICS') {
-    return { ...prevState, lyrics: action.lyrics };
-  }
-  if (action.type === 'CREATE_SONG') {
-    return {
-      title: action.title || '',
-      setlists: action.setlist ? [action.setlist] : [],
-      notes: [],
-      id: action.id,
-    };
-  }
-
-  return { ...prevState, notes: notes(prevState.notes, action) };
+  return prevState;
 };
 
 export const setlist = (prevState: Setlist, action: SetlistAction) => {
@@ -84,34 +46,32 @@ export const setlist = (prevState: Setlist, action: SetlistAction) => {
     return { ...prevState, title: action.title };
   }
 
-  if (action.type === 'CREATE_SONG' && prevState.id === action.setlist) {
-    return { ...prevState, songs: [...prevState.songs, action.id] };
-  }
-
   return prevState;
 };
 
-export const songs = (prevState: Song[] = mockSongs, action: SongsAction) => {
+export const songs = (prevState: Song[] = [], action: SongsAction) => {
   if (action.type === 'RESET_LISTS') {
     return [];
   }
   if (action.type === 'CREATE_SONG') {
-    return [...prevState, song({} as Song, action)];
+    return [...prevState, action.payload];
   }
 
   if (action.type === 'DELETE_SONG') {
-    return prevState.filter((listItem) => listItem.id !== action.id);
+    return prevState.filter((listItem) => listItem.shortUID !== action.id);
   }
-
+  if (action.type === 'ADD_SONG') {
+    return [...prevState, action.payload];
+  }
+  console.log(prevState);
   return prevState.map((listItem) => {
-    return action.songId === listItem.id ? song(listItem, action) : listItem;
+    return action.songId === listItem.shortUID
+      ? song(listItem, action)
+      : listItem;
   });
 };
 
-export const setlists = (
-  prevState: Setlist[] = mockSetlists,
-  action: SetlistsAction
-) => {
+export const setlists = (prevState: Setlist[] = [], action: SetlistsAction) => {
   if (action.type === 'RESET_LISTS') {
     return [];
   }

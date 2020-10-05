@@ -4,22 +4,25 @@ import { useUser } from './useUser';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateSetlist as updateReduxSetlist } from '../../state/actions';
 
-export const useSong = (setlistId: SetlistId) => {
+export const useSetlist = (setlistId?: SetlistId) => {
   const dispatch = useDispatch();
 
-  const [user, _updateUser] = useUser();
-  const currentSong = useSelector((state: StoreState) =>
+  const [user] = useUser();
+  const currentSetlist = useSelector((state: StoreState) =>
     state.setlists.find((thesetlist) => thesetlist.id === setlistId)
   );
+  if (!currentSetlist) {
+    return [null, null];
+  }
 
   const updateSetlist = function (setlist: Setlist) {
     if (!user) {
-      return;
+      return [null, null];
     }
     const setlistssRef = db.collection(`users/${user.uid}/setlists`); //@ts-ignore
     dispatch(updateReduxSetlist(setlist));
     return setlistssRef.doc(setlistId).set(setlist);
   };
 
-  return [currentSong, updateSetlist];
+  return [currentSetlist, updateSetlist] as const;
 };

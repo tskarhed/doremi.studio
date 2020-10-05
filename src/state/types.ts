@@ -24,8 +24,6 @@ export interface Song {
    *  Used directly in app
    */
   shortUID: string;
-  /** Deprecated */
-  id: string;
   title: string;
   notes: Notes;
   lyrics?: string;
@@ -54,36 +52,15 @@ interface SetlistActions {
   setlist?: SetlistId;
 }
 
-export interface AddNote extends NoteActions {
-  type: 'ADD_NOTE';
-  note: string;
-}
-
-export interface UpdateNote extends NoteActions {
-  type: 'UPDATE_NOTE';
-  index: number;
-  note: string;
-}
-
-export interface DeleteNote extends NoteActions {
-  type: 'DELETE_NOTE';
-  index: number;
-}
-
-export interface UpdateSongTitle extends NoteActions {
-  type: 'UPDATE_SONG_TITLE';
-  title: string;
-}
-
-export interface UpdateSongLyrics extends NoteActions {
-  type: 'UPDATE_SONG_LYRICS';
-  lyrics: string;
-}
-
 export interface UpdateSong {
   type: 'UPDATE_SONG';
   songId: SongId;
   song: Song;
+}
+
+export interface AddSong {
+  type: 'ADD_SONG';
+  payload: Song;
 }
 
 // Setlist interfaces and types
@@ -112,12 +89,7 @@ export interface DeleteSong {
 
 export interface CreateSong extends SetlistActions {
   type: 'CREATE_SONG';
-  id: SongId;
-  title: string;
-  /**
-   *  If the song was created from a setlist we want to assign it directly
-   */
-  setlist?: SetlistId;
+  payload: Song;
 }
 
 export interface UpdateSetlistTitle extends SetlistActions {
@@ -136,18 +108,12 @@ export interface DeleteSetlist {
   id: SetlistId;
 }
 
-export type NotesAction = AddNote | UpdateNote | DeleteNote;
 interface ResetLists {
   type: 'RESET_LISTS';
 }
 
-export type SongAction =
-  | UpdateSongTitle
-  | NotesAction
-  | CreateSong
-  | UpdateSongLyrics
-  | UpdateSong;
-export type SongsAction = DeleteSong | SongAction | ResetLists;
+export type SongAction = CreateSong | UpdateSong;
+export type SongsAction = DeleteSong | SongAction | ResetLists | AddSong;
 
 export type SetlistAction =
   | CreateSong

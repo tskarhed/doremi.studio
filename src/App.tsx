@@ -9,39 +9,42 @@ import { firebaseApp } from './firebase/firebase';
 
 function App() {
   let location = useLocation();
-  const [ auth, setAuth ] = useState({
+  const [auth, setAuth] = useState({
     auth: false,
-    init: true
-  })
+    init: true,
+  });
 
-  useEffect(() => firebaseApp.auth().onAuthStateChanged(user =>  {
-    if(user){
-      setAuth({auth: true, init: false});
-    } else {
-      setAuth({ auth: false, init: false});
-    }
-  }), [setAuth]);
-
+  useEffect(
+    () =>
+      firebaseApp.auth().onAuthStateChanged((user) => {
+        if (user) {
+          setAuth({ auth: true, init: false });
+        } else {
+          setAuth({ auth: false, init: false });
+        }
+      }),
+    [setAuth]
+  );
 
   if (!auth.auth && !auth.init && location.pathname !== '/login') {
     return <Redirect to="/login" />;
   }
-    
+
   if (!auth.auth && auth.init) {
-    return <span>Loading...</span>
+    return <span>Loading...</span>;
   }
 
   return (
     <AnimateSharedLayout type="crossfade">
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.key}>
-          <Route exact path="/setlist/:setlistName/play/:songNumber">
+          <Route exact path="/setlist/:setlistId/play/:songNumber">
             <Play />
           </Route>
-          <Route exact path="/setlist/:setlistName">
+          <Route exact path="/setlist/:setlistId">
             <Setlist />
           </Route>
-          <Route path="/song/:songName">
+          <Route path="/song/:songId">
             <Song />
           </Route>
           <Route path="/login">
