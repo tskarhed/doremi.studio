@@ -12,54 +12,103 @@ export const NotePicker = () => {
   const cy = 20;
   const r = 5;
   return (
-    <view style={wrapper as CSSProperties}>
-      <div style={{ maxHeight: '35%', width: '35%' }}>
-        {isGClef ? (
-          <img
-            src="/G-clef.svg"
-            alt="G-clef"
-            // style={{ height: '20%', width: '20%' }}
-            onClick={() => setisGClef(!isGClef)}
+    <div>
+      <view style={wrapper as CSSProperties}>
+        <p style={{ color: '#000' } as CSSProperties}>Choose a note to add!</p>
+        <div
+          style={
+            {
+              flexDirection: 'row',
+              display: 'flex',
+              maxHeight: '35%',
+              width: '100%',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+              // padding: '15px 0',
+            } as CSSProperties
+          }
+        >
+          <div
+            style={
+              {
+                maxHeight: '20px',
+                maxWidth: '14px',
+                alignItems: 'center',
+                color: '#000',
+                fontSize: '0.55rem',
+              } as CSSProperties
+            }
+          >
+            {isGClef ? (
+              <img
+                src="/G-clef.svg"
+                alt="G-clef"
+                // style={{ height: '20%', width: '20%' }}
+                onClick={() => setisGClef(!isGClef)}
+              />
+            ) : (
+              <img
+                src="/F-clef.svg"
+                alt="F-clef"
+                // style={{ height: '20%', width: '20%' }}
+                onClick={() => setisGClef(!isGClef)}
+              />
+            )}
+            <p>Toggle clef</p>
+          </div>
+          <div>
+            <img src="/bar.svg" alt="/bar.svg" />
+            {/* <svg>
+              <circle cx={cx} cy={cy} r={r} fill="red" />
+            </svg> */}
+          </div>
+          <div>
+            <ActionButton
+              inverted
+              icon="prev"
+              size="sm"
+              onClick={() => setClicks(clicks + 1)}
+              style={{ position: 'relative' }}
+            />
+            <ActionButton
+              inverted
+              icon="next"
+              size="sm"
+              onClick={() => setClicks(clicks - 1)}
+              style={{ position: 'relative' }}
+            />
+          </div>
+        </div>
+        <p style={{ color: '#000' } as CSSProperties}>Clicks: {clicks}</p>
+        <div
+          style={
+            {
+              flexDirection: 'row',
+              display: 'flex',
+              maxHeight: '35%',
+              width: '50%',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+            } as CSSProperties
+          }
+        >
+          <ActionButton
+            inverted
+            icon="play"
+            size="sm"
+            onClick={() => setClicks(clicks - 1)}
+            style={{ position: 'relative' }}
           />
-        ) : (
-          <img
-            src="/F-clef.svg"
-            alt="F-clef"
-            // style={{ height: '20%', width: '20%' }}
-            onClick={() => setisGClef(!isGClef)}
+          <ActionButton
+            inverted
+            icon="plus"
+            size="sm"
+            onClick={() => setClicks(clicks - 1)}
+            style={{ position: 'relative' }}
           />
-        )}
-      </div>
-      <img src="/bar.svg" alt="/bar.svg" />
-      <p>Clicks: {clicks}</p>
-
-      <ActionButton
-        inverted
-        icon="plus"
-        size="sm"
-        onClick={() => setClicks(clicks + 1)}
-        style={{ position: 'relative' }}
-      />
-      <ActionButton
-        inverted
-        icon="play"
-        size="sm"
-        onClick={() => setClicks(clicks - 1)}
-        style={{ position: 'relative' }}
-      />
-      <svg
-        style={
-          {
-            position: 'relative',
-            top: -5 * clicks,
-            left: 0,
-            zIndex: 10,
-          } as CSSProperties
-        }
-      >
-        <circle cx={cx} cy={cy} r={r} fill="red" />
-      </svg>
-    </view>
+        </div>
+      </view>
+    </div>
   );
 };
 
@@ -78,6 +127,9 @@ const noteAddLayout = {
 };
 
 const wrapper = {
+  flexDirection: 'column',
+  alignItems: 'center',
+  alignContent: 'space-between',
   display: 'flex',
   backgroundColor: '#ffffff',
   color: '000000',
@@ -85,7 +137,7 @@ const wrapper = {
   textDecoration: 'none',
   minHeight: '70px',
   margin: '8px 5px',
-  padding: '2px 10px',
+  padding: '2%',
   borderRadius: '5px',
   boxShadow: '0 2px 5px 0px rgba(0, 0, 0, 0.8)',
   // cursor: 'pointer',
