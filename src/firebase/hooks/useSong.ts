@@ -23,7 +23,7 @@ export const useSong = (songId?: SongId) => {
     }
     const songsRef = db.collection(`users/${user.uid}/songs`);
     dispatch(updateReduxSong(song));
-    songsRef.doc(songId).set(song);
+    songsRef.doc(song.uid).set(song);
   };
 
   return [currentSong, updateSong] as const;
