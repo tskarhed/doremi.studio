@@ -4,8 +4,7 @@ import { ListItem, List } from './List';
 import { Input } from '../native';
 import { useDispatch } from 'react-redux';
 import { setSearch, addSongToSetlist } from '../state/actions';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import Icon from './Icon';
 import { createSong, createSetlist } from '../state/actions';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
@@ -113,7 +112,7 @@ export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
         <Icon
           size="2x"
           style={{ paddingRight: '3%' }}
-          icon={faTimes}
+          icon="times"
           onClick={onSearchSelect}
         />
       </div>

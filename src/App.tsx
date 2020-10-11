@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import { Main, Play, Setlist, Song, LoginView } from './views';
 import { AnimateSharedLayout, AnimatePresence } from 'framer-motion';
 // Initialize Sampler
@@ -9,26 +11,29 @@ import { firebaseApp } from './firebase/firebase';
 
 function App() {
   let location = useLocation();
-  const [ auth, setAuth ] = useState({
+  const [auth, setAuth] = useState({
     auth: false,
-    init: true
-  })
-
-  useEffect(() => firebaseApp.auth().onAuthStateChanged(user =>  {
-    if(user){
-      setAuth({auth: true, init: false});
-    } else {
-      setAuth({ auth: false, init: false});
-    }
-  }), [setAuth]);
-
+    init: true,
+  });
+  library.add(fas);
+  useEffect(
+    () =>
+      firebaseApp.auth().onAuthStateChanged((user) => {
+        if (user) {
+          setAuth({ auth: true, init: false });
+        } else {
+          setAuth({ auth: false, init: false });
+        }
+      }),
+    [setAuth]
+  );
 
   if (!auth.auth && !auth.init && location.pathname !== '/login') {
     return <Redirect to="/login" />;
   }
-    
+
   if (!auth.auth && auth.init) {
-    return <span>Loading...</span>
+    return <span>Loading...</span>;
   }
 
   return (

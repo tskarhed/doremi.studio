@@ -2,15 +2,9 @@ import React, { FC, useState, useEffect } from 'react';
 import { View } from '../native';
 import styles from './ActionButton.module.scss';
 import '../theme.module.scss';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import {
-  faPlay,
-  faPlus,
-  faStepBackward,
-  faStepForward,
-  faFileAlt,
-  faMusic,
-} from '@fortawesome/free-solid-svg-icons';
+import Icon from './Icon';
+
+import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 
 interface Props {
   size: 'sm' | 'md' | 'lg' | 'xl';
@@ -21,7 +15,7 @@ interface Props {
   inverted?: boolean;
   disabled?: boolean;
   disableAnimation?: boolean;
-  icon?: 'play' | 'plus' | 'prev' | 'next' | 'text' | 'music';
+  icon?: FontAwesomeIconProps['icon'];
 }
 
 export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
@@ -71,21 +65,8 @@ export const ActionButton: FC<React.PropsWithChildren<Props>> = ({
           (inverted ? 'animToInverted' : 'animFromInverted'))
       }
     >
-      {icon === 'play' && (
-        <Icon style={{ paddingLeft: '5%', paddingTop: '2%' }} icon={faPlay} />
-      )}
-      {icon === 'plus' && <Icon style={{ paddingTop: '2%' }} icon={faPlus} />}
-      {icon === 'prev' && (
-        <Icon style={{ paddingTop: '2%' }} icon={faStepBackward} />
-      )}
-      {icon === 'next' && (
-        <Icon style={{ paddingTop: '2%' }} icon={faStepForward} />
-      )}
-      {icon === 'text' && (
-        <Icon style={{ paddingTop: '2%' }} icon={faFileAlt} />
-      )}
-      {icon === 'music' && <Icon style={{ paddingTop: '2%' }} icon={faMusic} />}
-      {!icon && children}
+      {icon ? <Icon icon={icon} /> : null}
+      {children}
     </View>
   );
 };

@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
+import Icon from './Icon';
 
 interface Props {
   to?: string;
@@ -12,7 +11,7 @@ export const Back: FC<Props> = ({ to }) => {
 
   return (
     <Icon
-      icon={faChevronLeft}
+      icon="chevron-left"
       onClick={() => (to ? history.push(to) : history.goBack())}
       size="2x"
       style={{
