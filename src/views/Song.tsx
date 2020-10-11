@@ -44,7 +44,7 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
         >
           <ActionButton
             inverted
-            icon={isLyricVisible ? 'music' : 'text'}
+            icon={isLyricVisible ? 'music' : 'file-alt'}
             size="lg"
             onClick={() => setisLyricVisible(!isLyricVisible)}
           />
