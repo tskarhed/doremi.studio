@@ -27,6 +27,9 @@ export const InitState = () => {
         const songs = songsQuery.docs.map((doc) => doc.data());
         const setlists = setlistsQuery.docs.map((doc) => doc.data());
 
+        console.log(songs);
+        console.log(setlists);
+
         dispatch({ type: 'SET_INIT_STATE', payload: { songs, setlists } });
       }
     }

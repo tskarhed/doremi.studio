@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { db, firebaseApp } from './firebase';
 import { useUser } from './hooks/useUser';
 import { useDispatch } from 'react-redux';
+import { songOrSetlistConverter } from './converters';
 
 /**
  *  Responsible for registering and unregistering Firestore event listeners
@@ -45,24 +46,27 @@ export const FirebaseListeners = () => {
           });
 
         // Fetch entire list when on first auth, then attach listeners for changes
-        db.collection(`users/${changedUser.uid}/setlists`)
-          .get()
-          .then((querySnapshot) => {
-            querySnapshot.forEach((doc) =>
-              dispatch({ type: 'ADD_SETLIST', payload: doc.data() })
-            );
-          });
-        db.collection(`users/${changedUser.uid}/songs`)
-          .get()
-          .then((querySnapshot) => {
-            querySnapshot.forEach((doc) =>
-              dispatch({ type: 'ADD_SONG', payload: doc.data() })
-            );
-          });
+        // db.collection(`users/${changedUser.uid}/setlists`)
+        //   .withConverter(songOrSetlistConverter)
+        //   .get()
+        //   .then((querySnapshot) => {
+        //     querySnapshot.forEach((doc) =>
+        //       dispatch({ type: 'ADD_SETLIST', payload: doc.data() })
+        //     );
+        //   });
+        // db.collection(`users/${changedUser.uid}/songs`)
+        //   .withConverter(songOrSetlistConverter)
+        //   .get()
+        //   .then((querySnapshot) => {
+        //     querySnapshot.forEach((doc) =>
+        //       dispatch({ type: 'ADD_SONG', payload: doc.data() })
+        //     );
+        //   });
 
         // Setlists listener
         unsubSetlists = db
           .collection(`users/${changedUser.uid}/setlists`)
+          .withConverter(songOrSetlistConverter)
           .onSnapshot((setlistDoc) => {
             setlistDoc.forEach((doc) =>
               dispatch({
@@ -76,12 +80,14 @@ export const FirebaseListeners = () => {
 
         unsubSetlists = db
           .collection(`users/${changedUser.uid}/songs`)
+          .withConverter(songOrSetlistConverter)
+
           .onSnapshot((setlistDoc) => {
             setlistDoc.forEach((doc) => {
               if (doc.data()) {
                 dispatch({
                   type: 'UPDATE_SONG',
-                  songId: doc.data().shortUID,
+                  shortUID: doc.data().shortUID,
                   ...doc.data(),
                 });
               }

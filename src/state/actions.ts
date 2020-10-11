@@ -1,20 +1,16 @@
 import {
   SongId,
-  CreateSong,
   SetlistId,
   DeleteSong,
-  UpdateSetlistTitle,
-  CreateSetlist,
   DeleteSetlist,
-  AddSongToSetlist,
   SearchState,
   SetSearchState,
-  RemoveSong,
   Song,
   UpdateSong,
   UpdateSetlist,
   Setlist,
   AddSong,
+  AddSetlist,
 } from './types';
 import {
   playSequence as playPianoSequnece,
@@ -24,8 +20,8 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
 //Song
-export const createSong = (song: Song): CreateSong => ({
-  type: 'CREATE_SONG',
+export const createSong = (song: Song): AddSong => ({
+  type: 'ADD_SONG',
   payload: song,
 });
 
@@ -46,30 +42,7 @@ export const addSong = (song: Song): AddSong => ({
   payload: song,
 });
 
-//Setlist
-export const updateSetlistTitle = (
-  title: string,
-  setlist: SetlistId
-): UpdateSetlistTitle => ({
-  type: 'UPDATE_SETLIST_TITLE',
-  title,
-  setlist,
-});
-export const addSongToSetlist = (
-  song: SongId,
-  setlist: SetlistId
-): AddSongToSetlist => ({ type: 'ADD_SONG_TO_SETLIST', setlist, song });
-export const removeSongFromSetlist = (
-  setlist: SetlistId,
-  index: number
-): RemoveSong => ({ type: 'REMOVE_SONG', setlist, index });
-
 //Setlists
-export const createSetlist = (title: string): CreateSetlist => ({
-  type: 'CREATE_SETLIST',
-  title,
-  id: encodeURIComponent(title),
-});
 export const deleteSetlist = (id: SetlistId): DeleteSetlist => ({
   type: 'DELETE_SETLIST',
   id,
@@ -77,8 +50,13 @@ export const deleteSetlist = (id: SetlistId): DeleteSetlist => ({
 
 export const updateSetlist = (setlist: Setlist): UpdateSetlist => ({
   type: 'UPDATE_SETLIST',
-  id: setlist.id,
-  setlist,
+  setlist: setlist.shortUID,
+  payload: setlist,
+});
+
+export const createSetlist = (setlist: Setlist): AddSetlist => ({
+  type: 'ADD_SETLIST',
+  payload: setlist,
 });
 
 //Search

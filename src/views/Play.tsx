@@ -144,7 +144,7 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
       }
       footer={
         <PlayFooter
-          setlistId={setlist.id}
+          setlistId={setlist.shortUID}
           prev={setlistSongs[songIndex - 1]}
           next={setlistSongs[songIndex + 1]}
           current={song}

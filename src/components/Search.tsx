@@ -3,7 +3,7 @@ import { SearchState, Setlist, Song, SetlistId } from '../state/types';
 import { ListItem, List } from './List';
 import { Input } from '../native';
 import { useDispatch } from 'react-redux';
-import { setSearch, addSongToSetlist } from '../state/actions';
+import { setSearch } from '../state/actions';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { createSong, createSetlist } from '../state/actions';
@@ -11,6 +11,9 @@ import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import theme from '../theme.module.scss';
 import ShortUniqueId from 'short-unique-id';
+import { db } from '../firebase/firebase';
+import { useUser } from '../firebase/hooks/useUser';
+import { useAddSongToSetlist } from '../firebase/hooks/useAddSongToSetlist';
 
 // Create interface
 interface Props {
@@ -56,7 +59,9 @@ export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
       : [...songs, ...(isSearching === 'song' ? [...setlists] : [])];
   const [list, setList] = useState<SearchList>(searchableList);
 
-  const { setlistName } = useParams();
+  const { setlistId } = useParams();
+
+  const addSong = useAddSongToSetlist(setlistId || '');
 
   const [inputValue, setInputValue] = useState<string>('');
 
@@ -80,9 +85,10 @@ export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
         <ListItem
           onClick={(event: React.MouseEvent) => {
             // Add song to current setlist
-            if (isSearching === 'song' && setlistName) {
+            if (isSearching === 'song' && setlistId) {
+              console.log('Trying to add song');
               event.preventDefault();
-              dispatch(addSongToSetlist(item.shortUID, encodeURI(setlistName)));
+              addSong(item.shortUID);
             }
           }}
           key={item.shortUID}
@@ -121,7 +127,7 @@ export const Search: FC<Props> = ({ isSearching, setlists, songs }) => {
       <List style={searchStyles.list} onClick={onSearchSelect}>
         {generateListItems(list)}
         {isSearching && (
-          <CreateNew setlist={setlistName} type={isSearching}>
+          <CreateNew setlist={setlistId} type={isSearching}>
             {inputValue}
           </CreateNew>
         )}
@@ -137,12 +143,15 @@ interface CreateNewProps {
 }
 const CreateNew: FC<CreateNewProps> = ({ setlist, type, children }) => {
   const dispatch = useDispatch();
+  const [user] = useUser();
+
+  const addSong = useAddSongToSetlist(setlist || '');
 
   let history = useHistory();
 
   const onClick = () => {
+    const uid = new ShortUniqueId();
     if (type === 'all' || type === 'song') {
-      const uid = new ShortUniqueId();
       let song = {
         title: children,
         shortUID: uid(),
@@ -150,12 +159,29 @@ const CreateNew: FC<CreateNewProps> = ({ setlist, type, children }) => {
         notes: [],
       };
       dispatch(createSong(song));
+      if (user) {
+        db.collection(`users/${user.uid}/songs`).add(song);
+      }
+
+      if (setlist) {
+        addSong(song.shortUID);
+      }
       // Redirect to place
-      history.push(`/song/${encodeURI(children)}`);
+      history.push(`/song/${song.shortUID}`);
     } else if (type === 'setlist') {
-      dispatch(createSetlist(children));
+      const setlist = {
+        title: children,
+        shortUID: uid(),
+        uid: '',
+        songs: [],
+      };
+      dispatch(createSetlist(setlist));
+
+      if (user) {
+        db.collection(`users/${user.uid}/setlists`).add(setlist);
+      }
       // Redirect
-      history.push(`/setlist/${encodeURIComponent(children)}`);
+      history.push(`/setlist/${setlist.shortUID}`);
     }
     // Reset isSearching
 

@@ -38,16 +38,18 @@ export interface Setlist {
    *  uid used by the app
    */
   shortUID: string;
-  id: SetlistId;
   title: string;
   songs: SongId[];
 }
 
 // Song interfaces and types
-interface NoteActions {
-  songId: SongId;
+export interface SetInitialStateAction {
+  type: 'SET_INIT_STATE';
+  payload: {
+    songs: Song[];
+    setlists: Setlist[];
+  };
 }
-
 interface SetlistActions {
   setlist?: SetlistId;
 }
@@ -67,8 +69,8 @@ export interface AddSong {
 
 export interface UpdateSetlist {
   type: 'UPDATE_SETLIST';
-  id: SetlistId;
-  setlist: Setlist;
+  setlist: SetlistId;
+  payload: Setlist;
 }
 export interface AddSongToSetlist {
   type: 'ADD_SONG_TO_SETLIST';
@@ -87,42 +89,35 @@ export interface DeleteSong {
   id: SongId;
 }
 
-export interface CreateSong extends SetlistActions {
-  type: 'CREATE_SONG';
-  payload: Song;
-}
-
-export interface UpdateSetlistTitle extends SetlistActions {
-  type: 'UPDATE_SETLIST_TITLE';
-  title: string;
-}
-
-export interface CreateSetlist {
-  type: 'CREATE_SETLIST';
-  id: SetlistId;
-  title: string;
-}
-
 export interface DeleteSetlist {
   type: 'DELETE_SETLIST';
   id: SetlistId;
+}
+
+export interface AddSetlist {
+  type: 'ADD_SETLIST';
+  payload: Setlist;
 }
 
 interface ResetLists {
   type: 'RESET_LISTS';
 }
 
-export type SongAction = CreateSong | UpdateSong;
-export type SongsAction = DeleteSong | SongAction | ResetLists | AddSong;
+export type SongAction = UpdateSong;
+export type SongsAction =
+  | DeleteSong
+  | SongAction
+  | ResetLists
+  | AddSong
+  | SetInitialStateAction;
 
-export type SetlistAction =
-  | CreateSong
-  | AddSongToSetlist
-  | RemoveSong
-  | UpdateSetlistTitle
-  | CreateSetlist
-  | UpdateSetlist;
-export type SetlistsAction = DeleteSetlist | SetlistAction | ResetLists;
+export type SetlistAction = AddSongToSetlist | RemoveSong | UpdateSetlist;
+export type SetlistsAction =
+  | DeleteSetlist
+  | SetlistAction
+  | ResetLists
+  | AddSetlist
+  | SetInitialStateAction;
 
 export type SearchStateType =
   | 'SEARCH_ALL'

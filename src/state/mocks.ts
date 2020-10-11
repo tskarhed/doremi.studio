@@ -132,14 +132,12 @@ export const mockSetlists: Setlist[] = [
     uid: 'fina-klassiker',
     shortUID: 'fina-klassiker',
     title: 'Fina klassiker',
-    id: 'klassiker',
     songs: ['dane-liksom-askan', 'norrland', 'high-barbary', 'nubbejojk'],
   },
   {
     uid: 'serenader',
     shortUID: 'serenader',
     title: 'Serenader',
-    id: 'serenader',
     songs: [
       'kristallen-den-fina',
       'kom-du-ljuva',
@@ -153,7 +151,6 @@ export const mockSetlists: Setlist[] = [
     uid: 'bordsvisor',
     shortUID: 'bordsvisor',
     title: 'Bordsvisor',
-    id: 'bordsvisor',
     songs: [
       'helan',
       'halvan',

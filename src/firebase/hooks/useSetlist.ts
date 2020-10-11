@@ -9,7 +9,7 @@ export const useSetlist = (setlistId?: SetlistId) => {
 
   const [user] = useUser();
   const currentSetlist = useSelector((state: StoreState) =>
-    state.setlists.find((thesetlist) => thesetlist.id === setlistId)
+    state.setlists.find((thesetlist) => thesetlist.shortUID === setlistId)
   );
   if (!currentSetlist) {
     return [null, null];
@@ -19,9 +19,10 @@ export const useSetlist = (setlistId?: SetlistId) => {
     if (!user) {
       return [null, null];
     }
-    const setlistssRef = db.collection(`users/${user.uid}/setlists`); //@ts-ignore
+    const setlistssRef = db.collection(`users/${user.uid}/setlists`);
     dispatch(updateReduxSetlist(setlist));
-    return setlistssRef.doc(setlistId).set(setlist);
+    // Assumed we have received a uid by now
+    return setlistssRef.doc(setlist.uid).set(setlist);
   };
 
   return [currentSetlist, updateSetlist] as const;

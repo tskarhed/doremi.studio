@@ -20,41 +20,19 @@ export const song = (prevState: Song, action: SongAction) => {
 };
 
 export const setlist = (prevState: Setlist, action: SetlistAction) => {
-  if (action.type === 'CREATE_SETLIST') {
-    return {
-      title: action.title || '',
-      songs: [],
-      id: action.id,
-    };
-  }
-
   if (action.type === 'UPDATE_SETLIST') {
-    return action.setlist;
-  }
-
-  if (action.type === 'ADD_SONG_TO_SETLIST') {
-    return { ...prevState, songs: [...prevState.songs, action.song] };
-  }
-  if (action.type === 'REMOVE_SONG') {
-    return {
-      ...prevState,
-      songs: prevState.songs.filter((_song, index) => index !== action.index),
-    };
-  }
-
-  if (action.type === 'UPDATE_SETLIST_TITLE') {
-    return { ...prevState, title: action.title };
+    return action.payload;
   }
 
   return prevState;
 };
 
 export const songs = (prevState: Song[] = [], action: SongsAction) => {
+  if (action.type === 'SET_INIT_STATE') {
+    return action.payload.songs;
+  }
   if (action.type === 'RESET_LISTS') {
     return [];
-  }
-  if (action.type === 'CREATE_SONG') {
-    return [...prevState, action.payload];
   }
 
   if (action.type === 'DELETE_SONG') {
@@ -72,19 +50,23 @@ export const songs = (prevState: Song[] = [], action: SongsAction) => {
 };
 
 export const setlists = (prevState: Setlist[] = [], action: SetlistsAction) => {
+  if (action.type === 'SET_INIT_STATE') {
+    return action.payload.setlists;
+  }
   if (action.type === 'RESET_LISTS') {
     return [];
   }
-  if (action.type === 'CREATE_SETLIST') {
-    return [...prevState, setlist({} as Setlist, action)];
-  }
 
   if (action.type === 'DELETE_SETLIST') {
-    return prevState.filter((list) => list.id !== action.id);
+    return prevState.filter((list) => list.shortUID !== action.id);
+  }
+
+  if (action.type === 'ADD_SETLIST') {
+    return [...prevState, action.payload];
   }
 
   return prevState.map((list) => {
-    return action.setlist === list.id ? setlist(list, action) : list;
+    return action.setlist === list.shortUID ? setlist(list, action) : list;
   });
 };
 
