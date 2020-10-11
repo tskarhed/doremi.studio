@@ -70,7 +70,13 @@ export const LoginView = () => {
           // padding: '5%',
         }}
       >
-        <img src={'doremiStudio_logo.svg'} alt="doremi.Studio logo" />
+        <div style={{position:'relative', height:'12vh'}}>
+        
+        
+          <img style={{position: 'absolute', top:'0', left:'0', right:'0', marginLeft:'auto', marginRight:'auto'}} src={'doremiStudio_logo.svg'} alt="doremi.Studio logo" />
+          
+          
+        </div>
         <p>Log in or continue anonymously</p>
         <Login afterLogin={handleLogin} />
         {showMissingFields && (
