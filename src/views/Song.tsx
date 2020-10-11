@@ -26,7 +26,7 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
     <Page
       title={song ? song.title : ''}
       onTitleChange={(newTitle) => {
-        dispatch(updateSong({ ...song, title: newTitle }));
+        updateSong({ ...song, title: newTitle });
       }}
       prefixElement={<Back />}
       footer={
@@ -54,7 +54,7 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
                 'A4';
               const newSong = song;
               newSong.notes.push(note);
-              dispatch(updateSong(newSong));
+              updateSong(newSong);
             }}
           />
           <ActionButton
@@ -70,7 +70,7 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
         <LyricLayout
           edit={true}
           lyrics={song.lyrics}
-          onChange={(lyrics) => dispatch(updateSong({ ...song, lyrics }))}
+          onChange={(lyrics) => updateSong({ ...song, lyrics })}
         />
       ) : (
         <NoteLayout
@@ -84,7 +84,7 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
               newNotes[index] = newNote;
             }
 
-            dispatch(updateSong({ ...song, notes: newNotes }));
+            updateSong({ ...song, notes: newNotes });
           }}
         />
       )}
