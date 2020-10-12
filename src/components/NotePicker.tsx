@@ -11,33 +11,17 @@ export const NotePicker = () => {
   const cx = 20;
   const cy = 20;
   const r = 5;
+
+
   return (
     <div>
       <view style={wrapper as CSSProperties}>
         <p style={{ color: '#000' } as CSSProperties}>Choose a note to add!</p>
         <div
-          style={
-            {
-              flexDirection: 'row',
-              display: 'flex',
-              maxHeight: '35%',
-              width: '100%',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              // padding: '15px 0',
-            } as CSSProperties
-          }
+          style={midsection as CSSProperties}
         >
           <div
-            style={
-              {
-                maxHeight: '20px',
-                maxWidth: '14px',
-                alignItems: 'center',
-                color: '#000',
-                fontSize: '0.55rem',
-              } as CSSProperties
-            }
+            style={clef as CSSProperties}
           >
             {isGClef ? (
               <img
@@ -56,11 +40,19 @@ export const NotePicker = () => {
             )}
             <p>Toggle clef</p>
           </div>
-          <div>
-            <img src="/bar.svg" alt="/bar.svg" />
-            {/* <svg>
-              <circle cx={cx} cy={cy} r={r} fill="red" />
-            </svg> */}
+          <div style={barAndNote as CSSProperties}>
+            <img style={{
+              position:'absolute',
+              top: '0',
+              left: '0',
+              }}
+              src="/bar.svg" alt="/bar.svg" / >
+            <img style={{
+              position:'absolute',
+              top: `${clicks*0.25}rem`,
+              left: '1rem',
+              }} 
+              src="/note.svg" alt="/note.svg" id='note'/>
           </div>
           <div>
             <ActionButton
@@ -81,16 +73,7 @@ export const NotePicker = () => {
         </div>
         <p style={{ color: '#000' } as CSSProperties}>Clicks: {clicks}</p>
         <div
-          style={
-            {
-              flexDirection: 'row',
-              display: 'flex',
-              maxHeight: '35%',
-              width: '50%',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-            } as CSSProperties
-          }
+          style={acceptDecline as CSSProperties}
         >
           <ActionButton
             inverted
@@ -111,6 +94,37 @@ export const NotePicker = () => {
     </div>
   );
 };
+
+const acceptDecline={
+  flexDirection: 'row',
+  display: 'flex',
+  maxHeight: '35%',
+  width: '50%',
+  alignItems: 'center',
+  justifyContent: 'space-around',
+}
+const barAndNote={
+  position: 'relative',
+  height: '20px',
+  width: '25vw'
+}
+const clef = {
+  maxHeight: '20px',
+  maxWidth: '14px',
+  alignItems: 'center',
+  color: '#000',
+  fontSize: '0.55rem',
+}
+
+const midsection={
+  flexDirection: 'row',
+  display: 'flex',
+  maxHeight: '35%',
+  width: '100%',
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  // padding: '15px 0',
+} 
 
 // Skapa style här
 const noteAddLayout = {
