@@ -1,8 +1,7 @@
 import React, { FC, SyntheticEvent } from 'react';
 import { ListItem, List } from './List';
 import { Song, SetlistId } from '../state/types';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faPen, faTimes } from '@fortawesome/free-solid-svg-icons';
+import Icon from './Icon';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -37,7 +36,7 @@ export const SongList: FC<Props> = ({ songs, setlist, onRemove }) => {
                     onRemove(i);
                   }}
                   size="2x"
-                  icon={faTimes}
+                  icon="times"
                 />
                 <Icon
                   onClick={(e: SyntheticEvent) => {
@@ -45,7 +44,7 @@ export const SongList: FC<Props> = ({ songs, setlist, onRemove }) => {
                     history.push(`/song/${song.shortUID}`);
                   }}
                   size="2x"
-                  icon={faPen}
+                  icon="pen"
                 />
               </>
             }

@@ -40,7 +40,7 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
         >
           <ActionButton
             inverted
-            icon={isLyricVisible ? 'music' : 'text'}
+            icon={isLyricVisible ? 'music' : 'file-alt'}
             size="lg"
             onClick={() => setisLyricVisible(!isLyricVisible)}
           />
@@ -50,11 +50,17 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
             size="xl"
             onClick={() => {
               const note =
-                prompt('Write note with an octave you want to add', 'A4') ||
-                'A4';
-              const newSong = song;
-              newSong.notes.push(note);
-              updateSong(newSong);
+
+                prompt(
+                  'Write note (capital) with an octave (number) you want to add',
+                  'Ab4'
+                ) || 'Ab4';
+              var pattern = new RegExp(/^([A-G])(b|#)?\d+$/);
+              if (pattern.test(note)) {
+                const newSong = song;
+                newSong.notes.push(note);
+                updateSong(newSong);
+              }
             }}
           />
           <ActionButton

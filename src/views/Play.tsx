@@ -63,7 +63,7 @@ const PlayFooter: FC<PlayFooterProps> = ({
           {prev && `${prev.title}`}
         </motion.div>
         <ActionButton
-          icon="prev"
+          icon="step-backward"
           size="md"
           onClick={() => prev && navigate(currentIndex - 1)}
           inverted
@@ -81,7 +81,7 @@ const PlayFooter: FC<PlayFooterProps> = ({
           {next && `${next.title}`}
         </motion.div>
         <ActionButton
-          icon="next"
+          icon="step-forward"
           size="md"
           onClick={() => next && navigate(currentIndex + 1)}
           inverted

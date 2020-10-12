@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import { Main, Play, Setlist, Song, LoginView } from './views';
 import { AnimateSharedLayout, AnimatePresence } from 'framer-motion';
 // Initialize Sampler
@@ -13,6 +15,8 @@ function App() {
     auth: false,
     init: true,
   });
+
+  library.add(fas);
 
   useEffect(
     () =>
