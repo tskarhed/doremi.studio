@@ -10,17 +10,16 @@ export const useSongs = (setlistId?: SetlistId) => {
   const setlist = useSelector<StoreState>((state) =>
     state.setlists.find((setlist) => setlist.shortUID === setlistId)
   ) as Setlist;
-  const songs = setlist.songs
-    .map((songId) => allSongs.find((song) => song.shortUID === songId))
-    .filter((song) => song !== undefined);
 
   if (!setlistId) {
     return allSongs;
   }
-
   if (!setlist) {
     return [];
   }
+  const songs = setlist.songs
+    .map((songId) => allSongs.find((song) => song.shortUID === songId))
+    .filter((song) => song !== undefined);
 
   return songs;
 };

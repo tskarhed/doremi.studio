@@ -11,11 +11,16 @@ import { playSequence } from '../state/actions';
 import { LyricLayout } from '../components/LyricLayout';
 import { useSong } from '../firebase/hooks/useSong';
 
+import isEqual from 'lodash.isequal';
+
 export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const history = useHistory();
   const [song, updateSong] = useSong(songId);
+  console.log(song);
+  const [localSong, setLocalSong] = useState(song);
+
   const [isLyricVisible, setisLyricVisible] = useState(false);
   if (!song || !updateSong) {
     history.push('/');
@@ -26,9 +31,25 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
     <Page
       title={song ? song.title : ''}
       onTitleChange={(newTitle) => {
-        updateSong({ ...song, title: newTitle });
+        setLocalSong({ ...song, title: newTitle });
       }}
       prefixElement={<Back />}
+      headerElement={
+        !isEqual(localSong, song) ? (
+          <ActionButton
+            inverted
+            size="lg"
+            icon="save"
+            onClick={() => {
+              if (localSong) {
+                updateSong(localSong);
+              }
+            }}
+          />
+        ) : (
+          <></>
+        )
+      }
       footer={
         <View
           style={{
@@ -50,7 +71,6 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
             size="xl"
             onClick={() => {
               const note =
-
                 prompt(
                   'Write note (capital) with an octave (number) you want to add',
                   'Ab4'
@@ -59,7 +79,7 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
               if (pattern.test(note)) {
                 const newSong = song;
                 newSong.notes.push(note);
-                updateSong(newSong);
+                setLocalSong(newSong);
               }
             }}
           />
@@ -76,7 +96,7 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
         <LyricLayout
           edit={true}
           lyrics={song.lyrics}
-          onChange={(lyrics) => updateSong({ ...song, lyrics })}
+          onChange={(lyrics) => setLocalSong({ ...song, lyrics })}
         />
       ) : (
         <NoteLayout
@@ -90,7 +110,7 @@ export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
               newNotes[index] = newNote;
             }
 
-            updateSong({ ...song, notes: newNotes });
+            setLocalSong({ ...song, notes: newNotes });
           }}
         />
       )}

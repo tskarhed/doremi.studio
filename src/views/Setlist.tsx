@@ -16,6 +16,7 @@ export const Setlist: FC = () => {
   let history = useHistory();
   const dispatch = useDispatch();
   const [setlist, updateSetlist] = useSetlist(setlistId);
+
   const setlistSongs = useSongs(setlistId);
 
   if (!setlist || !updateSetlist || !setlistId) {
@@ -27,7 +28,7 @@ export const Setlist: FC = () => {
     <Page
       title={setlist.title}
       onTitleChange={(newTitle) => {
-        dispatch(updateSetlist({ ...setlist, title: newTitle }));
+        updateSetlist({ ...setlist, title: newTitle });
       }}
       prefixElement={<Back to="/" />}
       headerElement={
@@ -44,8 +45,8 @@ export const Setlist: FC = () => {
         songs={setlistSongs}
         setlist={setlist.shortUID}
         onRemove={(index) => {
-          const newSongs = setlist.songs.filter((song, i) => !(i === index));
-          dispatch(updateSetlist({ ...setlist, songs: newSongs }));
+          const newSongs = setlist.songs.filter((_song, i) => !(i === index));
+          updateSetlist({ ...setlist, songs: newSongs });
         }}
       />
       <AddToListButton onClick={() => dispatch(setSearch('song'))} />
