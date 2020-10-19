@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-10-19T16:48:53.452Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36" etag="J7DWYpCnMU6GxTBTOnPO" version="13.7.6" type="github">
+<mxfile host="app.diagrams.net" modified="2020-10-19T16:49:54.955Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36" etag="XSo1cNmPXWOe9IEo7dIZ" version="13.7.6" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1422" dy="745" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -19,7 +19,7 @@
         <mxCell id="CNceloM9hNiz_6qwrB2_-5" value="Local IndexDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="CNceloM9hNiz_6qwrB2_-1">
           <mxGeometry x="60" y="20" width="60" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="CNceloM9hNiz_6qwrB2_-2" value="Firestore listeners/Functions" style="swimlane;html=1;startSize=20;horizontal=0;" vertex="1" parent="CNceloM9hNiz_6qwrB2_-0">
+        <mxCell id="CNceloM9hNiz_6qwrB2_-2" value="Firestore listeners" style="swimlane;html=1;startSize=20;horizontal=0;" vertex="1" parent="CNceloM9hNiz_6qwrB2_-0">
           <mxGeometry y="150" width="760" height="160" as="geometry" />
         </mxCell>
         <mxCell id="CNceloM9hNiz_6qwrB2_-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="CNceloM9hNiz_6qwrB2_-2" source="CNceloM9hNiz_6qwrB2_-10" target="CNceloM9hNiz_6qwrB2_-14">
