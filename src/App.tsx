@@ -15,7 +15,9 @@ function App() {
     auth: false,
     init: true,
   });
+
   library.add(fas);
+
   useEffect(
     () =>
       firebaseApp.auth().onAuthStateChanged((user) => {
@@ -40,13 +42,13 @@ function App() {
     <AnimateSharedLayout type="crossfade">
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.key}>
-          <Route exact path="/setlist/:setlistName/play/:songNumber">
+          <Route exact path="/setlist/:setlistId/play/:songNumber">
             <Play />
           </Route>
-          <Route exact path="/setlist/:setlistName">
+          <Route exact path="/setlist/:setlistId">
             <Setlist />
           </Route>
-          <Route path="/song/:songName">
+          <Route path="/song/:songId">
             <Song />
           </Route>
           <Route path="/login">

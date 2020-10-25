@@ -4,46 +4,31 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import { ActionButton } from '../components/ActionButton';
 import { SongList } from '../components/SongList';
-import { StoreState, Song, Setlist as SetlistType } from '../state/types';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Back } from '../components/Back';
 import { AddToListButton } from '../components/AddToListButton';
-import {
-  setSearch,
-  removeSongFromSetlist,
-  updateSetlistTitle,
-} from '../state/actions';
+import { setSearch } from '../state/actions';
+import { useSetlist } from '../firebase/hooks/useSetlist';
+import { useSongs } from '../state/hooks/useSongs';
 
-interface Props {
-  songs: Song[];
-  setlists: SetlistType[];
-}
-
-export const UnconnectedSetlist: FC<Props> = ({ songs, setlists }) => {
-  const { setlistName } = useParams();
-  const history = useHistory();
+export const Setlist: FC = () => {
+  const { setlistId } = useParams();
+  let history = useHistory();
   const dispatch = useDispatch();
-  const setlist = setlists.find(
-    (setlist) => setlist.id === encodeURI(setlistName || '')
-  );
-  if (!setlist) {
-    history.push(`/`);
-    return <></>;
-  }
+  const [setlist, updateSetlist] = useSetlist(setlistId);
 
-  const setlistSongs = setlist.songs.reduce<Song[]>((songArray, songId) => {
-    const song = songs.find((song) => song.id === songId);
-    if (song) {
-      return [...songArray, song];
-    }
-    return songArray;
-  }, []);
+  const setlistSongs = useSongs(setlistId);
+
+  if (!setlist || !updateSetlist || !setlistId) {
+    // history.push(`/`);
+    return <Page title="404"></Page>;
+  }
 
   return (
     <Page
       title={setlist.title}
       onTitleChange={(newTitle) => {
-        dispatch(updateSetlistTitle(newTitle, setlist.id));
+        updateSetlist({ ...setlist, title: newTitle });
       }}
       prefixElement={<Back to="/" />}
       headerElement={
@@ -52,23 +37,19 @@ export const UnconnectedSetlist: FC<Props> = ({ songs, setlists }) => {
           inverted
           style={{ margin: '5px' }}
           size="lg"
-          onClick={() => history.push(`/setlist/${setlist.id}/play/0`)}
+          onClick={() => history.push(`/setlist/${setlist.shortUID}/play/0`)}
         />
       }
     >
       <SongList
         songs={setlistSongs}
-        setlist={setlist.id}
-        onRemove={(index) => dispatch(removeSongFromSetlist(setlist.id, index))}
+        setlist={setlist.shortUID}
+        onRemove={(index) => {
+          const newSongs = setlist.songs.filter((_song, i) => !(i === index));
+          updateSetlist({ ...setlist, songs: newSongs });
+        }}
       />
       <AddToListButton onClick={() => dispatch(setSearch('song'))} />
     </Page>
   );
 };
-
-const mapStateToProps = (state: StoreState) => ({
-  setlists: state.setlists,
-  songs: state.songs,
-});
-
-export const Setlist = connect(mapStateToProps)(UnconnectedSetlist);

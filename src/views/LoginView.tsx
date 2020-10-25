@@ -7,11 +7,6 @@ import { firestore } from 'firebase';
 import ShortUId from 'short-unique-id';
 import { useHistory } from 'react-router-dom';
 
-interface NewUser {
-  displayName: string;
-  shortId: string;
-}
-
 export const LoginView = () => {
   const [showMissingFields, setShowMissingFields] = useState(false);
   const [userId, setUserId] = useState();
@@ -20,7 +15,7 @@ export const LoginView = () => {
   const [redirect, setRedirect] = useState('/');
   let history = useHistory();
 
-  console.log(userId);
+  // console.log(userId);
 
   const handleLogin = async (authResult: any, redirectUrl: string) => {
     setUserId(authResult.user.uid);
@@ -37,7 +32,17 @@ export const LoginView = () => {
     console.log(authResult, redirectUrl);
 
     const userDoc = await db.collection('users').doc(authResult.user.uid).get();
-    if (userDoc.exists) {
+    if (userDoc.exists && userDoc.data()) {
+      // const { email, displayName, uid, photoURL } = userDoc.data() as UserInfo;
+      // dispatch({
+      //   type: 'UPDATE_USER',
+      //   payload: {
+      //     email,
+      //     displayName,
+      //     uid,
+      //     photoURL,
+      //   },
+      // });
       history.push(redirect);
       console.log('User exists in DB');
     } else {

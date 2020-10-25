@@ -64,6 +64,7 @@ export const Page: FC<React.PropsWithChildren<PageProps>> = ({
                   onTitleChange && onTitleChange(tempTitle);
                 }}
                 onChange={(event: React.KeyboardEvent<HTMLInputElement>) => {
+                  onTitleChange && onTitleChange(tempTitle);
                   setTempTitle(event.currentTarget.value);
                 }}
                 value={tempTitle}

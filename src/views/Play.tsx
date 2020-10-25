@@ -10,6 +10,7 @@ import { Back } from '../components/Back';
 import { ActionButton } from '../components/ActionButton';
 import { playSequence } from '../state/actions';
 import { motion } from 'framer-motion';
+import { useSetlist } from '../firebase/hooks/useSetlist';
 
 interface PlayFooterProps {
   prev?: Song;
@@ -19,12 +20,6 @@ interface PlayFooterProps {
   currentIndex: number;
 }
 
-// const navStyles ={
-//   fontSize: "1.3rem",
-//   margin: "5px",
-//   fontWeight: "bold",
-//   cursor: "pointer"
-// };
 const songTitleStyle = {
   maxWidth: '200%',
   textOverflow: 'ellipsis',
@@ -103,24 +98,19 @@ interface Props {
 }
 
 export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
-  const history = useHistory();
-  const { songNumber, setlistName } = useParams();
+  const { songNumber, setlistId } = useParams();
 
   const [isLyricVisible, setisLyricVisible] = useState(false);
   const songIndex = parseInt(songNumber as string) || 0;
 
-  const setlist = setlists.find(
-    (setlist) => setlist.id === encodeURI(setlistName || '')
-  );
+  const [setlist] = useSetlist(setlistId);
   console.log(setlist);
 
   if (!setlist) {
-    history.push(`/`);
-    return <></>;
+    return <Page title="404 - setlist not found"></Page>;
   }
-
   const setlistSongs = setlist.songs.reduce<Song[]>((songArray, songId) => {
-    const song = songs.find((song) => song.id === songId);
+    const song = songs.find((song) => song.shortUID === songId);
     if (song) {
       return [...songArray, song];
     }
@@ -130,14 +120,13 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
   const song = setlistSongs[songIndex];
 
   if (!song) {
-    history.push(`/setlist/${setlist.id}`);
-    return <></>;
+    return <Page title="404 - song not found"></Page>;
   }
   return (
     <Page
       editable={false}
       title={song.title}
-      prefixElement={<Back to={`/setlist/${setlist.id}`} />}
+      prefixElement={<Back to={`/setlist/${setlist.shortUID}`} />}
       headerElement={
         song.lyrics ? (
           <ActionButton
@@ -152,7 +141,7 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
       }
       footer={
         <PlayFooter
-          setlistId={setlist.id}
+          setlistId={setlist.shortUID}
           prev={setlistSongs[songIndex - 1]}
           next={setlistSongs[songIndex + 1]}
           current={song}
@@ -163,7 +152,7 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
       {isLyricVisible ? (
         <LyricLayout edit={false} lyrics={song.lyrics} />
       ) : (
-        <NoteLayout notes={song.notes} edit={false} songId={song.id} />
+        <NoteLayout notes={song.notes} edit={false} />
       )}
     </Page>
   );

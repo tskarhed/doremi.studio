@@ -16,13 +16,13 @@ export const SetlistList: FC<Props> = ({ setlists }) => {
       {setlists.map((setlist, i) => {
         return (
           <ListItem
-            key={`${setlist.id}-${i}`}
+            key={`${setlist.shortUID}-${i}`}
             type="setlist"
-            to={`/setlist/${setlist.id}`}
+            to={`/setlist/${setlist.shortUID}`}
             actionComponent={
               <ActionButton
                 onClick={() => {
-                  history.push(`/setlist/${setlist.id}/play/0`);
+                  history.push(`/setlist/${setlist.shortUID}/play/0`);
                 }}
                 size="md"
                 inverted

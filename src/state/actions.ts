@@ -1,20 +1,16 @@
 import {
   SongId,
-  AddNote,
-  UpdateNote,
-  DeleteNote,
-  UpdateSongTitle,
-  CreateSong,
   SetlistId,
   DeleteSong,
-  UpdateSetlistTitle,
-  CreateSetlist,
   DeleteSetlist,
-  AddSongToSetlist,
   SearchState,
   SetSearchState,
-  RemoveSong,
-  UpdateSongLyrics,
+  Song,
+  UpdateSong,
+  UpdateSetlist,
+  Setlist,
+  AddSong,
+  AddSetlist,
 } from './types';
 import {
   playSequence as playPianoSequnece,
@@ -23,41 +19,17 @@ import {
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
-// Notes
-
-export const addNote = (note: string, songId: SongId): AddNote => ({
-  type: 'ADD_NOTE',
-  note,
-  songId,
-});
-export const updateNote = (
-  note: string,
-  index: number,
-  songId: SongId
-): UpdateNote => ({ type: 'UPDATE_NOTE', index, note, songId });
-export const deleteNote = (index: number, songId: SongId): DeleteNote => ({
-  type: 'DELETE_NOTE',
-  index,
-  songId,
-});
-
 //Song
-export const updateSongTitle = (
-  title: string,
-  songId: SongId
-): UpdateSongTitle => ({ type: 'UPDATE_SONG_TITLE', title, songId });
-export const createSong = (title: string, setlist?: SetlistId): CreateSong => ({
-  type: 'CREATE_SONG',
-  id: encodeURI(title),
-  setlist: setlist ? encodeURI(setlist) : undefined,
-  title,
+export const createSong = (song: Song): AddSong => ({
+  type: 'ADD_SONG',
+  payload: song,
 });
 
-
-export const updateSongLyrics = (
-  lyrics: string,
-  songId: SongId
-): UpdateSongLyrics => ({ type: 'UPDATE_SONG_LYRICS', lyrics, songId });
+export const updateSong = (song: Song): UpdateSong => ({
+  type: 'UPDATE_SONG',
+  songId: song.shortUID,
+  song,
+});
 
 //Songs
 export const deleteSong = (id: SongId): DeleteSong => ({
@@ -65,33 +37,26 @@ export const deleteSong = (id: SongId): DeleteSong => ({
   id,
 });
 
-//Setlist
-export const updateSetlistTitle = (
-  title: string,
-  setlist: SetlistId
-): UpdateSetlistTitle => ({
-  type: 'UPDATE_SETLIST_TITLE',
-  title,
-  setlist,
+export const addSong = (song: Song): AddSong => ({
+  type: 'ADD_SONG',
+  payload: song,
 });
-export const addSongToSetlist = (
-  song: SongId,
-  setlist: SetlistId
-): AddSongToSetlist => ({ type: 'ADD_SONG_TO_SETLIST', setlist, song });
-export const removeSongFromSetlist = (
-  setlist: SetlistId,
-  index: number
-): RemoveSong => ({ type: 'REMOVE_SONG', setlist, index });
 
 //Setlists
-export const createSetlist = (title: string): CreateSetlist => ({
-  type: 'CREATE_SETLIST',
-  title,
-  id: encodeURIComponent(title),
-});
 export const deleteSetlist = (id: SetlistId): DeleteSetlist => ({
   type: 'DELETE_SETLIST',
   id,
+});
+
+export const updateSetlist = (setlist: Setlist): UpdateSetlist => ({
+  type: 'UPDATE_SETLIST',
+  setlist: setlist.shortUID,
+  payload: setlist,
+});
+
+export const createSetlist = (setlist: Setlist): AddSetlist => ({
+  type: 'ADD_SETLIST',
+  payload: setlist,
 });
 
 //Search

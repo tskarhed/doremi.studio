@@ -1,10 +1,11 @@
-import { Note } from '../sound/SoundSetup';
+import { UserInfo } from 'firebase';
 
 export type Notes = string[];
 export type SongId = string;
 export type SetlistId = string;
 
 export interface StoreState {
+  user: UserInfo | null;
   songs: Song[];
   setlists: Setlist[];
   isSearching: SearchState;
@@ -15,56 +16,62 @@ export interface StoreState {
 }
 
 export interface Song {
-  id: string;
+  /**
+   *  Only used by Firebase. DO NOT USE IN APP
+   */
+  uid: string;
+  /**
+   *  Used directly in app
+   */
+  shortUID: string;
   title: string;
   notes: Notes;
-  setlists?: SetlistId[];
   lyrics?: string;
 }
 
 export interface Setlist {
-  id: SetlistId;
+  /**
+   *  Only used by Firebase
+   */
+  uid: string;
+  /**
+   *  uid used by the app
+   */
+  shortUID: string;
   title: string;
   songs: SongId[];
 }
 
 // Song interfaces and types
-interface NoteActions {
-  songId: SongId;
+export interface SetInitialStateAction {
+  type: 'SET_INIT_STATE';
+  payload: {
+    songs: Song[];
+    setlists: Setlist[];
+  };
 }
-
 interface SetlistActions {
   setlist?: SetlistId;
 }
 
-export interface AddNote extends NoteActions {
-  type: 'ADD_NOTE';
-  note: string;
+export interface UpdateSong {
+  type: 'UPDATE_SONG';
+  songId: SongId;
+  song: Song;
 }
 
-export interface UpdateNote extends NoteActions {
-  type: 'UPDATE_NOTE';
-  index: number;
-  note: string;
-}
-
-export interface DeleteNote extends NoteActions {
-  type: 'DELETE_NOTE';
-  index: number;
-}
-
-export interface UpdateSongTitle extends NoteActions {
-  type: 'UPDATE_SONG_TITLE';
-  title: string;
-}
-
-export interface UpdateSongLyrics extends NoteActions {
-  type: 'UPDATE_SONG_LYRICS';
-  lyrics: string;
+export interface AddSong {
+  type: 'ADD_SONG';
+  payload: Song;
 }
 
 // Setlist interfaces and types
 
+export interface UpdateSetlist {
+  type: 'UPDATE_SETLIST';
+  setlist: SetlistId;
+  payload: Setlist;
+}
 export interface AddSongToSetlist {
   type: 'ADD_SONG_TO_SETLIST';
 
@@ -82,43 +89,35 @@ export interface DeleteSong {
   id: SongId;
 }
 
-export interface CreateSong extends SetlistActions {
-  type: 'CREATE_SONG';
-  id: SongId;
-  title: string;
-  /**
-   *  If the song was created from a setlist we want to assign it directly
-   */
-  setlist?: SetlistId;
-}
-
-export interface UpdateSetlistTitle extends SetlistActions {
-  type: 'UPDATE_SETLIST_TITLE';
-  title: string;
-}
-
-export interface CreateSetlist {
-  type: 'CREATE_SETLIST';
-  id: SetlistId;
-  title: string;
-}
-
 export interface DeleteSetlist {
   type: 'DELETE_SETLIST';
   id: SetlistId;
 }
 
-export type NotesAction = AddNote | UpdateNote | DeleteNote;
-export type SongAction = UpdateSongTitle | NotesAction | CreateSong | UpdateSongLyrics;
-export type SongsAction = DeleteSong | SongAction;
+export interface AddSetlist {
+  type: 'ADD_SETLIST';
+  payload: Setlist;
+}
 
-export type SetlistAction =
-  | CreateSong
-  | AddSongToSetlist
-  | RemoveSong
-  | UpdateSetlistTitle
-  | CreateSetlist;
-export type SetlistsAction = DeleteSetlist | SetlistAction;
+interface ResetLists {
+  type: 'RESET_LISTS';
+}
+
+export type SongAction = UpdateSong;
+export type SongsAction =
+  | DeleteSong
+  | SongAction
+  | ResetLists
+  | AddSong
+  | SetInitialStateAction;
+
+export type SetlistAction = AddSongToSetlist | RemoveSong | UpdateSetlist;
+export type SetlistsAction =
+  | DeleteSetlist
+  | SetlistAction
+  | ResetLists
+  | AddSetlist
+  | SetInitialStateAction;
 
 export type SearchStateType =
   | 'SEARCH_ALL'
@@ -150,3 +149,8 @@ export interface StopNote {
 
 export type PlayActionType = 'STOP_NOTE' | 'PLAY_NOTE';
 export type PlayActionState = PlayNote | StopNote;
+
+export interface UserAction {
+  type: 'UPDATE_USER';
+  payload: UserInfo;
+}
