@@ -98,7 +98,6 @@ interface Props {
 }
 
 export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
-  const history = useHistory();
   const { songNumber, setlistId } = useParams();
 
   const [isLyricVisible, setisLyricVisible] = useState(false);
@@ -108,8 +107,7 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
   console.log(setlist);
 
   if (!setlist) {
-    history.push(`/`);
-    return <></>;
+    return <Page title="404 - setlist not found"></Page>;
   }
   const setlistSongs = setlist.songs.reduce<Song[]>((songArray, songId) => {
     const song = songs.find((song) => song.shortUID === songId);
@@ -122,8 +120,7 @@ export const UnconnectedPlay: FC<Props> = ({ songs, setlists }) => {
   const song = setlistSongs[songIndex];
 
   if (!song) {
-    history.push(`/setlist/${setlist.shortUID}`);
-    return <></>;
+    return <Page title="404 - song not found"></Page>;
   }
   return (
     <Page

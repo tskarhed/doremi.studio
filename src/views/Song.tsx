@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Page } from './Page';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { NoteLayout } from '../components/NoteLayout';
 import { StoreState, Song } from '../state/types';
 import { connect, useDispatch } from 'react-redux';
@@ -16,15 +16,15 @@ import isEqual from 'lodash.isequal';
 export const SongPage: FC<{ songs: Song[] }> = ({ songs }) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
-  const history = useHistory();
+
   const [song, updateSong] = useSong(songId);
-  console.log(song);
+
   const [localSong, setLocalSong] = useState(song);
 
   const [isLyricVisible, setisLyricVisible] = useState(false);
   if (!song || !updateSong) {
-    history.push('/');
-    return <></>;
+    // history.push('/');
+    return <Page title="404 - song not found"></Page>;
   }
 
   return (

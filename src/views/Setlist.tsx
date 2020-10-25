@@ -20,8 +20,8 @@ export const Setlist: FC = () => {
   const setlistSongs = useSongs(setlistId);
 
   if (!setlist || !updateSetlist || !setlistId) {
-    history.push(`/`);
-    return <></>;
+    // history.push(`/`);
+    return <Page title="404"></Page>;
   }
 
   return (
