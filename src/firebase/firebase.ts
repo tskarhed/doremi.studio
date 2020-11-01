@@ -1,7 +1,6 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import * as firebaseui from 'firebaseui';
 
 const firebaseAuthConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_AUTH_KEY,
